@@ -1,0 +1,31 @@
+{
+  "title": "把任务分成三步",
+  "subtitle": "修改 JSON 即可复用",
+  "nodes": [
+    {
+      "id": "a",
+      "title": "输入",
+      "icon": "evidence"
+    },
+    {
+      "id": "b",
+      "title": "处理",
+      "icon": "analysis"
+    },
+    {
+      "id": "c",
+      "title": "输出",
+      "icon": "check"
+    }
+  ],
+  "edges": [
+    {
+      "from": "a",
+      "to": "b"
+    },
+    {
+      "from": "b",
+      "to": "c"
+    }
+  ]
+}

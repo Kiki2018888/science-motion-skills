@@ -1,0 +1,4 @@
+interface:
+  display_name: "005 · 手机聊天与锁屏通知"
+  short_description: "六种应用风格的手机聊天与通知动效，支持全屏、手机外框和可配置时间轴"
+  default_prompt: "使用 $005-phone-ui-motion 制作手机聊天与锁屏通知视频，选择界面风格并配置对话、背景和时间轴。"

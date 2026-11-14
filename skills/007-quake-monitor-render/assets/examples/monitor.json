@@ -1,0 +1,11 @@
+{
+  "duration": 28,
+  "text": {"title":"AI 地震局","subtitle":"2026 上半年 / 监测屏动效","footerLeft":"AI SEISMIC OBSERVATORY","calendarFooter":"01 — 06 / FIRST HALF"},
+  "timeline":{"phases":[{"at":0,"text":"信号苏醒"},{"at":4,"text":"月份切换"},{"at":6.4,"text":"事件定位"},{"at":10.6,"text":"主震定格"},{"at":15.3,"text":"时间推进"},{"at":20,"text":"余震伏笔"}]},
+  "wave":{"pulses":[{"at":1.2,"amplitude":18},{"at":4.3,"amplitude":29},{"at":7.1,"amplitude":52},{"at":10.95,"amplitude":87},{"at":17.1,"amplitude":25},{"at":18.1,"amplitude":33},{"at":19.1,"amplitude":40},{"at":20.1,"amplitude":47},{"at":25.3,"amplitude":50}],"holds":[{"at":12.2,"until":15.3}]},
+  "map":{"events":[{"id":"source-01","at":6.5,"until":20,"lon":15,"lat":49,"label":"信号源 01"}]},
+  "calendar":{"changes":[{"at":4,"month":2},{"at":16.3,"month":3},{"at":17.1,"month":4},{"at":17.9,"month":5},{"at":18.7,"month":6}]},
+  "magnitudes":[{"at":10.6,"rise":1.6,"hold":2.8,"value":8.8,"subtitle":"EVENT 01 / DEMONSTRATION"}],
+  "badges":[{"at":12.45,"until":15.3,"text":"本月最强震","subtitle":"MONTHLY PEAK"}],
+  "cracks":{"show":true,"at":20,"duration":5.8,"until":28,"title":"引线，仍在延伸","subtitle":"余震伏笔 / GROWING FRACTURE"}
+}

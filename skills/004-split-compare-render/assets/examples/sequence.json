@@ -1,0 +1,185 @@
+{
+  "text": {
+    "title": "同一批物件，两种处理方式",
+    "subtitle": "相同输入 · 同一时间轴 · 中途两次暂停比较",
+    "note": "原创流程示意 · 非性能实测",
+    "introTitle": "从相同输入开始",
+    "runTitle": "观察处理进度",
+    "runSubtitle": "两侧素材都由时间轴驱动。",
+    "summaryTitle": "在同一时刻比较完成数量",
+    "summarySubtitle": "素材与数值均为演示数据。"
+  },
+  "timeline": {
+    "duration": 3,
+    "intro": 1,
+    "outro": 1,
+    "segments": [
+      {
+        "to": 1,
+        "rate": 1
+      },
+      {
+        "to": 3,
+        "rate": 0.5
+      }
+    ],
+    "pauses": [
+      {
+        "at": 1,
+        "hold": 1,
+        "title": "第一次暂停",
+        "subtitle": "两侧同时停在 1 秒。"
+      },
+      {
+        "at": 2,
+        "hold": 1,
+        "title": "第二次暂停",
+        "subtitle": "两侧同时停在 2 秒。"
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "type": "box",
+      "side": "both",
+      "rect": [
+        0.03,
+        0.64,
+        0.94,
+        0.27
+      ],
+      "text": "完成区域",
+      "when": {
+        "phase": "pause"
+      }
+    },
+    {
+      "type": "delta",
+      "leftMetric": "done",
+      "rightMetric": "done",
+      "text": "完成数量相差",
+      "unit": "件",
+      "decimals": 0,
+      "when": {
+        "phase": "pause"
+      }
+    },
+    {
+      "type": "delta",
+      "leftMetric": "done",
+      "rightMetric": "done",
+      "text": "完成数量相差",
+      "unit": "件",
+      "decimals": 0,
+      "when": {
+        "phase": "outro"
+      }
+    }
+  ],
+  "left": {
+    "title": "方式 A",
+    "condition": "相同输入：8 个物件",
+    "footer": "图片序列可换成照片或结构示意",
+    "media": {
+      "kind": "sequence",
+      "frames": [
+        {
+          "at": 0,
+          "src": "sorting/a0.svg"
+        },
+        {
+          "at": 1,
+          "src": "sorting/a1.svg"
+        },
+        {
+          "at": 2,
+          "src": "sorting/a2.svg"
+        },
+        {
+          "at": 3,
+          "src": "sorting/a3.svg"
+        }
+      ]
+    },
+    "metrics": [
+      {
+        "id": "done",
+        "label": "已完成",
+        "unit": "件",
+        "decimals": 0,
+        "values": [
+          {
+            "at": 0,
+            "value": 0
+          },
+          {
+            "at": 1,
+            "value": 3
+          },
+          {
+            "at": 2,
+            "value": 6
+          },
+          {
+            "at": 3,
+            "value": 8
+          }
+        ],
+        "interpolation": "step"
+      }
+    ]
+  },
+  "right": {
+    "title": "方式 B",
+    "condition": "相同输入：8 个物件",
+    "footer": "图片序列可换成照片或结构示意",
+    "media": {
+      "kind": "sequence",
+      "frames": [
+        {
+          "at": 0,
+          "src": "sorting/b0.svg"
+        },
+        {
+          "at": 1,
+          "src": "sorting/b1.svg"
+        },
+        {
+          "at": 2,
+          "src": "sorting/b2.svg"
+        },
+        {
+          "at": 3,
+          "src": "sorting/b3.svg"
+        }
+      ]
+    },
+    "metrics": [
+      {
+        "id": "done",
+        "label": "已完成",
+        "unit": "件",
+        "decimals": 0,
+        "values": [
+          {
+            "at": 0,
+            "value": 0
+          },
+          {
+            "at": 1,
+            "value": 2
+          },
+          {
+            "at": 2,
+            "value": 4
+          },
+          {
+            "at": 3,
+            "value": 6
+          }
+        ],
+        "interpolation": "step"
+      }
+    ]
+  }
+}

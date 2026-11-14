@@ -1,0 +1,5 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>可配置双屏对照</title>
+<style>@font-face{font-family:Body;src:url('body.otf')}*{box-sizing:border-box}body{margin:0;background:#e6e9e3;color:#173e33;font-family:Body,'Microsoft YaHei',sans-serif;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}canvas{display:block}#controls{width:min(1100px,100%);display:flex;gap:16px;align-items:center;padding:14px 20px}button{font:inherit;border:1px solid #c4d4c8;border-radius:8px;padding:8px 15px;background:white;color:inherit;cursor:pointer}input{flex:1;accent-color:#316c52}#clock{font-variant-numeric:tabular-nums;min-width:105px}.cap #controls{display:none}.cap{display:block}</style>
+<canvas id="film" aria-label="对照实验双屏示意"></canvas>
+<div id="controls"><button id="play">暂停</button><button id="replay">重播</button><input id="seek" type="range" min="0" max="24" step="0.01" aria-label="时间轴"><span id="clock"></span></div>
+<script src="config.js"></script><script src="engine.js"></script></html>

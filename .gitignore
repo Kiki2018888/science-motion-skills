@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+output/
+build/
+dist/
+.env
+.env.*
+*.pending.mp4
+.DS_Store
+Thumbs.db

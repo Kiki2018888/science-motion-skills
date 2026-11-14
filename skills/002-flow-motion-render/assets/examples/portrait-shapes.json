@@ -1,0 +1,262 @@
+{
+  "aspect": "portrait",
+  "title": "从输入到判断",
+  "subtitle": "不同步骤，可以用不同形状。",
+  "eyebrow": "",
+  "duration": 10,
+  "cursor": {
+    "shape": "triangle"
+  },
+  "theme": {
+    "bg": "#f2f7f5",
+    "fg": "#183e37",
+    "muted": "#648078",
+    "line": "#c6d9d1",
+    "accent": "#207567",
+    "warning": "#a26434",
+    "highlight": "#c4e6d6",
+    "card": "#ffffff"
+  },
+  "layout": {
+    "header": 300,
+    "footer": 220
+  },
+  "nodeDefaults": {
+    "titleSize": 32,
+    "descriptionSize": 22
+  },
+  "nodes": [
+    {
+      "id": "input",
+      "position": {
+        "x": 360,
+        "y": 510
+      },
+      "title": "输入",
+      "description": "准备信息",
+      "icon": "evidence",
+      "enter": 0.4,
+      "events": [
+        {
+          "at": 0.4,
+          "state": "running",
+          "label": ""
+        },
+        {
+          "at": 1.5,
+          "state": "completed",
+          "label": ""
+        }
+      ],
+      "style": {
+        "shape": "rect",
+        "width": 320,
+        "height": 180
+      }
+    },
+    {
+      "id": "judge",
+      "position": {
+        "x": 360,
+        "y": 850
+      },
+      "title": "判断",
+      "description": "检查条件",
+      "icon": "analysis",
+      "enter": 1.7,
+      "events": [
+        {
+          "at": 1.7,
+          "state": "running",
+          "label": ""
+        },
+        {
+          "at": 3.1,
+          "state": "completed",
+          "label": ""
+        }
+      ],
+      "style": {
+        "shape": "diamond",
+        "width": 390,
+        "height": 300,
+        "showNumber": false
+      }
+    },
+    {
+      "id": "process",
+      "position": {
+        "x": 360,
+        "y": 1190
+      },
+      "title": "处理",
+      "description": "常规路径",
+      "icon": "experiment",
+      "enter": 3.5,
+      "events": [
+        {
+          "at": 3.5,
+          "state": "running",
+          "label": ""
+        },
+        {
+          "at": 5.4,
+          "state": "completed",
+          "label": ""
+        }
+      ],
+      "style": {
+        "shape": "pill",
+        "width": 330,
+        "height": 170
+      }
+    },
+    {
+      "id": "review",
+      "position": {
+        "x": 820,
+        "y": 850
+      },
+      "title": "复核",
+      "description": "补充检查",
+      "icon": "none",
+      "enter": 4,
+      "events": [
+        {
+          "at": 4,
+          "state": "blocked",
+          "label": "需复核"
+        },
+        {
+          "at": 6,
+          "state": "completed",
+          "label": ""
+        }
+      ],
+      "style": {
+        "shape": "circle",
+        "width": 240,
+        "height": 240,
+        "showIcon": false,
+        "showNumber": false,
+        "fill": "#fff3e5"
+      }
+    },
+    {
+      "id": "finish",
+      "position": {
+        "x": 360,
+        "y": 1500
+      },
+      "title": "完成",
+      "description": "汇合后继续",
+      "icon": "check",
+      "enter": 7.4,
+      "events": [
+        {
+          "at": 7.4,
+          "state": "completed",
+          "label": ""
+        }
+      ],
+      "style": {
+        "shape": "rounded",
+        "radius": 28,
+        "width": 320,
+        "height": 180,
+        "showState": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "a",
+      "from": "input",
+      "to": "judge",
+      "travels": [
+        {
+          "start": 1.1,
+          "duration": 0.6
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "from": "judge",
+      "to": "process",
+      "travels": [
+        {
+          "start": 2.8,
+          "duration": 0.7
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "from": "judge",
+      "to": "review",
+      "style": {
+        "color": "#a26434",
+        "bend": 40
+      },
+      "travels": [
+        {
+          "start": 3.4,
+          "duration": 0.6
+        }
+      ],
+      "label": {
+        "text": "复核",
+        "at": 3.4,
+        "dy": -24
+      }
+    },
+    {
+      "id": "d",
+      "from": "process",
+      "to": "finish",
+      "travels": [
+        {
+          "start": 6.6,
+          "duration": 0.8
+        }
+      ]
+    },
+    {
+      "id": "e",
+      "from": "review",
+      "to": "finish",
+      "fromPort": {
+        "side": "bottom"
+      },
+      "toPort": {
+        "side": "right"
+      },
+      "via": [
+        {
+          "x": 820,
+          "y": 1500
+        }
+      ],
+      "style": {
+        "color": "#a26434"
+      },
+      "travels": [
+        {
+          "start": 6,
+          "duration": 1.4
+        }
+      ]
+    }
+  ],
+  "captions": [
+    {
+      "at": 0,
+      "text": "依次推进，在判断处分支。"
+    },
+    {
+      "at": 7.7,
+      "text": "两条路径汇合，进入完成状态。"
+    }
+  ]
+}

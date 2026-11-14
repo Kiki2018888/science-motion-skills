@@ -1,0 +1,4 @@
+interface:
+  display_name: "003 · 多尺度连续缩放"
+  short_description: "将多层素材制作成连续缩放视频，可配置观察层级、停留、文字和比例尺"
+  default_prompt: "使用 $003-multiscale-zoom-render 将我的素材制作成多尺度连续缩放视频，并配置层级、停留时间和比例尺。"

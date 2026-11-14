@@ -1,0 +1,106 @@
+{
+  "next_number": 10,
+  "skills": [
+    {
+      "number": "001",
+      "name": "001-chat-motion-render",
+      "title": "聊天动效",
+      "path": "skills/001-chat-motion-render"
+    },
+    {
+      "number": "002",
+      "name": "002-flow-motion-render",
+      "title": "流程与因果链",
+      "path": "skills/002-flow-motion-render"
+    },
+    {
+      "number": "003",
+      "name": "003-multiscale-zoom-render",
+      "title": "多尺度连续缩放",
+      "path": "skills/003-multiscale-zoom-render"
+    },
+    {
+      "number": "004",
+      "name": "004-split-compare-render",
+      "title": "对照实验双屏",
+      "path": "skills/004-split-compare-render"
+    },
+    {
+      "number": "005",
+      "name": "005-phone-ui-motion",
+      "title": "手机聊天与锁屏通知",
+      "path": "skills/005-phone-ui-motion"
+    },
+    {
+      "number": "006",
+      "name": "006-layer-explode-render",
+      "title": "分层剖面与拆解",
+      "path": "skills/006-layer-explode-render"
+    },
+    {
+      "number": "007",
+      "name": "007-quake-monitor-render",
+      "title": "地震局监测屏",
+      "path": "skills/007-quake-monitor-render"
+    },
+    {
+      "number": "008",
+      "name": "008-terminal-motion-render",
+      "title": "终端 / 代码动效",
+      "path": "skills/008-terminal-motion-render"
+    },
+    {
+      "number": "009",
+      "name": "009-threshold-line-render",
+      "title": "斩杀线标尺",
+      "path": "skills/009-threshold-line-render"
+    }
+  ],
+  "previews": [
+    {
+      "skill": "001-chat-motion-render",
+      "video": "previews/001-chat-motion-render.mp4",
+      "bytes": 56915
+    },
+    {
+      "skill": "002-flow-motion-render",
+      "video": "previews/002-flow-motion-render.mp4",
+      "bytes": 604782
+    },
+    {
+      "skill": "003-multiscale-zoom-render",
+      "video": "previews/003-multiscale-zoom-render.mp4",
+      "bytes": 5324877
+    },
+    {
+      "skill": "004-split-compare-render",
+      "video": "previews/004-split-compare-render.mp4",
+      "bytes": 719754
+    },
+    {
+      "skill": "005-phone-ui-motion",
+      "video": "previews/005-phone-ui-motion.mp4",
+      "bytes": 354250
+    },
+    {
+      "skill": "006-layer-explode-render",
+      "video": "previews/006-layer-explode-render.mp4",
+      "bytes": 3476365
+    },
+    {
+      "skill": "007-quake-monitor-render",
+      "video": "previews/007-quake-monitor-render.mp4",
+      "bytes": 1498256
+    },
+    {
+      "skill": "008-terminal-motion-render",
+      "video": "previews/008-terminal-motion-render.mp4",
+      "bytes": 4551695
+    },
+    {
+      "skill": "009-threshold-line-render",
+      "video": "previews/009-threshold-line-render.mp4",
+      "bytes": 2037650
+    }
+  ]
+}

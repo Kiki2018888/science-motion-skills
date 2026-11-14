@@ -1,0 +1,21 @@
+{
+ "text":{"title":"模型训练观察","subtitle":"构建、评估与结果检查","session":"research@local / training","footer":"模拟指标 · 非真实训练结果"},
+ "theme":{"bg":"#10171c","panel":"#17252c","bar":"#21343c","green":"#75d7cb","red":"#efb96e","focusFill":"#3a3025"},
+ "timeline":{"tail":1},
+ "segments":[
+  {"id":"prepare","kind":"shell","label":"准备数据","duration":4,"rows":[
+   {"at":0.2,"kind":"command","duration":0.8,"text":"dataset validate ./samples"},
+   {"at":1.1,"text":"[ok] 12,800 samples validated","color":"#75d7cb"},
+   {"at":1.5,"kind":"command","duration":1,"text":"train start --epochs 20"},
+   {"at":2.6,"text":"[ready] training session created"}],
+   "progress":{"points":[{"at":1.1,"value":0},{"at":2.3,"value":0.65},{"at":3.5,"value":1}],"label":"PREPARING","doneLabel":"READY"}},
+  {"id":"model","kind":"code","tab":"train.py","label":"训练代码","duration":3,
+   "lines":["def train(model, data):","    for epoch in range(20):","        loss = model.fit(data)","        metrics = evaluate(model)","        save_checkpoint(model)","    return metrics"],
+   "scroll":[{"at":0,"value":0}],"highlights":[{"at":1.5,"line":3,"style":"inline","enter":0.3,"hold":0.8,"exit":0.3}]},
+  {"id":"evaluate","kind":"logs","label":"评估结果","duration":5,
+   "lines":[{"tag":"RUN","text":"evaluation started","stamp":"00:00"},{"tag":"DATA","text":"validation set loaded","stamp":"00:01"},{"tag":"SCORE","text":"accuracy = 0.873","stamp":"00:02"},{"tag":"CHECK","text":"baseline comparison complete","stamp":"00:03"},{"tag":"PASS","text":"ACCURACY_THRESHOLD_REACHED","stamp":"00:04"},{"tag":"SAVE","text":"checkpoint exported","stamp":"00:05"},{"tag":"AUDIT","text":"artifact integrity verified","stamp":"00:06"},{"tag":"DONE","text":"TRAINING_COMPLETE","stamp":"00:07"}],
+   "scroll":[{"at":0,"value":0},{"at":2,"value":4},{"at":4,"value":7}],
+   "highlights":[{"at":2,"line":4,"enter":0.4,"hold":1.2,"exit":0.4,"caption":"准确率达到设定阈值","kicker":"EVALUATION / PASS"},{"at":4,"line":7,"enter":0.4,"hold":0.8,"exit":0.4,"caption":"结果已保存","kicker":"SESSION / COMPLETE"}]}
+ ],
+ "counters":[{"id":"accuracy","label":"ACCURACY","caption":"准确率","from":12.5,"to":87.3,"decimals":1,"suffix":"%","at":4,"duration":5},{"id":"loss","label":"LOSS","caption":"损失值","from":2.8,"to":0.127,"decimals":3,"at":4,"duration":7},{"id":"epochs","label":"EPOCHS","caption":"训练轮次","to":20,"at":4,"duration":7}]
+}

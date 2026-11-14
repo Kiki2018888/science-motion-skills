@@ -1,0 +1,7 @@
+{
+ "mode":"race",
+ "text":{"title":"新一轮竞争","subtitle":"四个方案，从共同起点出发","raceTitle":"新的标准，新的起点","raceReady":"共同起点，各自加速","raceGo":"新方案进入下一轮竞争","readyLabel":"等待出发","footerRight":"程序动效示意"},
+ "threshold":{"color":"#729ed0"},
+ "race":{"duration":10,"gridAt":0.2,"gridDuration":1.2,"titleAt":0.1,"goAt":2.5,"goDuration":0.5,"lanes":[-1,-0.5,0,0.5,1],"cardWidth":200,"color":"#b7d58b"},
+ "entrants":[{"lane":-0.75,"entryAt":0.6,"entryDuration":1,"launch":3,"travel":4.5,"name":"方案一","color":"#95d8bd"},{"lane":-0.25,"entryAt":0.75,"entryDuration":1,"launch":3.25,"travel":4.5,"name":"方案二","color":"#9bc6eb"},{"lane":0.25,"entryAt":0.9,"entryDuration":1,"launch":3.5,"travel":4.2,"name":"方案三","color":"#e6ba78"},{"lane":0.75,"entryAt":1.05,"entryDuration":1,"launch":3.75,"travel":4.2,"name":"方案四","color":"#c7b4e8"}]
+}

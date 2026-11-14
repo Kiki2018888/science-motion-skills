@@ -1,0 +1,4 @@
+interface:
+  display_name: "008 · 终端与代码动效"
+  short_description: "制作可配置命令输入、代码日志滚动、进度计数和关键行定格的终端动效"
+  default_prompt: "使用 $008-terminal-motion-render，把我的命令、代码和日志制作成终端动效，配置进度、计数器和关键行定格，检查后导出视频。"

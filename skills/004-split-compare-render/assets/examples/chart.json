@@ -1,0 +1,153 @@
+{
+  "text": {
+    "title": "相同起点，比较变化曲线",
+    "subtitle": "两边使用相同坐标轴范围",
+    "note": "合成数据示意 · 非实测"
+  },
+  "timeline": {
+    "duration": 4,
+    "rate": 1,
+    "intro": 1,
+    "outro": 1,
+    "pauses": [
+      {
+        "at": 2,
+        "hold": 1,
+        "title": "同一时刻比较读数"
+      }
+    ]
+  },
+  "chart": {
+    "min": 0,
+    "max": 100,
+    "unit": "示意值"
+  },
+  "annotations": [
+    {
+      "type": "delta",
+      "when": {
+        "phase": "pause"
+      },
+      "leftMetric": "value",
+      "rightMetric": "value",
+      "unit": "",
+      "text": "读数相差"
+    }
+  ],
+  "left": {
+    "title": "条件 A",
+    "condition": "初始值均为 80",
+    "media": {
+      "kind": "chart",
+      "values": [
+        {
+          "at": 0,
+          "value": 80
+        },
+        {
+          "at": 1,
+          "value": 60
+        },
+        {
+          "at": 2,
+          "value": 40
+        },
+        {
+          "at": 3,
+          "value": 30
+        },
+        {
+          "at": 4,
+          "value": 20
+        }
+      ]
+    },
+    "metrics": [
+      {
+        "id": "value",
+        "label": "当前值",
+        "decimals": 1,
+        "values": [
+          {
+            "at": 0,
+            "value": 80
+          },
+          {
+            "at": 1,
+            "value": 60
+          },
+          {
+            "at": 2,
+            "value": 40
+          },
+          {
+            "at": 3,
+            "value": 30
+          },
+          {
+            "at": 4,
+            "value": 20
+          }
+        ]
+      }
+    ]
+  },
+  "right": {
+    "title": "条件 B",
+    "condition": "初始值均为 80",
+    "media": {
+      "kind": "chart",
+      "values": [
+        {
+          "at": 0,
+          "value": 80
+        },
+        {
+          "at": 1,
+          "value": 70
+        },
+        {
+          "at": 2,
+          "value": 60
+        },
+        {
+          "at": 3,
+          "value": 50
+        },
+        {
+          "at": 4,
+          "value": 40
+        }
+      ]
+    },
+    "metrics": [
+      {
+        "id": "value",
+        "label": "当前值",
+        "decimals": 1,
+        "values": [
+          {
+            "at": 0,
+            "value": 80
+          },
+          {
+            "at": 1,
+            "value": 70
+          },
+          {
+            "at": 2,
+            "value": 60
+          },
+          {
+            "at": 3,
+            "value": 50
+          },
+          {
+            "at": 4,
+            "value": 40
+          }
+        ]
+      }
+    ]
+  }
+}

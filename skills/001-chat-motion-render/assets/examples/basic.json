@@ -1,0 +1,18 @@
+{
+  "aspect": "landscape",
+  "theme": "chatgpt",
+  "title": "科普问答",
+  "messages": [
+    {
+      "side": "right",
+      "text": "为什么天空通常是蓝色的？",
+      "mode": "pop"
+    },
+    {
+      "side": "left",
+      "text": "空气分子会散射阳光，较短波长的蓝光更容易被散射到各个方向。",
+      "mode": "type",
+      "cps": 18
+    }
+  ]
+}

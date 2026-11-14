@@ -1,0 +1,4 @@
+interface:
+  display_name: "009 · 斩杀线标尺与起跑线"
+  short_description: "制作可换主题的阈值标尺、触线碎裂与起跑线动效，前后段可独立使用"
+  default_prompt: "使用 $009-threshold-line-render 将我的主题制作成阈值标尺与起跑线动画，按内容配置文字、卡片、配色和时间轴，并导出预览与 MP4。"

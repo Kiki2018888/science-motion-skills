@@ -1,0 +1,115 @@
+{
+  "title": "不同层数，同一套拆解逻辑",
+  "subject": "十层堆叠示意",
+  "note": "斜向展开 / 保持展开",
+  "motion": {
+    "direction": "up-left",
+    "gap": 150
+  },
+  "style": {
+    "labelSize": 22,
+    "noteSize": 16,
+    "showPhase": false
+  },
+  "layers": [
+    {
+      "id": "sheet-0",
+      "label": "第 1 层",
+      "thickness": 12,
+      "color": "#d2bf8a",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-1",
+      "label": "第 2 层",
+      "thickness": 13,
+      "color": "#8eaaa5",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-2",
+      "label": "第 3 层",
+      "thickness": 14,
+      "color": "#7699ae",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-3",
+      "label": "第 4 层",
+      "thickness": 15,
+      "color": "#d2bf8a",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-4",
+      "label": "第 5 层",
+      "thickness": 16,
+      "color": "#8eaaa5",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-5",
+      "label": "第 6 层",
+      "thickness": 17,
+      "color": "#7699ae",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-6",
+      "label": "第 7 层",
+      "thickness": 18,
+      "color": "#d2bf8a",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-7",
+      "label": "第 8 层",
+      "thickness": 19,
+      "color": "#8eaaa5",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-8",
+      "label": "第 9 层",
+      "thickness": 20,
+      "color": "#7699ae",
+      "texture": {
+        "kind": "solid"
+      }
+    },
+    {
+      "id": "sheet-9",
+      "label": "第 10 层",
+      "thickness": 21,
+      "color": "#d2bf8a",
+      "texture": {
+        "kind": "solid"
+      }
+    }
+  ],
+  "timeline": {
+    "intro": 1,
+    "explode": 1.2,
+    "stagger": 0.08,
+    "hold": 1,
+    "afterFocus": 0.5,
+    "reassemble": false,
+    "outro": 1
+  }
+}

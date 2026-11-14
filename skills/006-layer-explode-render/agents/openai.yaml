@@ -1,0 +1,4 @@
+interface:
+  display_name: "006 · 分层剖面与拆解"
+  short_description: "将多层结构展开、标注并重新组装，支持替换图片纹理、方向、间距和时间轴"
+  default_prompt: "使用 $006-layer-explode-render 制作分层拆解视频，配置各层素材、标注、展开方向、时间轴和背景。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "004 · 对照实验双屏"
+  short_description: "将左右素材制作成同步对照视频，配置共同时间轴、多个暂停点与差异标注"
+  default_prompt: "使用 $004-split-compare-render 制作左右素材的同步对照视频，设置暂停时刻、文字和差异标注。"

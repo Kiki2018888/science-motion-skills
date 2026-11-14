@@ -1,0 +1,91 @@
+{
+  "text": {
+    "kicker": "多尺度演示 / 01",
+    "title": "从一片叶子，到一个气孔",
+    "subtitle": "同一处观察点，逐层看见细节。",
+    "note": "结构示意 · 尺寸为演示设定",
+    "locator": "叶片定位"
+  },
+  "scene": {
+    "type": "leaf",
+    "focus": [
+      7000,
+      6500
+    ]
+  },
+  "levels": [
+    {
+      "name": "叶片",
+      "description": "先看整体",
+      "caption": "先找到这片叶子上的一个位置。",
+      "center": [
+        0,
+        0
+      ],
+      "viewWidth": 80000,
+      "transition": 0,
+      "hold": 2.5
+    },
+    {
+      "name": "叶面",
+      "description": "进入表面",
+      "caption": "细节开始出现，我们已经来到叶面。",
+      "center": [
+        7000,
+        6500
+      ],
+      "viewWidth": 3200,
+      "transition": 5.5,
+      "hold": 1.5,
+      "panEase": 3
+    },
+    {
+      "name": "表皮细胞",
+      "description": "分辨细胞",
+      "caption": "继续放大，表皮细胞逐渐清晰。",
+      "center": [
+        7000,
+        6500
+      ],
+      "viewWidth": 400,
+      "transition": 5,
+      "hold": 1.5
+    },
+    {
+      "name": "气孔",
+      "description": "聚焦微小开口",
+      "caption": "视野从 80 mm 缩至 80 μm，跨越三个数量级。",
+      "center": [
+        7000,
+        6500
+      ],
+      "viewWidth": 80,
+      "transition": 5,
+      "hold": 3,
+      "annotations": [
+        {
+          "text": "气孔",
+          "point": [
+            7000,
+            6500
+          ],
+          "offset": [
+            280,
+            -100
+          ]
+        },
+        {
+          "text": "保卫细胞",
+          "point": [
+            6992,
+            6503
+          ],
+          "offset": [
+            -220,
+            -160
+          ]
+        }
+      ]
+    }
+  ]
+}

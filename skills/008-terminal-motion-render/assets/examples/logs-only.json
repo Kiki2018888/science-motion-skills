@@ -1,0 +1,5 @@
+{
+ "text":{"title":"构建检查","subtitle":"独立日志 / 行内强调"},
+ "timeline":{"tail":1},
+ "segments":[{"id":"build","kind":"logs","label":"质量检查","duration":4,"lines":[{"tag":"CHECK","text":"检查依赖与配置"},{"tag":"BUILD","text":"编译模块完成"},{"tag":"PASS","text":"全部检查通过，可以进入下一步"}],"scroll":[{"at":0,"value":0},{"at":2,"value":2}],"highlights":[{"at":2,"line":2,"style":"inline","hold":1}]}]
+}

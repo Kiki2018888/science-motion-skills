@@ -1,0 +1,942 @@
+{
+  "timeline": {
+    "tail": 0
+  },
+  "segments": [
+    {
+      "id": "install",
+      "kind": "shell",
+      "label": "命令与安装",
+      "duration": 9.5,
+      "fontSize": 26,
+      "rows": [
+        {
+          "at": 0.9,
+          "kind": "command",
+          "duration": 2.3,
+          "text": "agent install demo-kit --local"
+        },
+        {
+          "at": 3.55,
+          "text": "[resolve]  demo-kit@1.0.0 -> local workspace",
+          "color": "#718596"
+        },
+        {
+          "at": 4.25,
+          "text": "[fetch]    downloading packages...",
+          "color": "#8dbef3"
+        },
+        {
+          "at": 5.5,
+          "text": "[verify]   integrity checks passed",
+          "color": "#8ee3bb"
+        },
+        {
+          "at": 6.6,
+          "text": "[link]     creating runtime bindings",
+          "color": "#8dbef3"
+        },
+        {
+          "at": 7.9,
+          "text": "[ready]    128 packages installed",
+          "color": "#8ee3bb"
+        },
+        {
+          "at": 8.45,
+          "text": "[trace]    session recording enabled",
+          "color": "#eac17a"
+        }
+      ],
+      "progress": {
+        "points": [
+          {
+            "at": 3.7,
+            "value": 0
+          },
+          {
+            "at": 5.3,
+            "value": 0.37
+          },
+          {
+            "at": 6.5,
+            "value": 0.83
+          },
+          {
+            "at": 7.8,
+            "value": 1
+          }
+        ],
+        "label": "INSTALLING",
+        "doneLabel": "INSTALL COMPLETE"
+      }
+    },
+    {
+      "id": "source",
+      "kind": "code",
+      "label": "代码展开",
+      "duration": 4,
+      "lines": [
+        "import { Agent, trace } from \"./runtime\";",
+        "",
+        "const worker = new Agent({",
+        "  model: \"demo-primary\",",
+        "  tools: [search, readFile, writeFile],",
+        "  concurrency: 8,",
+        "});",
+        "",
+        "export async function run(task: Task) {",
+        "  const plan = await worker.plan(task);",
+        "  for (const step of plan.steps) {",
+        "    const result = await worker.execute(step);",
+        "    trace.write({ step, result, status: \"ok\" });",
+        "    await checkpoint.save(result);",
+        "  }",
+        "  return { completed: true, traceId: task.id };",
+        "}",
+        "",
+        "// inspect the route before returning a result",
+        "const route = await router.resolve(request);",
+        "logger.info(\"route selected\", route.model);",
+        "await queue.flush();"
+      ],
+      "scroll": [
+        {
+          "at": 0,
+          "value": 0
+        },
+        {
+          "at": 4,
+          "value": 12
+        }
+      ]
+    },
+    {
+      "id": "trace",
+      "kind": "logs",
+      "label": "日志追踪",
+      "duration": 9.3,
+      "lines": [
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:00.000",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:00.167",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:00.334",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:00.501",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:00.668",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:00.835",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:01.002",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:01.169",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:01.336",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:01.503",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:01.670",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:01.837",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:02.004",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:02.171",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:02.338",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:02.505",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:02.672",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:02.839",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:03.006",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:03.173",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:03.340",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:03.507",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:03.674",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:03.841",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:04.008",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:04.175",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:04.342",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:04.509",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:04.676",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:04.843",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:05.010",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:05.177",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:05.344",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:05.511",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:05.678",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:05.845",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:06.012",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:06.179",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:06.346",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:06.513",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:06.680",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:06.847",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:07.014",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:07.181",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:07.348",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:07.515",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:07.682",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:07.849",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:08.016",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:08.183",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:08.350",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:08.517",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:08.684",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:08.851",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:09.018",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:09.185",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:09.352",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:09.519",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:09.686",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:09.853",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:10.020",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:10.187",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:10.354",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:10.521",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:10.688",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:10.855",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:11.022",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:11.189",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:11.356",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:11.523",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:11.690",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:11.857",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:12.024",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:12.191",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:12.358",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:12.525",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:12.692",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:12.859",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:13.026",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:13.193",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:13.360",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:13.527",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:13.694",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:13.861",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:14.028",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:14.195",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:14.362",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:14.529",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:14.696",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:14.863",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:15.030",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:15.197",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:15.364",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:15.531",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:15.698",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:15.865",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:16.032",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:16.199",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:16.366",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:16.533",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:16.700",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:16.867",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:17.034",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:17.201",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:17.368",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:17.535",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:17.702",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:17.869",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:18.036",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:18.203",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:18.370",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:18.537",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:18.704",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:18.871",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:19.038",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:19.205",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:19.372",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:19.539",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:19.706",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:19.873",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:20.040",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TOOL",
+          "text": "read_file             status=ok",
+          "stamp": "00:20.207",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "EXEC",
+          "text": "worker completed      duration=184ms",
+          "stamp": "00:20.374",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "cache snapshot        integrity=passed",
+          "stamp": "00:20.541",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "ROUTE",
+          "text": "policy evaluation     mode=automatic",
+          "stamp": "00:20.708",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "TRACE",
+          "text": "response recorded     checkpoint=ready",
+          "stamp": "00:20.875",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "INFO",
+          "text": "request accepted      model=demo-primary",
+          "stamp": "00:21.042",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "PLAN",
+          "text": "task graph resolved   steps=08",
+          "stamp": "00:21.209",
+          "color": "#8dbef3"
+        },
+        {
+          "tag": "WARN",
+          "text": "TOO_DUMB_TO_NEED_FABLE",
+          "stamp": "00:21.376",
+          "color": "#ff786b"
+        }
+      ],
+      "scroll": [
+        {
+          "at": 0,
+          "value": 0
+        },
+        {
+          "at": 5.2,
+          "value": 128
+        }
+      ],
+      "highlights": [
+        {
+          "at": 5.2,
+          "line": 128,
+          "kicker": "0129 / ROUTE WARNING"
+        }
+      ]
+    }
+  ],
+  "counters": [
+    {
+      "id": "stars",
+      "label": "STARS",
+      "caption": "社区关注",
+      "to": 100000,
+      "at": 9.8,
+      "duration": 8.65,
+      "finalSuffix": "+"
+    },
+    {
+      "id": "forks",
+      "label": "FORKS",
+      "caption": "分支数量",
+      "to": 5000,
+      "at": 9.8,
+      "duration": 8.65,
+      "finalSuffix": "+"
+    },
+    {
+      "id": "lines",
+      "label": "LINES",
+      "caption": "代码行数",
+      "to": 512000,
+      "at": 9.8,
+      "duration": 8.65,
+      "finalSuffix": ""
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "duration":8,"layout":"cracks",
+  "text":{"title":"材料应力观察","subtitle":"自定义分支 / 独立模块","footerRight":"路径示意 · 非物理仿真"},
+  "cracks":{"show":true,"at":0.7,"duration":5.2,"until":8,"title":"裂纹逐步扩展","subtitle":"CUSTOM BRANCHING PATHS","color":"#8fd7dc","coreColor":"#ffffff","paths":[{"id":"main","points":[[0.5,0.95],[0.46,0.72],[0.52,0.5],[0.48,0.3],[0.55,0.12]]},{"id":"left","parent":"main","points":[[0.46,0.72],[0.3,0.65],[0.2,0.5],[0.08,0.45]]},{"id":"right","parent":"main","points":[[0.52,0.5],[0.65,0.45],[0.72,0.3],[0.9,0.27]]},{"id":"twig","parent":"right","points":[[0.72,0.3],[0.75,0.52],[0.87,0.6]]}]}
+}

@@ -1,0 +1,75 @@
+{
+  "title": "替换素材，也能保持层次关系",
+  "subject": "模块结构示意",
+  "note": "三层图片 / 向右展开",
+  "background": {
+    "type": "image",
+    "src": "media/background.svg"
+  },
+  "motion": {
+    "direction": "right",
+    "gap": 650
+  },
+  "geometry": {
+    "u": [
+      250,
+      45
+    ],
+    "v": [
+      -125,
+      100
+    ]
+  },
+  "layers": [
+    {
+      "id": "circuits",
+      "label": "线路层",
+      "note": "本地 SVG 贴图",
+      "thickness": 25,
+      "texture": {
+        "kind": "image",
+        "src": "media/circuits.svg",
+        "frame": false
+      }
+    },
+    {
+      "id": "cells",
+      "label": "阵列层",
+      "note": "各层素材独立替换",
+      "thickness": 25,
+      "texture": {
+        "kind": "image",
+        "src": "media/cells.svg",
+        "frame": false
+      }
+    },
+    {
+      "id": "cover",
+      "label": "盖板层",
+      "note": "可换为照片或 PNG",
+      "thickness": 25,
+      "texture": {
+        "kind": "image",
+        "src": "media/cover.svg",
+        "frame": false
+      }
+    }
+  ],
+  "timeline": {
+    "intro": 1,
+    "explode": 1.2,
+    "stagger": 0.15,
+    "hold": 0.4,
+    "focus": [
+      {
+        "layer": "cells",
+        "duration": 1.5,
+        "pause": 0.1
+      }
+    ],
+    "afterFocus": 0.6,
+    "assemble": 1.1,
+    "assembleStagger": 0.1,
+    "outro": 1
+  }
+}

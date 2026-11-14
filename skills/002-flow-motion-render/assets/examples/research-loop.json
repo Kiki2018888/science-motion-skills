@@ -1,0 +1,310 @@
+{
+  "title": "一个结论，是怎样形成的？",
+  "subtitle": "跟着证据走，也允许回头。",
+  "eyebrow": "可配置动效 / 01",
+  "duration": 24,
+  "layout": {
+    "footer": 160
+  },
+  "cursor": {
+    "shape": "circle"
+  },
+  "nodes": [
+    {
+      "id": "question",
+      "position": {
+        "x": 270,
+        "y": 470
+      },
+      "title": "提出问题",
+      "description": "把疑问说清楚",
+      "icon": "question",
+      "enter": 1,
+      "events": [
+        {
+          "at": 1,
+          "state": "running",
+          "label": ""
+        },
+        {
+          "at": 2.4,
+          "state": "idle",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "position": {
+        "x": 690,
+        "y": 470
+      },
+      "title": "收集证据",
+      "description": "寻找可检验的依据",
+      "icon": "evidence",
+      "enter": 3.1,
+      "events": [
+        {
+          "at": 3.1,
+          "state": "running",
+          "label": ""
+        },
+        {
+          "at": 4.8,
+          "state": "idle",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "id": "analysis",
+      "position": {
+        "x": 1110,
+        "y": 470
+      },
+      "title": "分析判断",
+      "description": "检查证据是否充分",
+      "icon": "analysis",
+      "enter": 5.5,
+      "events": [
+        {
+          "at": 6,
+          "state": "running",
+          "label": "检查中"
+        },
+        {
+          "at": 7.7,
+          "state": "blocked",
+          "label": "证据不足",
+          "description": "发现缺口，暂缓结论"
+        },
+        {
+          "at": 16.7,
+          "state": "running",
+          "label": "重新检查",
+          "description": "加入新证据，再判断"
+        },
+        {
+          "at": 18.8,
+          "state": "completed",
+          "label": "证据充分",
+          "description": "本例：满足判断条件"
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "position": {
+        "x": 1590,
+        "y": 470
+      },
+      "title": "形成结论",
+      "description": "等待证据支持",
+      "icon": "conclusion",
+      "enter": 1.5,
+      "events": [
+        {
+          "at": 20,
+          "state": "completed",
+          "label": "形成结论",
+          "description": "基于当前证据判断"
+        }
+      ],
+      "initialState": "waiting"
+    },
+    {
+      "id": "experiment",
+      "position": {
+        "x": 1110,
+        "y": 775
+      },
+      "title": "补充实验",
+      "description": "针对缺口设计实验",
+      "icon": "experiment",
+      "enter": 11.1,
+      "events": [
+        {
+          "at": 11.1,
+          "state": "running",
+          "label": "补充中"
+        },
+        {
+          "at": 13,
+          "state": "running",
+          "label": "获得新证据",
+          "description": "补充可检验的证据"
+        },
+        {
+          "at": 14.3,
+          "state": "completed",
+          "label": "",
+          "description": "新证据已就位"
+        }
+      ],
+      "style": {
+        "height": 150,
+        "accent": "#a46b1a"
+      },
+      "states": {
+        "running": {
+          "border": "#a46b1a",
+          "highlight": "#ffe5b7"
+        },
+        "completed": {
+          "border": "#a46b1a"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "qe",
+      "from": "question",
+      "to": "evidence",
+      "enter": 1.7,
+      "travels": [
+        {
+          "start": 2.2,
+          "duration": 0.95
+        }
+      ]
+    },
+    {
+      "id": "ea",
+      "from": "evidence",
+      "to": "analysis",
+      "enter": 4.1,
+      "travels": [
+        {
+          "start": 4.6,
+          "duration": 0.95
+        }
+      ]
+    },
+    {
+      "id": "ac",
+      "from": "analysis",
+      "to": "conclusion",
+      "enter": 6.5,
+      "travels": [
+        {
+          "start": 8.15,
+          "duration": 0.65,
+          "to": 0.44,
+          "hold": 1,
+          "returnDuration": 0.4,
+          "color": "#a46b1a"
+        },
+        {
+          "start": 19,
+          "duration": 1
+        }
+      ],
+      "label": {
+        "text": "满足条件",
+        "at": 18.8,
+        "dy": -38
+      }
+    },
+    {
+      "id": "down",
+      "from": "analysis",
+      "to": "experiment",
+      "fromPort": {
+        "side": "bottom",
+        "offset": 0.4
+      },
+      "toPort": {
+        "side": "top",
+        "offset": 0.4
+      },
+      "style": {
+        "color": "#a46b1a"
+      },
+      "enter": 9.9,
+      "travels": [
+        {
+          "start": 10.1,
+          "duration": 1
+        }
+      ],
+      "label": {
+        "text": "证据不足",
+        "at": 10,
+        "dx": 120,
+        "dy": 5
+      }
+    },
+    {
+      "id": "back",
+      "from": "experiment",
+      "to": "analysis",
+      "fromPort": {
+        "side": "left"
+      },
+      "toPort": {
+        "side": "left",
+        "offset": 0.45
+      },
+      "style": {
+        "color": "#a46b1a",
+        "bend": 100
+      },
+      "enter": 14.6,
+      "travels": [
+        {
+          "start": 15,
+          "duration": 1.65
+        }
+      ],
+      "label": {
+        "text": "再分析",
+        "at": 14.7,
+        "dx": -80,
+        "dy": 0
+      }
+    }
+  ],
+  "captions": [
+    {
+      "at": 0,
+      "text": "先提出一个问题。",
+      "phase": "01 / 提问"
+    },
+    {
+      "at": 3.1,
+      "text": "收集证据，进入分析。",
+      "phase": "02 / 收集"
+    },
+    {
+      "at": 6,
+      "text": "关键一步：证据够不够？",
+      "phase": "03 / 判断"
+    },
+    {
+      "at": 8.1,
+      "text": "证据还不够，就先不下结论。",
+      "phase": "03 / 判断"
+    },
+    {
+      "at": 11.1,
+      "text": "补充实验，把缺口补上。",
+      "phase": "04 / 补充"
+    },
+    {
+      "at": 15,
+      "text": "回到分析，重新检查。",
+      "phase": "05 / 再判断"
+    },
+    {
+      "at": 19,
+      "text": "本例中，补充证据后满足判断条件。",
+      "phase": "06 / 形成结论"
+    },
+    {
+      "at": 21.6,
+      "text": "结论来自证据，也经得起回头检查。",
+      "phase": "06 / 形成结论"
+    }
+  ]
+}

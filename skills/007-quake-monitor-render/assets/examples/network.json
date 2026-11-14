@@ -1,0 +1,11 @@
+{
+  "duration":14,
+  "theme":{"accent":"#e7ba64","signal":"#87d1ba","calendarHeader":"#2d746a","bg":"#101c24","panel":"#16252e"},
+  "text":{"title":"算力网络观察","subtitle":"节点负载 / 演示数据","mapTitle":"网络拓扑","mapSubtitle":"NETWORK / DEMO","waiting":"等待节点响应","detected":"监测到节点活动","calendarTitle":"观测周期","calendarLabel":"月度运行","calendarFooter":"2027 — 2028","calendarNote":"跨年切换 / 配置示例","waveTitle":"负载信号","footerLeft":"COMPUTE OBSERVATORY","footerRight":"程序生成示意 · 非实测","rising":"负载上升","locked":"峰值锁定"},
+  "map":{"kind":"image","src":"network.svg","scanDuration":1.2,"events":[{"id":"a","at":1.2,"until":6,"position":[0.15,0.5],"label":"节点 A","subtitle":"REQUEST IN","radius":150},{"id":"b","at":2.3,"until":6,"position":[0.45,0.25],"label":"节点 B","subtitle":"COMPUTING","offset":[60,80],"color":"#87d1ba","radius":170},{"id":"c","at":3.4,"until":6,"position":[0.8,0.6],"label":"节点 C","subtitle":"RESPONSE","offset":[-240,100],"radius":170}]},
+  "calendar":{"year":2027,"month":11,"markers":[11,12,1],"changes":[{"at":4,"month":12},{"at":10,"year":2028,"month":1}]},
+  "wave":{"noise":0.7,"speed":180,"pulses":[{"at":1.2,"amplitude":25},{"at":2.3,"amplitude":40},{"at":3.4,"amplitude":50},{"at":6.8,"amplitude":90},{"at":12,"amplitude":24}],"holds":[{"at":7.6,"until":9.5}]},
+  "magnitudes":[{"at":6,"rise":1.6,"hold":2.5,"value":96,"decimals":0,"unit":"%","title":"节点峰值负载","subtitle":"PEAK UTILIZATION"}],
+  "badges":[{"at":7.85,"until":10.2,"shape":"circle","angle":6,"text":"峰值记录","subtitle":"PEAK","flash":0}],
+  "timeline":{"phases":[{"at":0,"text":"节点响应"},{"at":6,"text":"负载峰值"},{"at":10.2,"text":"新周期"}]}
+}

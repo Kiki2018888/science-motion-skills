@@ -1,0 +1,86 @@
+{
+  "title": "把内部层次，逐一展开",
+  "subject": "多层过滤模块",
+  "note": "结构示意 · 非具体产品",
+  "motion": {
+    "direction": "up",
+    "gap": 125,
+    "spread": 12
+  },
+  "layers": [
+    {
+      "id": "base",
+      "label": "底部托架",
+      "note": "承托各层，保持装配位置",
+      "thickness": 20,
+      "color": "#91a598",
+      "texture": {
+        "kind": "grid",
+        "color": "#84988b",
+        "detailColor": "#c1d1c5"
+      }
+    },
+    {
+      "id": "fold",
+      "label": "折叠滤材",
+      "note": "连续折叠形成起伏结构",
+      "thickness": 28,
+      "color": "#adc6b2",
+      "texture": {
+        "kind": "pleats",
+        "color": "#8bb5a1",
+        "detailColor": "#e6eee0"
+      }
+    },
+    {
+      "id": "grain",
+      "label": "颗粒填充层",
+      "note": "颗粒填充在独立框架内",
+      "thickness": 22,
+      "color": "#8b917a",
+      "texture": {
+        "kind": "granules",
+        "color": "#34473e",
+        "detailColor": "#b1a680"
+      }
+    },
+    {
+      "id": "mesh",
+      "label": "预过滤网",
+      "note": "网孔与支撑边框分开呈现",
+      "thickness": 14,
+      "color": "#69a799",
+      "texture": {
+        "kind": "mesh",
+        "color": "#245a54",
+        "detailColor": "#b8e1d1"
+      }
+    },
+    {
+      "id": "lid",
+      "label": "上盖",
+      "note": "覆盖内部，保留进气开孔",
+      "thickness": 24,
+      "color": "#c0ccbf",
+      "texture": {
+        "kind": "slots",
+        "color": "#e4eae1",
+        "detailColor": "#627e70",
+        "text": "LAYER"
+      }
+    }
+  ],
+  "timeline": {
+    "focus": [
+      {
+        "layer": "mesh"
+      },
+      {
+        "layer": "grain"
+      },
+      {
+        "layer": "fold"
+      }
+    ]
+  }
+}

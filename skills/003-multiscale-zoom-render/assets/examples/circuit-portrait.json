@@ -1,0 +1,103 @@
+{
+  "width": 1080,
+  "height": 1920,
+  "text": {
+    "title": "从电路板，走进芯片",
+    "subtitle": "更换素材与层级的配置示例",
+    "note": "原创结构示意 · 不代表真实芯片布局",
+    "locator": "电路板定位"
+  },
+  "units": {
+    "name": "示意单位",
+    "metresPerUnit": null
+  },
+  "scaleBar": {
+    "show": false,
+    "mode": "nice"
+  },
+  "theme": {
+    "background": "#edf2f5",
+    "ink": "#173b51",
+    "muted": "#627f91",
+    "accent": "#247a87",
+    "field": "#dce6eb",
+    "rule": "#cad8df",
+    "panel": "#f7fafb",
+    "locator": "#d5a33e"
+  },
+  "scene": {
+    "type": "images",
+    "layers": [
+      {
+        "src": "circuit/board.svg",
+        "bounds": {
+          "cx": 0,
+          "cy": 0,
+          "width": 1100,
+          "height": 700
+        }
+      },
+      {
+        "src": "circuit/chip.svg",
+        "bounds": {
+          "cx": 160,
+          "cy": 80,
+          "width": 100,
+          "height": 70
+        },
+        "revealWidth": 320,
+        "fadeRatio": 2
+      },
+      {
+        "src": "circuit/gates.svg",
+        "bounds": {
+          "cx": 166,
+          "cy": 82,
+          "width": 12,
+          "height": 9
+        },
+        "revealWidth": 40,
+        "fadeRatio": 2
+      }
+    ]
+  },
+  "levels": [
+    {
+      "name": "电路板",
+      "description": "先看整体",
+      "caption": "找到电路板上的目标芯片。",
+      "viewWidth": 1300,
+      "center": [
+        0,
+        0
+      ],
+      "hold": 1,
+      "transition": 0
+    },
+    {
+      "name": "芯片",
+      "description": "进入内部示意",
+      "caption": "镜头推进，内部结构逐渐显现。",
+      "viewWidth": 160,
+      "center": [
+        160,
+        80
+      ],
+      "hold": 1,
+      "transition": 3,
+      "panEase": 2
+    },
+    {
+      "name": "微结构",
+      "description": "观察重复单元",
+      "caption": "素材、配色、位置和节奏均由配置控制。",
+      "viewWidth": 20,
+      "center": [
+        166,
+        82
+      ],
+      "hold": 2,
+      "transition": 3
+    }
+  ]
+}

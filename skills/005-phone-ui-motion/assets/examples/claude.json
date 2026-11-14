@@ -1,0 +1,44 @@
+{
+  "duration": 14.2,
+  "messages": [
+    {
+      "role": "user",
+      "text": "为什么要先给结论？",
+      "inputAt": 0.2,
+      "at": 1.5
+    },
+    {
+      "role": "assistant",
+      "text": "先给观众一个清晰的方向，再解释原因。\n这样更容易理解，也更容易记住。",
+      "thinkingAt": 2.05,
+      "at": 2.8,
+      "typeDuration": 3.2
+    },
+    {
+      "role": "user",
+      "text": "明白了，晚点继续。",
+      "at": 6.7
+    }
+  ],
+  "lock": {
+    "at": 8,
+    "wakeAt": 8.5,
+    "date": "星期五，11月13日",
+    "time": "9:41"
+  },
+  "notifications": [
+    {
+      "at": 9,
+      "text": "刚才的讲解，我整理成了三个要点。"
+    },
+    {
+      "at": 10.6,
+      "text": "还可以配一个生活中的例子，让观众更容易理解。"
+    }
+  ],
+  "theme": "claude",
+  "display": {
+    "mode": "phone",
+    "caption": "CLAUDE / 手机界面动效"
+  }
+}
