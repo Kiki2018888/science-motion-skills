@@ -131,7 +131,7 @@ nodeDefaults 为全局默认，节点 style 逐字段覆盖。
 
 - fromPort / toPort：`{"side":"left","offset":0}`。side 为 left/right/top/bottom；offset 为沿该侧宽或高的比例，−0.8 到 0.8。0 为该侧中心。端点按实际形状边界计算。
 - 不设端口时按节点相对方向选择相向端口。回路通常显式指定两端都从左侧或右侧连接。自连线须明确指定两个不同端口。
-- routing：curve（默认）或 straight。
+- routing：curve（默认）、straight 或 lane（分道回程，详见下文）。
 - via：中间折点，形成圆角折线，优先于 routing。点为 `{"x":900,"y":700}` 或相对节点中心的 `{"node":"judge","dx":-220,"dy":80}`。
 - enter：底线淡入开始，默认首段 travel 的 start。
 - style：覆盖 edgeDefaults；cursor：覆盖全局 cursor。
@@ -190,3 +190,24 @@ shape 支持 circle / triangle。size 是圆半径，三角形按相近视觉面
 永久修改 input.json 后作为下一次 --config 输入重渲。--check-only 不编码视频；通过后可用同名路径加 --overwrite 导出。失败保留报告和已生成的排版图供修正；完整验收后才把中间视频移动到最终路径。
 
 网页接口：window.__dur、await window.__seek(seconds)、window.__setCursor('config'/'circle'/'triangle')、window.__inspect()。预览播放不改变导出的确定性，任意位置均由绝对时间计算。
+
+## 连续虚线与分道回路（v02）
+
+`appearance: "amber-night"` 启用 #323232 底色、琥珀色线条、白字和无阴影卡片；theme 与单个节点覆盖仍有效。省略时保持原默认外观。
+
+连续虚线示例：
+
+```json
+{"id":"feedback","from":"result","to":"input","routing":"lane",
+ "lane":{"side":"top","clearance":70,"gap":64},"enter":1.6,
+ "animation":{"mode":"dashed","dash":14,"gap":12,"speed":90,"phase":0,"direction":"forward"},
+ "label":{"text":"反馈","position":0.5,"dy":-24}}
+```
+
+- animation.mode 默认 travel，保留原 travels 和光标；dashed 模式不配置 travels，不显示光标。dash/gap 为 2–120 像素，speed 为像素/秒，phase 为起始像素相位。direction 可为 forward/reverse。until 可指定开始淡出时间。
+- 虚线相位从边的 enter 起按绝对时间计算，任意跳转、局部导出不会重新起跑。不是“光标到终点后跳回起点”的循环。
+- lane.side 支持 top/bottom/left/right。轨道在所有节点外包框之外，距离为 clearance + index × gap。clearance 为 32–700，gap 为 24–300 像素。index 为 0–5，同侧未指定时依出现顺序分配。
+- lane 的两个端口必须在同一侧；省略端口时 offset 为 auto。自动端口按节点实际位置向两端外移，形成内外嵌套；指定数值 offset 可以手动调整。lane 不与 via 混用。轨道仍须放在内容安全区内；跨接不同节点组的复杂回路仍可能交叉。
+- validation 的 paths/labels/crossings 分别设为 off/warn/error，默认 warn 兼容旧配置。paths 检查自折返、路径重合和越界，labels 检查标签压节点、标签互压及连线穿字，crossings 检查线间及自交。新布局建议全部设为 error；有意交叉可单独降为 warn 并人工检查。
+- 几何检测约每 10 像素采样一次；接近共同端点的相交会忽略。它是排版诊断，不是精确碰撞仿真。长标签、动态入场和多个分支仍需检查关键帧。
+- report.json 增加 layout_warnings / path_diagnostics；页面 window.__inspect() 的虚线状态包含 dashOffset、period、pathLength 和 visible。

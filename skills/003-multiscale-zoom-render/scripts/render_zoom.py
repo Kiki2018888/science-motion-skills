@@ -8,6 +8,7 @@ import math
 import os
 from pathlib import Path
 from runtime import default_chrome, default_ffmpeg
+from motion_render import add_arguments, RenderPlan
 import shutil
 import subprocess
 import sys
@@ -22,7 +23,7 @@ def main():
     ap.add_argument('--scale',type=int,choices=[1,2],default=2)
     ap.add_argument('--chrome',type=Path,default=default_chrome())
     ap.add_argument('--ffmpeg',type=Path,default=default_ffmpeg())
-    args=ap.parse_args();raw=json.loads(args.config.read_text(encoding='utf-8-sig'));c=normalize(raw)
+    add_arguments(ap);args=ap.parse_args();raw=json.loads(args.config.read_text(encoding='utf-8-sig'));c=normalize(raw)
     skill=Path(__file__).resolve().parents[1];dest=args.output.resolve();source=dest.parent/(dest.stem+'_source')
     require(dest.suffix.lower()=='.mp4','Output must be .mp4')
     require(not dest.is_relative_to(skill) and not source.is_relative_to(skill),'Outputs must be outside skill directory')
@@ -47,7 +48,7 @@ def main():
     for name,data in [('input.json',raw),('resolved.json',c),('assets.json',manifest)]:
         (source/name).write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
     (source/'config.js').write_text('window.ZOOM_CONFIG='+json.dumps(c,ensure_ascii=False)+';\n',encoding='utf-8')
-    errors=[];frames=math.ceil(c['duration']*c['fps']);pending=source/'render.pending.mp4'
+    errors=[];plan=RenderPlan(args,c['duration'],c['fps'],c['width'],c['height'],source,args.config);frames=plan.count;pending=plan.pending
     report=dict(encoded=False,resolution=[c['width'],c['height']],fps=c['fps'],duration=frames/c['fps'],frames=frames,audio=False,scene=c['scene']['type'],supersampling=args.scale)
     try:
         with sync_playwright() as pw:
@@ -86,11 +87,12 @@ def main():
                     page.evaluate('window.__seek(0)');page.evaluate('window.__seek(window.__dur)');page.evaluate('(t)=>window.__seek(t)',t)
                     require(digest==hashlib.sha256(page.screenshot()).hexdigest(),'Seek pixel mismatch')
                 report.update(camera_continuity_pass=True,scale_bar_pass=True,seek_pixels_pass=True,layout_pass=True,sample_times=times)
+                plan.export_previews(page);report.update(plan.metadata())
                 if not args.check_only:
-                    proc=subprocess.Popen([str(args.ffmpeg),'-y','-v','error','-f','image2pipe','-framerate',str(c['fps']),'-i','-','-vf',f'scale={c["width"]}:{c["height"]}:flags=lanczos,setsar=1','-an','-c:v','libx264','-threads','4','-preset','fast','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(pending)],stdin=subprocess.PIPE)
+                    proc=subprocess.Popen(plan.command(args.ffmpeg,threads=4),stdin=subprocess.PIPE)
                     try:
-                        for f in range(frames):
-                            page.evaluate('(t)=>window.__seek(t)',f/c['fps']);proc.stdin.write(page.screenshot(type='jpeg',quality=96))
+                        for f in plan.indices:
+                            page.evaluate('(t)=>window.__seek(t)',f/c['fps']);proc.stdin.write(plan.capture(page))
                             if f%(c['fps']*3)==0:print(f'FRAME {f}/{frames}',flush=True)
                         proc.stdin.close();require(proc.wait(timeout=120)==0,'FFmpeg failed')
                     finally:
@@ -99,10 +101,7 @@ def main():
             finally:browser.close()
         require(not errors,str(errors))
         if not args.check_only:
-            meta=json.loads(subprocess.run([str(probe),'-v','error','-show_streams','-of','json',str(pending)],capture_output=True,text=True,check=True).stdout)
-            v=meta['streams'][0];require(len(meta['streams'])==1 and v['codec_name']=='h264' and v['width']==c['width'] and v['height']==c['height'] and int(v['nb_frames'])==frames,'Unexpected encoded format')
-            decoded=subprocess.run([str(args.ffmpeg),'-v','error','-i',str(pending),'-f','null',os.devnull],capture_output=True,check=True);require(not decoded.stderr,'Video decode error')
-            pending.replace(dest);report.update(encoded=True,full_decode_pass=True,file_bytes=dest.stat().st_size)
+            plan.finish(args.ffmpeg,probe,dest,report)
         report['page_errors']=errors
     except Exception as e:
         report.update(error=str(e),page_errors=errors);raise

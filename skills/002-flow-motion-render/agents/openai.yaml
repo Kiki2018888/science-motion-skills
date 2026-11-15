@@ -1,6 +1,6 @@
 interface:
   display_name: "002 · 流程与因果链动效"
-  short_description: "将流程生成为横竖屏视频，可配置卡片形状配色、分支回路及圆形或方向三角形光标"
+  short_description: "横竖屏流程动效，支持分道回路、持续虚线、移动光标与线条标签遮挡检查"
   default_prompt: "使用 $002-flow-motion-render，将下面的流程制作成动效视频，按我指定的形状、配色、布局和光标设置生成。"
 policy:
   allow_implicit_invocation: true

@@ -1,0 +1,24 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "theme": "claude",
+  "duration": 12,
+  "display": {
+    "mode": "phone",
+    "framing": "top",
+    "center": [0.5, 0.97],
+    "phoneHeight": 1740,
+    "hardware": {"finish": "titanium", "camera": "island", "buttons": true}
+  },
+  "style": {"appearance": "amber-night", "fontSize": 38, "lineHeight": 1.5},
+  "status": {"time": "20:26"},
+  "app": {"title": "Claude"},
+  "labels": {"greeting": "从一个问题开始"},
+  "messages": [
+    {"role": "user", "text": "能帮我把这个想法整理清楚吗？", "at": 1.2, "mode": "type", "cps": 18},
+    {"role": "assistant", "text": "可以。先把目标讲清楚，再把行动拆成几个步骤。", "at": 3.2, "mode": "type", "cps": 17, "thinkingAt": 2.5},
+    {"role": "user", "text": "那就从第一步开始。", "at": 6.4, "mode": "pop"},
+    {"role": "assistant", "text": "写下一句话：完成之后，你希望看到什么变化？", "at": 7.5, "mode": "type", "cps": 17}
+  ]
+}

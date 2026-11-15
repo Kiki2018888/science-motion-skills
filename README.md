@@ -78,3 +78,9 @@ See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Fon
 ## English overview
 
 Nine configurable motion-rendering skills for science communication: chat, flow and causality, multiscale zoom, split comparison, phone conversation/notifications, exploded layers, event monitoring, terminal/code, and threshold/start-line animation. Run the Python renderers directly or install the folders as Codex skills. JSON examples and editable browser-based engines are included. Original code and examples are MIT licensed; bundled fonts retain SIL OFL licensing. Windows is verified; other platforms have portable tool discovery but have not received full rendering validation.
+
+## v1.1.0 · 2026-11-14
+
+所有九套技能加入共同渲染 2.0：按原时间轴导出帧段、关键帧 PNG、有限范围 BT.709、编码后 PTS 与完整解码检查。005 新增半截手机、硬件细节与消息安全区；002 新增连续虚线、分道回程和路径诊断；009 新增像素角色、细节跑道与实际轮廓越线。上述三项新样片位于 gallery 的 v02 区域，原样片保留。
+
+新选项均为可选配置；旧配置保留原布局。`shared/` 保存共同渲染源码，`python tools/sync_runtime.py` 检查九份副本，`--apply` 同步副本。007 / 008 在本次公开版本中只更新共同渲染层。

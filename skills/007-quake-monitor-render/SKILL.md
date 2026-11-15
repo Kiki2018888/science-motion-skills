@@ -40,3 +40,8 @@ python -B -X utf8 '<技能目录>\scripts\render_monitor.py' --config '<工作�
 ## Portable runtime
 
 需要 Python 3.10+、Playwright、Pillow、Chrome/Chromium 与 FFmpeg/ffprobe。自动查找 PATH 和常见安装位置；也可传 `--chrome` / `--ffmpeg`，或设置 `CHROME_BIN` / `FFMPEG_BIN`。输出必须位于技能目录之外。
+
+
+## 局部预览与统一编码
+
+读 [共同渲染接口](references/rendering.md)。支持 `--frames START:END`、`--preview-frames` 和 `--profile bt709|legacy`；默认有限范围 BT.709，时间仍使用原场景时间轴。

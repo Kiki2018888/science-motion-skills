@@ -101,3 +101,37 @@ lane 为 -0.82 至 0.82；entryAt / entryDuration 是入场开始和时长，lau
 输出 MP4 为无声 H.264；配套目录包含 input.json、resolved.json、config.js、engine.js、index.html、字体及许可、poster.png、report.json。浏览器打开 index.html 可播放、暂停和拖动时间。
 
 `--check-only` 只生成源文件和关键帧，不编码视频；report.encoded 为 false。正式输出会逐帧渲染、核对帧数/分辨率并完整解码。report 中单段未使用的物理阶段检查为 null。随机跳转像素一致性只在本次浏览器环境内验证，不承诺跨 Chrome 版本逐像素相同。
+
+## 像素角色和细节跑道（v02）
+
+保留 type: card 作为原默认。单个参与者可设为 pixel，两类可混排：
+
+```json
+{"type":"pixel","lane":-0.64,"name":"方案 A","color":"#E4893A",
+ "entryAt":0.65,"entryDuration":1,"launch":4,"travel":4.8,
+ "pixel":{"size":1.35,"crouchDuration":0.55,"crouchDepth":0.25,
+          "turnDuration":0.28,"strideRate":12,"blinkPeriod":3.6,
+          "blinkDuration":0.14,"hop":8,"labelSize":30,"eyeColor":"#292B28"}}
+```
+
+| pixel 字段 | 默认 / 范围与含义 |
+| --- | --- |
+| size | 1.35 / 0.8–1.6，角色整体倍率，叠加透视 scale |
+| crouchDuration | 0.55 / 0–1.2，launch 前的蓄力时间，0 关闭 |
+| crouchDepth | 0.25 / 0–0.45，蓄力时身体压低比例 |
+| turnDuration | 0.28 / 0.15–1，转身从 launch 前 0.12 秒开始 |
+| strideRate | 12 / 1–30，每秒步态切换次数，六相位交替四足 |
+| blinkPeriod / blinkDuration | 3.6 / 0.14 秒；周期 0.5–10，时长 0–0.4，仅等待时眨眼 |
+| hop | 8 / 0–12，运行时跳步高度，按 4 像素格取整 |
+| labelSize | 30 / 22–42，标签字号随远近适量变化，最低 22 设计像素 |
+| eyeColor | #292B28，眼睛颜色；身体色使用 entrant.color |
+
+姿态仅由原时间、launch 及角色序号计算，无累积随机状态。可以分别调整不同角色的参数和出发时刻。角色为原创几何像素轮廓，不依赖外部人物素材。
+
+`race.trackStyle` 为 classic（原默认）或 detailed。后者增加分道底色、双侧边线、刻度、道次和起跑器。`appearance: amber-night` 设置 #323232 背景、白字、琥珀/金色强调；显式 theme 覆盖仍优先。没有指定主题时沿用原配色。字体沿用包内 OFL 字体，可用 --shared-font 指定项目字体。
+
+包含像素角色时，检查整个运动过程中的角色边界、与其他角色/标签的间距和所在赛道宽度；entrants.lane 必须位于相邻 lanes 边界之间，不能压在边界上。1–5 名角色均受总数限制。标签宽度上限 220 设计像素，超长时报错，应缩短名称或调整排版。更高的角色可能提前越线，须一并调整 readyZ、startY 和赛道几何，不可关闭检查。
+
+越线检测使用像素角色真正绘制的身体、四足和手臂矩形，不包含影子与标签。首个越线时刻触发脉冲；离散像素步态可能在切帧时跨过线，而不是恰好有一个顶边等于线的中间姿态。报告 race_diagnostics 记录前后边界和首个越线时刻。卡片仍使用原顶边。
+
+几何检查按多个时点采样，并在出发和实际越线时单独验证；不声称覆盖任意时间的连续物理碰撞。入场阶段允许从画外滑入，检查在完整入场后启用。sample/contact 和任意 seek 仍须结合人工视觉审看。

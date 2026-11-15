@@ -6,6 +6,7 @@ import math
 import os
 from pathlib import Path
 from runtime import default_chrome, default_ffmpeg
+from motion_render import add_arguments, RenderPlan
 import shutil
 import subprocess
 import sys
@@ -22,7 +23,7 @@ def main():
     ap.add_argument('--chrome',type=Path,default=default_chrome())
     ap.add_argument('--ffmpeg',type=Path,default=default_ffmpeg())
     ap.add_argument('--scale',type=int,choices=[1,2],default=2,help='Capture multiplier; output resolution stays unchanged')
-    a=ap.parse_args();raw=json.loads(a.config.read_text(encoding='utf-8-sig'))
+    add_arguments(ap);a=ap.parse_args();raw=json.loads(a.config.read_text(encoding='utf-8-sig'))
     if a.cursor:raw['cursor']={**raw.get('cursor',{}),'shape':a.cursor}
     if a.fps:raw['fps']=a.fps
     c=normalize(raw);skill=Path(__file__).resolve().parents[1];dest=a.output.resolve();source=dest.parent/(dest.stem+'_source')
@@ -36,13 +37,13 @@ def main():
     from playwright.sync_api import sync_playwright
     from PIL import Image,ImageDraw
     source.mkdir(parents=True,exist_ok=True)
-    for name in ['index.html','style.css','engine.js','body.otf','OFL.txt']:
+    for name in ['index.html','style.css','geometry.js','engine.js','body.otf','OFL.txt']:
         shutil.copy2(skill/'assets/template'/name,source/name)
     (source/'input.json').write_text(json.dumps(raw,ensure_ascii=False,indent=2),encoding='utf-8')
     (source/'resolved.json').write_text(json.dumps(c,ensure_ascii=False,indent=2),encoding='utf-8')
     # External JS + JSON encoding: user text never enters HTML markup or a shell command.
     (source/'config.js').write_text('window.FLOW_CONFIG='+json.dumps(c,ensure_ascii=False)+';\n',encoding='utf-8')
-    errors=[];frames=math.ceil(c['duration']*c['fps']);pending=source/'render.pending.mp4'
+    errors=[];plan=RenderPlan(a,c['duration'],c['fps'],c['width'],c['height'],source,a.config);frames=plan.count;pending=plan.pending
     report={'encoded':False,'layout_pass':False,'audio':False,'resolution':[c['width'],c['height']],'fps':c['fps'],'frames':frames,'duration_seconds':frames/c['fps'],'cursor':c['cursor'],'supersampling':a.scale}
     try:
         with sync_playwright() as pw:
@@ -51,7 +52,7 @@ def main():
                 page=browser.new_page(viewport={'width':c['width'],'height':c['height']},device_scale_factor=a.scale)
                 page.on('pageerror',lambda e:errors.append(str(e)))
                 page.goto((source/'index.html').as_uri()+'?cap=1');page.wait_for_function('window.__ready===true || window.__buildError',timeout=20000)
-                require(not errors,str(errors));issues=page.evaluate('window.__issues||[]');report['layout_issues']=issues
+                require(not errors,str(errors));issues=page.evaluate('window.__issues||[]');report['layout_issues']=issues;report['layout_warnings']=page.evaluate('window.__warnings||[]');report['path_diagnostics']=page.evaluate('window.__pathDiagnostics||[]')
                 # Save a final frame even on layout failure, so the configuration can be corrected visually.
                 page.evaluate('(t)=>window.__seek(t)',c['duration']-.1)
                 Image.open(io.BytesIO(page.screenshot(type='png'))).resize((c['width'],c['height']),Image.Resampling.LANCZOS).save(source/'poster.png')
@@ -92,11 +93,12 @@ def main():
                 report['cursor_direction_checks']=direction_checks
                 for shape in ['circle','triangle','config']:
                     page.evaluate('(s)=>window.__setCursor(s)',shape)
+                plan.export_previews(page);report.update(plan.metadata())
                 if not a.check_only:
-                    proc=subprocess.Popen([str(a.ffmpeg),'-y','-v','error','-f','image2pipe','-framerate',str(c['fps']),'-i','-','-vf',f'scale={c["width"]}:{c["height"]}:flags=lanczos,setsar=1','-an','-c:v','libx264','-threads','3','-preset','fast','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(pending)],stdin=subprocess.PIPE)
+                    proc=subprocess.Popen(plan.command(a.ffmpeg,threads=4),stdin=subprocess.PIPE)
                     try:
-                        for f in range(frames):
-                            page.evaluate('(t)=>window.__seek(t)',f/c['fps']);proc.stdin.write(page.screenshot(type='jpeg',quality=96))
+                        for f in plan.indices:
+                            page.evaluate('(t)=>window.__seek(t)',f/c['fps']);proc.stdin.write(plan.capture(page))
                             if f%(c['fps']*3)==0:print(f'FRAME {f}/{frames}',flush=True)
                         proc.stdin.close();require(proc.wait(timeout=120)==0,'FFmpeg encoding failed')
                     finally:
@@ -104,10 +106,7 @@ def main():
             finally:browser.close()
         require(not errors,str(errors))
         if not a.check_only:
-            meta=json.loads(subprocess.run([str(probe),'-v','error','-show_streams','-of','json',str(pending)],capture_output=True,text=True,check=True).stdout)
-            v=meta['streams'][0];require(len(meta['streams'])==1 and v['codec_name']=='h264' and v['width']==c['width'] and v['height']==c['height'] and int(v['nb_frames'])==frames,'Unexpected output format')
-            decoded=subprocess.run([str(a.ffmpeg),'-v','error','-i',str(pending),'-f','null',os.devnull],capture_output=True,check=True);require(not decoded.stderr,'Video decode errors: '+decoded.stderr.decode(errors='replace'))
-            pending.replace(dest);report.update(encoded=True,full_decode_pass=True,file_bytes=dest.stat().st_size,output=str(dest))
+            plan.finish(a.ffmpeg,probe,dest,report)
         report['page_errors']=errors
     except Exception as e:
         report.update(error=str(e),page_errors=errors);raise

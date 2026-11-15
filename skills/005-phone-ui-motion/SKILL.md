@@ -1,6 +1,6 @@
 ---
 name: 005-phone-ui-motion
-description: 将对话与通知制作成手机界面动效视频，支持微信、ChatGPT、Gemini、DeepSeek、Kimi、Claude 六种风格，全屏或带手机外框嵌入，逐字输入与回复、键盘、锁屏和通知堆叠。适用于手机聊天、AI 对话、锁屏消息和应用界面示意；不操作真实 App，不发送真实消息。
+description: 将对话与通知制作成手机界面动效视频，支持微信、ChatGPT、Gemini、DeepSeek、Kimi、Claude 六种风格，全屏、完整手机或半截手机特写，可选金属边框、镜头岛和暗夜配色，支持逐字输入与回复、键盘、锁屏和通知堆叠。适用于手机聊天、AI 对话、锁屏消息和应用界面示意；不操作真实 App，不发送真实消息。
 ---
 
 # 手机聊天与通知动效
@@ -13,6 +13,8 @@ description: 将对话与通知制作成手机界面动效视频，支持微信�
 
 - `display.mode: fullscreen`：竖屏界面铺满画布。
 - `display.mode: phone`：带手机外框，支持横竖画布，位置与尺寸可调。
+- `display.framing: top`：上半部特写，允许机身下方出画；按实际可见区域滚动消息。参考 `half-phone.json`，重要文字仍须完整可读。
+- `display.hardware` 可选机身材质、侧键与镜头岛；`style.appearance: amber-night` 是可选暗夜主题，默认仍沿用各应用原配色。
 - 六套模板有各自标题栏、消息呈现、输入框和配色：微信为头像+气泡，AI 主题为各自风格的回答区和功能区；锁屏共用 iOS 风格结构。
 
 这些是风格化重绘与示意图标，不声称是对应 App 最新版本的像素级复制。若用户要求特定版本的精确 UI，使用其截图校准模板，品牌图标可通过本地图片替换。不要仅改应用名称就声称完成新风格。
@@ -21,7 +23,7 @@ description: 将对话与通知制作成手机界面动效视频，支持微信�
 
 ## 执行
 
-依赖 Python 3.10+、Playwright Python、Pillow、本机 Chrome、FFmpeg / ffprobe；使用独立虚拟环境，不将依赖目录放入技能包或 项目输出目录 项目。
+依赖 Python 3.10+、Playwright Python、Pillow、本机 Chrome、FFmpeg / ffprobe；使用独立虚拟环境，不将依赖目录放入技能包或输出目录。
 
 ```powershell
 python -B -X utf8 '<技能目录>\scripts\render_phone.py' --config '<工作目录>\config.json' --output '<工作目录>\phone.mp4' --check-only
@@ -38,6 +40,12 @@ python -B -X utf8 '<技能目录>\scripts\render_phone.py' --config '<工作目�
 输出旁 `_source` 保存原始配置、展开配置、网页、字体及许可、复制素材与摘要清单、关键帧和报告。本项目输出统一放 `output/005-phone-ui-motion/`，技能安装目录保持只读。中间帧经管道编码，不生成海量 PNG 序列。
 
 接口：`window.__dur`、`await window.__seek(t)`、`window.__inspect()`。字体显式预载；缓存静态背景与手机外框；每帧重置画布状态并使用固定渲染方式，保持任意定位一致。修改这些逻辑后要复查跳帧，不要只看顺序播放。
+
+
+## 局部预览与统一编码
+
+需要只改某一段、查看指定关键帧或对齐成片色彩时，读 [共同渲染接口](references/rendering.md)。支持 `--frames START:END`、`--preview-frames` 和 `--profile bt709|legacy`，默认统一BT.709；原配置中的时间仍为完整场景时间。
+
 
 ## Portable runtime
 

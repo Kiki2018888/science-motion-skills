@@ -151,3 +151,21 @@ UTF-8 JSON（兼容 BOM）。文件路径以配置文件所在目录为基准；
 源目录中的 `input.json` 保留原参数，`resolved.json` 含展开的文字时间表；`media/` 是本次本地素材副本，`assets.json` 记录源路径和 SHA-256。不要直接编辑展开的字符时间表，修改原始配置后重渲。
 
 不调用六款应用的 API，不发送真实通知，不依赖账号登录。界面和示意图标不是最新 App 版本的精确声明。正式视频内是否标明“示意”按任务语境处理，不能冒充真实平台操作或真实实验记录。
+
+
+## 上半部特写与硬件样式（v02）
+
+`display.framing` 默认 `full`，完整机身须在安全区域内。`top` 允许机身底部出画，但机身顶部和左右边缘仍须在安全区域内；横竖位置继续使用原 `center` 和 `phoneHeight`。不支持把手机顶部、左右侧随意切掉。
+
+`display.safeArea: [x,y,width,height]` 使用输出像素坐标，默认整个画面；设备和屏幕在这个区域内裁切，可为外部字幕条保留底部空间。特写按真正可见的屏幕高度计算聊天滚动，最新完整消息与操作区需落在范围内。聊天至少保留620个逻辑屏幕像素；锁屏至少710个，超高消息/通知仍会被拒绝。
+
+`display.composer` 完整构图默认true、特写默认false。隐藏输入框时，不可使用 `inputAt`，可用用户消息的 `mode:type` 在气泡内输入。特写配合显式输入框时应设置 `keyboard:false`，不把全键盘塞进半截手机。
+
+`display.hardware`：
+- `finish`: `classic`（默认，保留旧样式）、`graphite`、`titanium`、`silver`。
+- `buttons`: true（默认），false可隐藏侧键。
+- `camera`: `pill`（默认）、`island`、`none`。原 `notch:false` 仍可整体关闭。
+
+`style.appearance: amber-night` 提供深底、白字和琥珀强调色；若未显式设置画布背景，也切换为#323232。`style.palette` 可分别覆盖 `bg/ink/muted/accent/user/answer/input`，颜色用#RRGGBB，answer可为null。保留六种应用的界面结构，主题与硬件材质独立。
+
+参见 `assets/examples/half-phone.json`。默认配置未开启上述能力时，旧完整手机的布局与外观保持。

@@ -1,0 +1,63 @@
+{
+  "mode": "race",
+  "appearance": "amber-night",
+  "text": {
+    "title": "新一轮竞争",
+    "subtitle": "共同起点，各自加速",
+    "eyebrow": "THRESHOLD / START",
+    "footerLeft": "NEXT ROUND",
+    "footerRight": "",
+    "raceTitle": "同一条线，新的起点",
+    "raceReady": "准备 · 蓄力 · 出发",
+    "raceGo": "向下一程加速",
+    "readyLabel": "等待出发",
+    "startLabel": "起跑线"
+  },
+  "race": {
+    "duration": 11,
+    "trackStyle": "detailed",
+    "gridAt": 0.1,
+    "gridDuration": 1.1,
+    "titleAt": 0.1,
+    "goAt": 3.3,
+    "goDuration": 0.5,
+    "lanes": [
+      -1,
+      -0.32,
+      0.32,
+      1
+    ]
+  },
+  "entrants": [
+    {
+      "type": "pixel",
+      "lane": -0.64,
+      "entryAt": 0.65,
+      "entryDuration": 1,
+      "launch": 4.0,
+      "travel": 4.8,
+      "name": "方案 A",
+      "color": "#E4893A"
+    },
+    {
+      "type": "pixel",
+      "lane": 0,
+      "entryAt": 0.8500000000000001,
+      "entryDuration": 1,
+      "launch": 4.3,
+      "travel": 4.8,
+      "name": "方案 B",
+      "color": "#F3BB66"
+    },
+    {
+      "type": "pixel",
+      "lane": 0.64,
+      "entryAt": 1.05,
+      "entryDuration": 1,
+      "launch": 4.6,
+      "travel": 4.8,
+      "name": "方案 C",
+      "color": "#BCA78D"
+    }
+  ]
+}

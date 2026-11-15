@@ -7,6 +7,7 @@ import math
 import os
 from pathlib import Path
 from runtime import default_chrome, default_ffmpeg
+from motion_render import add_arguments, RenderPlan
 import shutil
 import subprocess
 import sys
@@ -22,7 +23,7 @@ def main():
     ap.add_argument('--scale',type=int,choices=[1,2],default=1)
     ap.add_argument('--chrome',type=Path,default=default_chrome())
     ap.add_argument('--ffmpeg',type=Path,default=default_ffmpeg())
-    a=ap.parse_args();raw=json.loads(a.config.read_text(encoding='utf-8-sig'));c=normalize(raw)
+    add_arguments(ap);a=ap.parse_args();raw=json.loads(a.config.read_text(encoding='utf-8-sig'));c=normalize(raw)
     skill=Path(__file__).resolve().parents[1];dest=a.output.resolve();source=dest.parent/(dest.stem+'_source')
     require(dest.suffix.lower()=='.mp4','Output must be .mp4')
     require(not dest.is_relative_to(skill) and not source.is_relative_to(skill),'Outputs must be outside skill directory')
@@ -42,7 +43,7 @@ def main():
     for name,data in [('input.json',raw),('resolved.json',c)]:
         (source/name).write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
     (source/'config.js').write_text('window.TERMINAL_CONFIG='+json.dumps(c,ensure_ascii=False)+';\n',encoding='utf-8')
-    frames=math.ceil(c['duration']*c['fps']);pending=source/'render.pending.mp4';errors=[]
+    plan=RenderPlan(a,c['duration'],c['fps'],c['width'],c['height'],source,a.config);frames=plan.count;pending=plan.pending;errors=[]
     report=dict(encoded=False,resolution=[c['width'],c['height']],fps=c['fps'],duration=frames/c['fps'],frames=frames,audio=False,segments=len(c['segments']),highlights=len(c['pauses']),supersampling=a.scale)
     try:
         with sync_playwright() as pw:
@@ -88,22 +89,17 @@ def main():
                     page.evaluate('window.__seek(window.__dur)');page.evaluate('window.__seek(0)');page.evaluate('(t)=>window.__seek(t)',t)
                     require(digest==hashlib.sha256(page.screenshot()).hexdigest(),'Non-deterministic seek at '+str(t))
                 report.update(timeline_pass=True,hold_pixels_pass=True,counters_pass=True,seek_pixels_pass=True,layout_pass=True,sample_times=selected)
+                plan.export_previews(page);report.update(plan.metadata())
                 if not a.check_only:
-                    proc=subprocess.Popen([str(a.ffmpeg),'-y','-v','error','-f','image2pipe','-framerate',str(c['fps']),'-i','-',
-                         '-vf',f"scale={c['width']}:{c['height']}:flags=lanczos,setsar=1",'-an','-c:v','libx264','-threads','4',
-                         '-preset','fast','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(pending)],stdin=subprocess.PIPE)
+                    proc=subprocess.Popen(plan.command(a.ffmpeg,threads=4),stdin=subprocess.PIPE)
                     try:
-                        for f in range(frames):
-                            page.evaluate('(t)=>window.__seek(t)',f/c['fps']);proc.stdin.write(page.screenshot(type='jpeg',quality=96))
+                        for f in plan.indices:
+                            page.evaluate('(t)=>window.__seek(t)',f/c['fps']);proc.stdin.write(plan.capture(page))
                             if f%96==0:print(f'FRAME {f}/{frames}',flush=True)
                         proc.stdin.close();require(proc.wait(timeout=120)==0,'FFmpeg failed')
                     finally:
                         if proc.poll() is None:proc.kill();proc.wait()
-                    meta=json.loads(subprocess.run([str(probe),'-v','error','-show_streams','-of','json',str(pending)],capture_output=True,text=True,check=True).stdout)
-                    v=meta['streams'][0];require(len(meta['streams'])==1 and v['codec_name']=='h264' and v['width']==c['width'] and v['height']==c['height'] and int(v['nb_frames'])==frames,'Encoded format/frame count mismatch')
-                    decoded=subprocess.run([str(a.ffmpeg),'-v','error','-i',str(pending),'-f','null',os.devnull],capture_output=True,check=True);require(not decoded.stderr,str(decoded.stderr))
-                    require(not errors and not page.evaluate('window.__issues'),str(errors or page.evaluate('window.__issues')))
-                    pending.replace(dest);report.update(encoded=True,full_decode_pass=True,file_bytes=dest.stat().st_size)
+                    plan.finish(a.ffmpeg,probe,dest,report)
                 require(not errors,str(errors));report['page_errors']=errors
             finally:browser.close()
     except Exception as e:

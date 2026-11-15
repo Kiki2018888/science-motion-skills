@@ -29,12 +29,41 @@ function threshold(t,s){if(s.transition>=1)return;let shake=0;for(const p of pin
 const entrants=C.mode==='threshold'?[]:C.entrants;
 function trackPoint(x,z){return [960+x*(RA.farWidth+RA.spread*z),RA.farY+RA.depth*z];}
 function entrantState(t,e,i){const entry=ease((t-e.entryGlobal)/e.entryDuration),p=clamp((t-e.at)/e.travel),travel=ease(p);return {entry,travel,z:mix(RA.readyZ+.24,RA.readyZ,entry)-travel*(RA.readyZ-RA.finishZ),scale:mix(1,RA.endScale,travel)};}
-for(let i=0;i<entrants.length;i++){const e=entrants[i];let lo=e.at,hi=e.at+e.travel;for(let n=0;n<40;n++){const t=(lo+hi)/2,r=entrantState(t,e,i),front=trackPoint(e.lane,r.z)[1]-RA.cardHeight*r.scale;if(front>RA.startY)lo=t;else hi=t;}e.cross=(lo+hi)/2;e.crossX=trackPoint(e.lane,entrantState(e.cross,e,i).z)[0];}
+function entrantBounds(t,e,i){const r=entrantState(t,e,i),[x,y]=trackPoint(e.lane,r.z);if(e.type==='pixel')return PixelRunner.bounds(PixelRunner.pose(t,e,i,r),x,y);return {left:x-RA.cardWidth*r.scale/2,right:x+RA.cardWidth*r.scale/2,top:y-RA.cardHeight*r.scale,bottom:y};}
+function pixelLabel(t,e,i){const r=entrantState(t,e,i),[x,y]=trackPoint(e.lane,r.z),size=Math.max(22,e.pixel.labelSize*mix(1,.75,r.travel)),baseline=y+32*Math.max(.65,r.scale)+8;ctx.font=`500 ${size}px Body`;const width=ctx.measureText(e.name).width;return {x,baseline,size,width,left:x-width/2,right:x+width/2,top:baseline-size,bottom:baseline+size*.2};}
+// Find the first crossing, including stepped pixel poses; do not reuse card height.
+for(let i=0;i<entrants.length;i++){const e=entrants[i];let lo=e.at,hi=e.at+e.travel;
+ if(e.type==='pixel')for(let n=1;n<=256;n++){const t=e.at+e.travel*n/256;if(entrantBounds(t,e,i).top<=RA.startY){hi=t;lo=e.at+e.travel*(n-1)/256;break;}}
+ for(let n=0;n<40;n++){const t=(lo+hi)/2;if(entrantBounds(t,e,i).top>RA.startY)lo=t;else hi=t;}e.cross=(lo+hi)/2;e.crossX=trackPoint(e.lane,entrantState(e.cross,e,i).z)[0];}
+function raceDiagnostics(){
+ const result={pixelEntrants:entrants.filter(e=>e.type==='pixel').length,samples:0,crossings:entrants.map((e,i)=>({name:e.name,type:e.type,time:e.cross,frontBefore:entrantBounds(e.cross-.00001,e,i).top,frontAfter:entrantBounds(e.cross+.00001,e,i).top}))};
+ if(!result.pixelEntrants)return result;
+ const samples=new Set();entrants.forEach(e=>{for(let n=0;n<=80;n++)samples.add(e.entryGlobal+e.entryDuration+(e.at+e.travel-e.entryGlobal-e.entryDuration)*n/80)});
+ for(const t of samples){const visible=entrants.map((e,i)=>({e,i,r:entrantState(t,e,i),b:entrantBounds(t,e,i)})).filter(a=>a.r.entry>=.999&&a.r.travel<.96);result.samples++;
+  for(const a of visible){const {b,e,r}=a;if(b.left<88||b.right>1832||b.top<350||b.bottom>974)issues.add('Entrant outside race area: '+e.name);
+   if(e.type==='pixel'){a.label=pixelLabel(t,e,a.i);if(a.label.width>220)issues.add('Pixel label too long: '+e.name);if(a.label.bottom>1004)issues.add('Pixel label outside race area: '+e.name);}
+   const k=RA.lanes.findIndex((v,i)=>i<RA.lanes.length-1&&e.lane>v&&e.lane<RA.lanes[i+1]);if(k<0)issues.add('Entrant needs a lane between boundaries: '+e.name);
+   else if(b.left<trackPoint(RA.lanes[k],r.z)[0]+6||b.right>trackPoint(RA.lanes[k+1],r.z)[0]-6)issues.add('Entrant exceeds lane width: '+e.name);
+  }
+  for(let i=0;i<visible.length;i++)for(let j=i+1;j<visible.length;j++){const hit=(a,b)=>a&&b&&a.left<b.right+8&&a.right>b.left-8&&a.top<b.bottom+8&&a.bottom>b.top-8;const a=visible[i],b=visible[j];if(hit(a.b,b.b))issues.add('Entrants overlap: '+a.e.name+' / '+b.e.name);if(hit(a.label,b.label)||hit(a.label,b.b)||hit(a.b,b.label))issues.add('Entrant label overlap: '+a.e.name+' / '+b.e.name);}
+ }
+ return result;
+}
+window.__raceDiagnostics=null;
+function detailedTrack(grid){
+ const near=RA.readyZ+.04;poly([trackPoint(-1,near),trackPoint(-1,.03),trackPoint(1,.03),trackPoint(1,near)],'#292929',P.trackGrid,1);
+ for(let i=0;i<RA.lanes.length-1;i++){const a=RA.lanes[i],b=RA.lanes[i+1];if(i%2===0)poly([trackPoint(a,near),trackPoint(a,.03),trackPoint(b,.03),trackPoint(b,near)],'#303030');
+  const [x,y]=trackPoint((a+b)/2,.2);ctx.save();ctx.globalAlpha*=.55;ctx.textAlign='center';text(String(i+1).padStart(2,'0'),x,y,18,P.muted,500,70);ctx.restore();}
+ for(const side of [-1,1]){line([trackPoint(side,.02),trackPoint(side,near)],P.trackEdge,2);line([trackPoint(side*1.035,.02),trackPoint(side*1.035,near)],P.line,3);
+  for(let j=1;j<=9;j++){const z=j/10;line([trackPoint(side,z),trackPoint(side*1.024,z)],j%3===0?P.gold:P.muted,1.5);}}
+ for(const e of entrants){const [x,y]=trackPoint(e.lane,RA.readyZ);for(const side of [-1,1]){poly([[x+side*23-11,y+5],[x+side*23-7,y-5],[x+side*23+12,y-5],[x+side*23+10,y+5]],P.line,P.trackEdge,1);}}
+}
 function rgb(hex){return [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));}
 function newRace(t,s){if(C.mode==='threshold'||t<RA.start)return;const local=t-RA.start,tilt=C.mode==='race'?1:ease((local-RA.moveAt)/RA.moveDuration),grid=ease((local-RA.gridAt)/RA.gridDuration),startY=mix(LINE,RA.startY,tilt),left=mix(TH.left,RA.left,tilt),right=mix(TH.right,RA.right,tilt);
  // The original red line remains intact while the surrounding diagram changes.
- ctx.save();ctx.beginPath();ctx.rect(88,194,1744,780);ctx.clip();
+ ctx.save();ctx.beginPath();ctx.rect(88,194,1744,RA.trackStyle==='detailed'?810:780);ctx.clip();
  if(grid){ctx.save();ctx.globalAlpha=grid;const glow=ctx.createRadialGradient(960,760,15,960,760,760);glow.addColorStop(0,RA.color+'18');glow.addColorStop(1,P.bg+'00');ctx.fillStyle=glow;ctx.fillRect(100,320,1720,640);
+ if(RA.trackStyle==='detailed')detailedTrack(grid);
  for(const x of RA.lanes){const near=trackPoint(x,RA.readyZ),far=trackPoint(x,.03);line([near,[mix(near[0],far[0],grid),mix(near[1],far[1],grid)]],x===-1||x===1?P.trackEdge:P.trackGrid,x===-1||x===1?1.8:1.2);}
  for(let i=0;i<10;i++){const z=i/10;ctx.globalAlpha=grid*(.1+z*.17);line([trackPoint(-1,z),trackPoint(1,z)],P.muted,1);}ctx.globalAlpha=grid;
  for(let i=0;i<entrants.length;i++){const [x,y]=trackPoint(entrants[i].lane,.06);circle(x,y,4,entrants[i].color);}
@@ -44,8 +73,11 @@ function newRace(t,s){if(C.mode==='threshold'||t<RA.start)return;const local=t-R
  if(tilt>.5){ctx.save();ctx.globalAlpha=ease((tilt-.5)*2);text(go<.5?T.readyLabel:T.startLabel,left+6,startY-25,25,lineColor,500);ctx.textAlign='right';text(go<.5?T.readyTag:T.goTag,right-8,startY-25,19,lineColor);ctx.restore();}
  for(let i=0;i<entrants.length;i++){const e=entrants[i],r=entrantState(t,e,i);if(!r.entry)continue;const [x,y]=trackPoint(e.lane,r.z),w=RA.cardWidth*r.scale,h=RA.cardHeight*r.scale,fade=1-ease((r.travel-.86)/.14);ctx.save();ctx.globalAlpha=r.entry*fade;
  if(r.travel>0){const tail=trackPoint(e.lane,Math.min(1.12,r.z+.12+r.travel*.2)),g=ctx.createLinearGradient(x,y,tail[0],tail[1]);g.addColorStop(0,e.color);g.addColorStop(1,e.color+'00');line([[x,y],[tail[0],tail[1]]],g,3*r.scale);}
+ if(e.type==='pixel'){
+  const pose=PixelRunner.pose(t,e,i,r),label=pixelLabel(t,e,i);PixelRunner.draw(ctx,pose,e,x,y);ctx.textAlign='center';text(e.name,x,label.baseline,label.size,P.ink,500,220);
+ }else{
  ctx.shadowColor=e.color+'33';ctx.shadowBlur=20;box(x-w/2,y-h,w,h,9*r.scale,P.raceFill,e.color);ctx.shadowBlur=0;line([[x-w/2+18*r.scale,y-h+16*r.scale],[x-w/2+48*r.scale,y-h+16*r.scale]],e.color,3*r.scale);
- ctx.textAlign='center';text(e.name,x,y-h*.43,30*r.scale,P.ink,500,w-24*r.scale);text(r.travel>0?T.entrantGo:T.entrantReady,x,y-h*.15,13*r.scale,e.color,400,w-20*r.scale);ctx.restore();
+ ctx.textAlign='center';text(e.name,x,y-h*.43,30*r.scale,P.ink,500,w-24*r.scale);text(r.travel>0?T.entrantGo:T.entrantReady,x,y-h*.15,13*r.scale,e.color,400,w-20*r.scale);}ctx.restore();
  // A short local pulse marks each crossing; other lanes remain visually quiet.
  const cross=e.cross,dt=t-cross;if(dt>=0&&dt<.55){ctx.save();ctx.globalAlpha=(1-dt/.55)*.6;const px=e.crossX;line([[px-40-dt*110,startY],[px+40+dt*110,startY]],e.color,8*(1-dt/.55));ctx.restore();}}
  ctx.restore();
@@ -55,4 +87,4 @@ function draw(t){const s=stateAt(t);cv.width=C.width;ctx.reset();ctx.scale(C.wid
 function fit(){const r=cap?1:Math.min(innerWidth/C.width,(innerHeight-66)/C.height);cv.style.width=C.width*r+'px';cv.style.height=C.height*r+'px';}
 document.querySelector('#seek').max=DUR;let current=0,playing=!cap,last=0;window.__dur=DUR;window.__stateAt=stateAt;window.__inspect=()=>window.__state;window.__seek=async t=>{current=Math.max(0,Math.min(DUR,t));draw(current);};
 document.querySelector('#play').onclick=()=>{if(current>=DUR)current=0;playing=!playing;};document.querySelector('#replay').onclick=()=>{current=0;playing=true;};document.querySelector('#seek').oninput=e=>{playing=false;window.__seek(+e.target.value);};addEventListener('resize',fit);
-(async()=>{try{await document.fonts.load('32px Body');await document.fonts.ready;textures=cards.map(cardTexture);fit();draw(0);window.__ready=true;requestAnimationFrame(function tick(ms){if(last&&playing){current=Math.min(DUR,current+(ms-last)/1000);draw(current);if(current===DUR)playing=false;}last=ms;requestAnimationFrame(tick);});}catch(e){window.__buildError=String(e);console.error(e);}})();
+(async()=>{try{await document.fonts.load('32px Body');await document.fonts.ready;textures=cards.map(cardTexture);window.__raceDiagnostics=raceDiagnostics();fit();draw(0);window.__ready=true;requestAnimationFrame(function tick(ms){if(last&&playing){current=Math.min(DUR,current+(ms-last)/1000);draw(current);if(current===DUR)playing=false;}last=ms;requestAnimationFrame(tick);});}catch(e){window.__buildError=String(e);console.error(e);}})();

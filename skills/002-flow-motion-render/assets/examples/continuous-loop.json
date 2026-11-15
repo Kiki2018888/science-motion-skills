@@ -1,0 +1,23 @@
+{
+  "appearance": "amber-night",
+  "title": "信息沿着回路持续流动",
+  "subtitle": "输入、处理、反馈，形成连续循环。",
+  "badge": "FLOW / LOOP",
+  "duration": 10,
+  "fps": 24,
+  "validation": {"paths":"error", "labels":"error", "crossings":"error"},
+  "nodeDefaults": {"width":300,"height":190,"showIcon":false,"showState":false,"titleSize":38,"descriptionSize":25},
+  "edgeDefaults": {"color":"#E4893A","width":4,"opacity":1,"baseWidth":1},
+  "nodes": [
+    {"id":"input","position":{"x":460,"y":600},"title":"输入信息","description":"问题与资料","enter":0.2,"events":[]},
+    {"id":"process","position":{"x":960,"y":600},"title":"分析处理","description":"推理与检验","enter":0.4,"events":[]},
+    {"id":"result","position":{"x":1460,"y":600},"title":"形成结果","description":"输出与反馈","enter":0.6,"events":[]}
+  ],
+  "edges": [
+    {"id":"forward1","from":"input","to":"process","routing":"straight","enter":1,"animation":{"mode":"dashed"}},
+    {"id":"forward2","from":"process","to":"result","routing":"straight","enter":1,"animation":{"mode":"dashed","phase":8}},
+    {"id":"feedback","from":"result","to":"input","routing":"lane","lane":{"side":"top","clearance":70},"enter":1.6,"animation":{"mode":"dashed","speed":90},"label":{"text":"反馈","dy":-24}},
+    {"id":"review","from":"result","to":"input","routing":"lane","lane":{"side":"bottom","clearance":70},"enter":2.3,"animation":{"mode":"dashed","speed":90},"label":{"text":"复核","dy":38}}
+  ],
+  "captions": [{"at":1,"text":"各条线路独立运行，反馈沿回路返回。"}]
+}

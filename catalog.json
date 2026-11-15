@@ -101,6 +101,32 @@
       "skill": "009-threshold-line-render",
       "video": "previews/009-threshold-line-render.mp4",
       "bytes": 2037650
+    },
+    {
+      "skill": "005-phone-ui-motion",
+      "video": "previews/005-phone-ui-motion-v02.mp4",
+      "bytes": 144075,
+      "sha256": "7f8a7bdf344c55080f3f25ac93d12ca257d88fa4c0c59f100e64d05651a14cc2",
+      "revision": "v02",
+      "title": "半截手机与安全区"
+    },
+    {
+      "skill": "002-flow-motion-render",
+      "video": "previews/002-flow-motion-render-v02.mp4",
+      "bytes": 338463,
+      "sha256": "0a5504a7ad4a9f14ee1998a9b8e83ea6015c26740c0cb84807e1ef79668c1ace",
+      "revision": "v02",
+      "title": "连续虚线与分道回路"
+    },
+    {
+      "skill": "009-threshold-line-render",
+      "video": "previews/009-threshold-line-render-v02.mp4",
+      "bytes": 613953,
+      "sha256": "c037c79e3da0fb0c3d2e6c89cd2382f895d023558b4ea63f26d459229a60dcf2",
+      "revision": "v02",
+      "title": "像素角色与细节跑道"
     }
-  ]
+  ],
+  "version": "1.1.0",
+  "shared_renderer_version": "2.0.0"
 }

@@ -60,11 +60,15 @@ def cursor(base, patch, where):
 
 def normalize(raw):
     root_keys = ('schemaVersion aspect width height fps duration tail title subtitle eyebrow badge theme layout '
-                 'nodeDefaults states edgeDefaults cursor show captions nodes edges').split()
+                 'nodeDefaults states edgeDefaults cursor show captions nodes edges appearance validation').split()
     obj(raw, root_keys, 'config')
     c = copy.deepcopy(raw)
     require(c.get('schemaVersion', 1) == 1, 'Only schemaVersion 1 is supported')
     c['schemaVersion'] = 1
+    c.setdefault('appearance','default');require(c['appearance'] in ['default','amber-night'],'Unknown appearance')
+    validation=dict(paths='warn',labels='warn',crossings='warn')
+    obj(c.get('validation',{}),validation,'validation');validation.update(c.get('validation',{}))
+    require(all(v in ['off','warn','error'] for v in validation.values()),'validation values must be off, warn or error');c['validation']=validation
     c.setdefault('aspect', 'landscape')
     require(c['aspect'] in ['landscape', 'portrait'], 'Invalid aspect')
     portrait = c['aspect'] == 'portrait'
@@ -79,6 +83,7 @@ def normalize(raw):
         c.setdefault(key, default); string(c[key], key)
     theme = dict(bg='#fbf9f3', fg='#1d2f55', muted='#7a8399', line='#d9d4c6', accent='#1d2f55',
                  warning='#a46b1a', highlight='#ffe066', card='#ffffff')
+    if c['appearance']=='amber-night':theme.update(bg='#323232',fg='#FFFFFF',muted='#A3A3A3',line='#505050',accent='#E4893A',warning='#F3BB66',highlight='#F3BB66',card='#383838')
     obj(c.get('theme', {}), theme, 'theme'); theme.update(c.get('theme', {}))
     for key, value in theme.items(): color(value, 'theme.' + key)
     c['theme'] = theme
@@ -98,6 +103,7 @@ def normalize(raw):
                 descriptionSize=24, iconSize=40, showIcon=True, showNumber=True, showState=True,
                 fill=theme['card'], border=theme['line'], text=theme['fg'], descriptionColor=theme['muted'],
                 accent=theme['accent'], highlight=theme['highlight'], strokeWidth=2, shadow=True)
+    if c['appearance']=='amber-night':base.update(radius=8,shadow=False)
     base = merge_style(base, c.get('nodeDefaults', {}), 'nodeDefaults'); c['nodeDefaults'] = base
     # Sparse state styles preserve node-specific base colors unless explicitly overridden.
     state_base = dict(fill=base['fill'], border=base['border'], text=base['text'], descriptionColor=base['descriptionColor'],
@@ -156,9 +162,9 @@ def normalize(raw):
             end = max(end, ev['at'] + .3)
         end = max(end, n['enter'] + n['enterDuration'])
     by_id = {n['id']: n for n in c['nodes']}
-    c.setdefault('edges', []); require(isinstance(c['edges'], list), 'edges must be an array'); edge_ids = set()
+    c.setdefault('edges', []); require(isinstance(c['edges'], list), 'edges must be an array'); edge_ids = set();lane_counts={}
     for i, e in enumerate(c['edges']):
-        obj(e, ['id','from','to','fromPort','toPort','via','routing','style','cursor','enter','travels','label'], f'edges[{i}]')
+        obj(e, ['id','from','to','fromPort','toPort','via','routing','style','cursor','enter','travels','label','lane','animation'], f'edges[{i}]')
         e.setdefault('id', 'edge' + str(i)); string(e['id'], 'edge.id', False)
         require(e['id'] not in edge_ids, 'Duplicate edge id'); edge_ids.add(e['id'])
         require(e.get('from') in ids and e.get('to') in ids, 'Edge references an unknown node')
@@ -166,8 +172,28 @@ def normalize(raw):
         for k in ['fromPort','toPort']:
             if k not in e: continue
             obj(e[k], ['side','offset'], k); require(e[k].get('side') in ['left','right','top','bottom'], 'Unknown port side')
-            e[k].setdefault('offset', 0); number(e[k]['offset'], k + '.offset', -.8, .8)
-        e.setdefault('routing', 'curve'); require(e['routing'] in ['curve','straight'], 'Unknown routing')
+            e[k].setdefault('offset', 0)
+            if e[k]['offset']=='auto':require(e.get('routing')=='lane','Automatic ports require lane routing')
+            else:number(e[k]['offset'], k + '.offset', -.8, .8)
+        e.setdefault('routing', 'curve'); require(e['routing'] in ['curve','straight','lane'], 'Unknown routing')
+        if e['routing']=='lane':
+            lane=dict(side='bottom',clearance=64,gap=64);obj(e.get('lane',{}),['side','clearance','gap','index'],'lane');lane.update(e.get('lane',{}))
+            require(lane['side'] in ['left','right','top','bottom'],'Unknown lane side')
+            lane.setdefault('index',lane_counts.get(lane['side'],0));require(type(lane['index']) is int and 0<=lane['index']<=5,'lane.index must be integer 0–5')
+            lane_counts[lane['side']]=max(lane_counts.get(lane['side'],0),lane['index']+1)
+            number(lane['clearance'],'lane.clearance',32,700);number(lane['gap'],'lane.gap',24,300);e['lane']=lane
+            for key in ['fromPort','toPort']:
+                e.setdefault(key,{'side':lane['side'],'offset':'auto'})
+                require(e[key]['side']==lane['side'],'Lane routing uses two ports on lane.side')
+            require(not e.get('via'),'Use lane routing or explicit via, not both')
+        else:require('lane' not in e,'lane requires routing:lane')
+        animation=dict(mode='travel',dash=14,gap=12,speed=78,phase=0,direction='forward')
+        obj(e.get('animation',{}),list(animation)+['until'],'animation');animation.update(e.get('animation',{}))
+        require(animation['mode'] in ['travel','dashed'],'Unknown animation.mode');require(animation['direction'] in ['forward','reverse'],'Unknown dash direction')
+        for key in ['dash','gap']:number(animation[key],'animation.'+key,2,120)
+        number(animation['speed'],'animation.speed',1,1000);number(animation['phase'],'animation.phase',-100000,100000)
+        if 'until' in animation:number(animation['until'],'animation.until')
+        e['animation']=animation
         e.setdefault('via', []); require(isinstance(e['via'], list), 'via must be an array')
         for pt in e['via']:
             obj(pt, ['x','y','node','dx','dy'], 'via')
@@ -179,7 +205,8 @@ def normalize(raw):
         e['style'] = merge_style(c['edgeDefaults'], e.get('style', {}), 'edge.style')
         e['cursor'] = cursor(c['cursor'], e.get('cursor', {}), 'edge.cursor')
         default_start = max(by_id[e['from']]['enter'] + .7, by_id[e['to']]['enter'] - .8)
-        e.setdefault('travels', [{'start':default_start, 'duration':.8}]); require(isinstance(e['travels'], list), 'travels must be an array')
+        e.setdefault('travels', [] if animation['mode']=='dashed' else [{'start':default_start, 'duration':.8}]); require(isinstance(e['travels'], list), 'travels must be an array')
+        require(animation['mode']!='dashed' or not e['travels'],'Continuous dashes use animation, not cursor travels')
         previous_end = -1
         for tr in e['travels']:
             obj(tr, ['start','duration','from','to','hold','returnDuration','turnDuration','color'], 'travel')
@@ -193,6 +220,7 @@ def normalize(raw):
             if 'color' in tr: color(tr['color'], 'travel.color')
             end = max(end, previous_end)
         e.setdefault('enter', e['travels'][0]['start'] if e['travels'] else 0); number(e['enter'], 'edge.enter')
+        if 'until' in animation:require(animation['until']>e['enter'],'animation.until must follow edge.enter');end=max(end,animation['until'])
         require(not e['travels'] or e['enter'] <= e['travels'][0]['start'], 'edge.enter cannot follow first travel')
         if 'label' in e:
             obj(e['label'], ['text','at','until','position','dx','dy'], 'edge.label')
