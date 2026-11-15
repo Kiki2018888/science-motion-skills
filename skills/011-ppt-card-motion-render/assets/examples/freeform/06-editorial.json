@@ -1,0 +1,222 @@
+{
+  "mode": "freeform",
+  "version": 2,
+  "style": "neon",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "scenes": [
+    {
+      "style": "editorial",
+      "dur": 6,
+      "elements": [
+        {
+          "id": "edition",
+          "type": "text",
+          "x": 120,
+          "y": 55,
+          "w": 1680,
+          "h": 40,
+          "text": "011  /  FREEFORM CARDS                        06  /  EDITORIAL",
+          "fontSize": 19,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 600
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.05,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "x": 120,
+          "y": 125,
+          "w": 1700,
+          "h": 110,
+          "text": "文字与卡片，分别编排，也能同行。",
+          "fontSize": 70,
+          "enter": {
+            "type": "slide",
+            "at": 0.08,
+            "duration": 0.8,
+            "direction": "down",
+            "distance": 55
+          }
+        },
+        {
+          "id": "caption",
+          "type": "text",
+          "x": 120,
+          "y": 960,
+          "w": 1700,
+          "h": 50,
+          "text": "独立文字 · 嵌套编组 · 统一移动",
+          "fontSize": 25,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 500
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.9,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "statement",
+          "type": "text",
+          "x": 120,
+          "y": 310,
+          "w": 800,
+          "h": 360,
+          "text": "少一点束缚。\n多一点表达。",
+          "fontSize": 100,
+          "enter": {
+            "type": "wipe",
+            "at": 0.25,
+            "duration": 0.8,
+            "direction": "down"
+          },
+          "keyframes": [
+            {
+              "t": 3
+            },
+            {
+              "t": 4.2,
+              "y": 360,
+              "fontSize": 88
+            }
+          ]
+        },
+        {
+          "id": "substatement",
+          "type": "text",
+          "x": 130,
+          "y": 740,
+          "w": 720,
+          "h": 120,
+          "text": "留出空间，让一句话\n拥有它自己的节奏。",
+          "fontSize": 32,
+          "appearance": {
+            "fontWeight": 400,
+            "color": "#85909d"
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.8,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "collection",
+          "type": "group",
+          "x": 1030,
+          "y": 280,
+          "w": 770,
+          "h": 610,
+          "rotate": 4,
+          "enter": {
+            "type": "slide",
+            "at": 0.3,
+            "duration": 0.8,
+            "direction": "right"
+          },
+          "keyframes": [
+            {
+              "t": 3
+            },
+            {
+              "t": 4.3,
+              "x": 990,
+              "rotate": -2
+            }
+          ],
+          "children": [
+            {
+              "id": "chart",
+              "type": "chart",
+              "x": 0,
+              "y": 0,
+              "w": 700,
+              "h": 355,
+              "title": "看得见的变化",
+              "chart": "bars",
+              "values": [
+                3,
+                6,
+                5,
+                8,
+                7,
+                10
+              ],
+              "draw": 0,
+              "fontSize": 40,
+              "appearance": {
+                "padding": 32
+              },
+              "keyframes": [
+                {
+                  "t": 0.8,
+                  "draw": 0
+                },
+                {
+                  "t": 2.1,
+                  "draw": 1
+                }
+              ]
+            },
+            {
+              "id": "blue-pill",
+              "type": "pill",
+              "x": 40,
+              "y": 405,
+              "w": 350,
+              "h": 100,
+              "text": "有呼吸的留白",
+              "fontSize": 32,
+              "appearance": {
+                "fill": "#377cc3",
+                "color": "#fff",
+                "radius": 50
+              },
+              "enter": {
+                "type": "slide",
+                "at": 0.7,
+                "duration": 0.8,
+                "direction": "down"
+              }
+            },
+            {
+              "id": "quote",
+              "type": "card",
+              "x": 430,
+              "y": 390,
+              "w": 300,
+              "h": 210,
+              "title": "顺着阅读\n的方向。",
+              "fontSize": 37,
+              "appearance": {
+                "fill": "#f2c69d",
+                "padding": 30,
+                "color": "#674321"
+              },
+              "enter": {
+                "type": "scale",
+                "at": 0.9,
+                "duration": 0.8,
+                "direction": "down",
+                "scale": 0.8
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

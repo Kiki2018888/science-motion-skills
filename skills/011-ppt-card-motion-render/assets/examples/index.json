@@ -1,0 +1,50 @@
+[
+  {
+    "style": "blocks",
+    "name": "大色块分区",
+    "config": "01-blocks.json",
+    "duration": 7
+  },
+  {
+    "style": "photo",
+    "name": "图片卡片流",
+    "config": "02-photo.json",
+    "duration": 7
+  },
+  {
+    "style": "glass",
+    "name": "渐变玻璃",
+    "config": "03-glass.json",
+    "duration": 7
+  },
+  {
+    "style": "dense",
+    "name": "高密度卡片墙",
+    "config": "04-dense.json",
+    "duration": 7
+  },
+  {
+    "style": "neon",
+    "name": "黑白灰＋荧光",
+    "config": "05-neon.json",
+    "duration": 7
+  },
+  {
+    "style": "editorial",
+    "name": "杂志排版",
+    "config": "06-editorial.json",
+    "duration": 7
+  },
+  {
+    "style": "header",
+    "name": "深色压顶",
+    "config": "07-header.json",
+    "duration": 7
+  },
+  {
+    "style": "console",
+    "name": "暗色控制台",
+    "config": "08-console.json",
+    "duration": 7
+  }
+]

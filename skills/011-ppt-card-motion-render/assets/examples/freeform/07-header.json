@@ -1,0 +1,177 @@
+{
+  "mode": "freeform",
+  "version": 2,
+  "style": "neon",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "scenes": [
+    {
+      "style": "header",
+      "dur": 6.5,
+      "elements": [
+        {
+          "id": "edition",
+          "type": "text",
+          "x": 120,
+          "y": 55,
+          "w": 1680,
+          "h": 40,
+          "text": "011  /  FREEFORM CARDS                        07  /  HEADER",
+          "fontSize": 19,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 600
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.05,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "x": 120,
+          "y": 125,
+          "w": 1700,
+          "h": 110,
+          "text": "登场与离场，各有节奏。",
+          "fontSize": 70,
+          "enter": {
+            "type": "slide",
+            "at": 0.08,
+            "duration": 0.8,
+            "direction": "down",
+            "distance": 55
+          }
+        },
+        {
+          "id": "caption",
+          "type": "text",
+          "x": 120,
+          "y": 960,
+          "w": 1700,
+          "h": 50,
+          "text": "顺序可以指定 · 时间可以错开 · 动作可以组合",
+          "fontSize": 25,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 500
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.9,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "first",
+          "type": "card",
+          "x": 120,
+          "y": 300,
+          "w": 500,
+          "h": 560,
+          "label": "01 / SETUP",
+          "title": "先铺垫",
+          "body": "给信息一个\n自然的开场。",
+          "fontSize": 60,
+          "appearance": {
+            "padding": 36,
+            "bodySize": 35
+          },
+          "enter": {
+            "type": "slide",
+            "at": 0.2,
+            "duration": 0.8,
+            "direction": "left"
+          },
+          "exit": {
+            "type": "slide",
+            "direction": "left",
+            "at": 3.5,
+            "duration": 0.7,
+            "distance": 720
+          }
+        },
+        {
+          "id": "second",
+          "type": "card",
+          "x": 710,
+          "y": 365,
+          "w": 500,
+          "h": 430,
+          "label": "02 / DEVELOP",
+          "title": "再推进",
+          "body": "让视线\n跟着内容移动。",
+          "fontSize": 60,
+          "appearance": {
+            "padding": 36,
+            "bodySize": 32
+          },
+          "enter": {
+            "type": "flip",
+            "at": 0.6,
+            "duration": 0.8,
+            "direction": "down",
+            "angle": -70
+          },
+          "exit": {
+            "type": "scale",
+            "scale": 0.65,
+            "at": 3.9,
+            "duration": 0.7
+          }
+        },
+        {
+          "id": "third",
+          "type": "card",
+          "x": 1300,
+          "y": 270,
+          "w": 500,
+          "h": 620,
+          "label": "03 / RESOLVE",
+          "title": "后收束",
+          "body": "停留片刻，\n让重点落下来。",
+          "fontSize": 60,
+          "appearance": {
+            "padding": 36,
+            "bodySize": 35
+          },
+          "enter": {
+            "type": "scale",
+            "at": 1,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.85
+          },
+          "exit": {
+            "type": "slide",
+            "direction": "right",
+            "at": 4.3,
+            "duration": 0.7,
+            "distance": 720
+          }
+        },
+        {
+          "id": "closure",
+          "type": "text",
+          "x": 420,
+          "y": 450,
+          "w": 1300,
+          "h": 180,
+          "text": "让观众，跟得上。",
+          "fontSize": 96,
+          "enter": {
+            "type": "blur",
+            "at": 4.65,
+            "duration": 0.7,
+            "amount": 10
+          }
+        }
+      ]
+    }
+  ]
+}

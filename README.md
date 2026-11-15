@@ -1,6 +1,6 @@
 # Science Motion Skills · 科普动效技能库
 
-九套可配置、可复现的科普视频动效。提供独立 Python 渲染脚本、HTML/Canvas/SVG 源码、JSON 配置示例、中文字体和代表样片，可作为 Codex 技能使用，也可以直接从命令行导出视频。
+十套可配置、可复现的科普视频动效。提供独立 Python 渲染脚本、HTML/Canvas/SVG 源码、JSON 配置示例、中文字体和代表样片，可作为 Codex 技能使用，也可以直接从命令行导出视频。
 
 **代码与原创示例采用 MIT 开源许可证，可修改、分发和商用。字体保留 SIL OFL 1.1。**
 
@@ -17,8 +17,9 @@
 | 007 | 地震局监测屏 | [007-quake-monitor-render](skills/007-quake-monitor-render/SKILL.md) | [MP4](previews/007-quake-monitor-render.mp4) |
 | 008 | 终端 / 代码动效 | [008-terminal-motion-render](skills/008-terminal-motion-render/SKILL.md) | [MP4](previews/008-terminal-motion-render.mp4) |
 | 009 | 斩杀线标尺 | [009-threshold-line-render](skills/009-threshold-line-render/SKILL.md) | [MP4](previews/009-threshold-line-render.mp4) |
+| 011 | 自由卡片动效 | [011-ppt-card-motion-render](skills/011-ppt-card-motion-render/SKILL.md) | [MP4](previews/011-ppt-card-motion-render-v02.mp4) |
 
-在本地浏览器打开 [gallery.html](gallery.html) 可观看全部九条样片。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
+在本地浏览器打开 [gallery.html](gallery.html) 可观看十套技能的样片。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
 
 ## 安装环境
 
@@ -66,7 +67,7 @@ python tools/install_skills.py
 
 ## 编号与贡献
 
-- `catalog.json` 是编号索引；现有自建技能 001–009，下一个为 010。
+- `catalog.json` 是编号索引；现有自建技能 001–009、011；010 已停用，下一个为 012。
 - 新技能采用 `NNN-kebab-case`，目录、SKILL name 与显示名编号一致；已有技能增加主题沿用原编号。
 - 修改应保留确定性的时间定位、可替换配置、字体许可和必要验证。不要提交密钥、个人路径、运行环境、临时帧或私人业务脚本。
 - 运行 `python tools/check_release.py` 检查包结构、配置文件、许可证和 Python 语法。动态检查需依赖环境与浏览器，按各技能运行 `--check-only`，正式视频还需检查解码和画面。
@@ -77,7 +78,7 @@ See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Fon
 
 ## English overview
 
-Nine configurable motion-rendering skills for science communication: chat, flow and causality, multiscale zoom, split comparison, phone conversation/notifications, exploded layers, event monitoring, terminal/code, and threshold/start-line animation. Run the Python renderers directly or install the folders as Codex skills. JSON examples and editable browser-based engines are included. Original code and examples are MIT licensed; bundled fonts retain SIL OFL licensing. Windows is verified; other platforms have portable tool discovery but have not received full rendering validation.
+Ten configurable motion-rendering skills for science communication: chat, flow and causality, multiscale zoom, split comparison, phone conversation/notifications, exploded layers, event monitoring, terminal/code, threshold/start-line animation, and freeform card motion. Run the Python renderers directly or install the folders as Codex skills. JSON examples and editable browser-based engines are included. Original code and examples are MIT licensed; bundled fonts retain SIL OFL licensing. Windows is verified; other platforms have portable tool discovery but have not received full rendering validation.
 
 ## v1.1.0 · 2026-11-14
 
@@ -88,3 +89,8 @@ Nine configurable motion-rendering skills for science communication: chat, flow 
 ## v1.2.0 · 2026-11-14
 
 007 新增固定监测带：统一事件配置驱动波峰、月份、数值定格与盖章，可跨镜头复用。008 新增长命令与日志折行、原始行到显示行的映射、长标签和字段强调，以及完整原始行放大。两套模板均可选暗夜配色，默认保留旧布局。配置分别见 `monitor-band.json` 和 `readable-terminal.json`。两条 v02 样片已加入 gallery，原有样片保留。
+
+
+## v1.3.0 · 2026-11-15
+
+新增 011 自由卡片动效 v2：每个元素独立设置大小、位置、层级与动作，支持几何关键帧、曲线路径、透视翻转、进退场和编组。八种 UI 外观可独立使用或混用，无固定看板布局。50 秒认可样片与八份分场景配置随包提供，原看板配置保留兼容。详细参数见 `skills/011-ppt-card-motion-render/references/freeform.md`。不编辑原生 PPTX 动画。

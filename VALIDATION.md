@@ -1,5 +1,14 @@
 # Release validation
 
+## v1.3.0 — 2026-11-15
+
+- New 011 freeform renderer completed an actual 30-frame export from original frames 90–119 using CHROME_BIN and FFMPEG_BIN dependency discovery. Layout, 60 timeline inspections, random seek state/pixel checks, BT.709 metadata, timestamps and full decode passed.
+- The full 50-second preview was copied byte-for-byte from the approved and validated local v2 sample. All 14 earlier public videos and all nine existing skill packages remain unchanged.
+- Local v2 testing covered independent card geometry, cubic paths, focus expansion, group transforms, scene boundaries, pause/scrub controls, an independently authored three-card composition and legacy dashboard compatibility. Technical validation does not imply all possible content combinations were tested.
+- Package metadata, Python/JavaScript syntax, JSON examples, font license and all ten shared runtime copies passed checks. New public text was scanned for private machine paths and common credential patterns, with no matches.
+- Original implementation and procedural illustrations retain MIT licensing; the Adobe Source font retains SIL OFL 1.1. Private user documents and production records are excluded.
+- Tested on Windows. macOS/Linux full rendering remains unverified.
+
 ## v1.2.0 — 2026-11-14
 
 - 007 monitor-band and 008 readable-terminal portable examples completed actual 24-frame exports at their original timeline positions; layout, timing, BT.709 metadata, timestamps and full decode checks passed.

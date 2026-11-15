@@ -1,0 +1,259 @@
+{
+  "style": "neon",
+  "fps": 30,
+  "chapters": [
+    "开场",
+    "章节",
+    "说明",
+    "总结"
+  ],
+  "scenes": [
+    {
+      "type": "cover",
+      "dur": 3,
+      "chapter": 0,
+      "kicker": "CARD MOTION",
+      "title": "把重点<br>放在第一眼",
+      "chips": [
+        "卡片",
+        "数字",
+        "动效"
+      ],
+      "card": {
+        "title": "工作台概览",
+        "sub": "让信息各就其位",
+        "kpis": [
+          {
+            "label": "本周完成",
+            "value": "24",
+            "delta": "+ 8"
+          },
+          {
+            "label": "目标进度",
+            "value": "96%",
+            "delta": "+ 12%"
+          },
+          {
+            "label": "协作成员",
+            "value": "12",
+            "delta": "+ 3"
+          },
+          {
+            "label": "平均用时",
+            "value": "3.2h",
+            "delta": "− 0.8h"
+          }
+        ],
+        "bars": [
+          4,
+          7,
+          5,
+          8,
+          6,
+          9,
+          8,
+          10
+        ],
+        "barHl": 7,
+        "chartTitle": "八周进展",
+        "list": [
+          {
+            "title": "方案整理",
+            "meta": "完成"
+          },
+          {
+            "title": "视觉设计",
+            "meta": "完成"
+          },
+          {
+            "title": "交付检查",
+            "meta": "进行中"
+          }
+        ],
+        "listTitle": "当前任务",
+        "hl": 1
+      }
+    },
+    {
+      "type": "section",
+      "dur": 3,
+      "chapter": 1,
+      "no": "01",
+      "title": "清楚地呈现",
+      "card": {
+        "title": "工作台概览",
+        "sub": "让信息各就其位",
+        "kpis": [
+          {
+            "label": "本周完成",
+            "value": "24",
+            "delta": "+ 8"
+          },
+          {
+            "label": "目标进度",
+            "value": "96%",
+            "delta": "+ 12%"
+          },
+          {
+            "label": "协作成员",
+            "value": "12",
+            "delta": "+ 3"
+          },
+          {
+            "label": "平均用时",
+            "value": "3.2h",
+            "delta": "− 0.8h"
+          }
+        ],
+        "bars": [
+          4,
+          7,
+          5,
+          8,
+          6,
+          9,
+          8,
+          10
+        ],
+        "barHl": 7,
+        "chartTitle": "八周进展",
+        "list": [
+          {
+            "title": "方案整理",
+            "meta": "完成"
+          },
+          {
+            "title": "视觉设计",
+            "meta": "完成"
+          },
+          {
+            "title": "交付检查",
+            "meta": "进行中"
+          }
+        ],
+        "listTitle": "当前任务",
+        "hl": 1
+      }
+    },
+    {
+      "type": "point",
+      "dur": 4,
+      "chapter": 2,
+      "flip": true,
+      "no": "02",
+      "l1": "换一个方向",
+      "l2": "逻辑依然清楚",
+      "card": {
+        "title": "零值也能显示",
+        "kpis": [
+          {
+            "label": "当前数量",
+            "value": "0"
+          }
+        ],
+        "bars": [
+          0,
+          0,
+          0
+        ]
+      },
+      "scan": true
+    },
+    {
+      "type": "point",
+      "dur": 4,
+      "chapter": 2,
+      "card": {
+        "title": "独立大卡片",
+        "kpis": [
+          {
+            "label": "完成比例",
+            "value": "100%"
+          }
+        ],
+        "line": [
+          0,
+          0
+        ]
+      },
+      "wire": "hold",
+      "focus": "chart",
+      "focusLabel": "曲线区域"
+    },
+    {
+      "type": "quote",
+      "dur": 3,
+      "chapter": 3,
+      "text": "少一点堆叠，<em>多一点清楚。</em>",
+      "by": "卡片动效"
+    },
+    {
+      "type": "checklist",
+      "dur": 4,
+      "chapter": 3,
+      "title": "收尾检查",
+      "items": [
+        "层次分明",
+        "数字清楚",
+        "动效克制",
+        "便于复用"
+      ],
+      "brand": "PPT CARD MOTION",
+      "sub": "011 · 自建动效",
+      "card": {
+        "title": "工作台概览",
+        "sub": "让信息各就其位",
+        "kpis": [
+          {
+            "label": "本周完成",
+            "value": "24",
+            "delta": "+ 8"
+          },
+          {
+            "label": "目标进度",
+            "value": "96%",
+            "delta": "+ 12%"
+          },
+          {
+            "label": "协作成员",
+            "value": "12",
+            "delta": "+ 3"
+          },
+          {
+            "label": "平均用时",
+            "value": "3.2h",
+            "delta": "− 0.8h"
+          }
+        ],
+        "bars": [
+          4,
+          7,
+          5,
+          8,
+          6,
+          9,
+          8,
+          10
+        ],
+        "barHl": 7,
+        "chartTitle": "八周进展",
+        "list": [
+          {
+            "title": "方案整理",
+            "meta": "完成"
+          },
+          {
+            "title": "视觉设计",
+            "meta": "完成"
+          },
+          {
+            "title": "交付检查",
+            "meta": "进行中"
+          }
+        ],
+        "listTitle": "当前任务",
+        "hl": 1
+      }
+    }
+  ]
+}

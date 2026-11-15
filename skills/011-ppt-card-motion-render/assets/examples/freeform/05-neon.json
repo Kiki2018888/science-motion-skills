@@ -1,0 +1,174 @@
+{
+  "mode": "freeform",
+  "version": 2,
+  "style": "neon",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "scenes": [
+    {
+      "style": "neon",
+      "dur": 6,
+      "elements": [
+        {
+          "id": "edition",
+          "type": "text",
+          "x": 120,
+          "y": 55,
+          "w": 1680,
+          "h": 40,
+          "text": "011  /  FREEFORM CARDS                        05  /  NEON",
+          "fontSize": 19,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 600
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.05,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "x": 120,
+          "y": 125,
+          "w": 1700,
+          "h": 110,
+          "text": "一张卡片，也能成为全场主角。",
+          "fontSize": 70,
+          "enter": {
+            "type": "slide",
+            "at": 0.08,
+            "duration": 0.8,
+            "direction": "down",
+            "distance": 55
+          }
+        },
+        {
+          "id": "caption",
+          "type": "text",
+          "x": 120,
+          "y": 960,
+          "w": 1700,
+          "h": 50,
+          "text": "其他卡片退场 · 主角移位放大 · 稳定停留",
+          "fontSize": 25,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 500
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.9,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "left",
+          "type": "card",
+          "x": 120,
+          "y": 340,
+          "w": 480,
+          "h": 480,
+          "title": "先收集",
+          "body": "让不同的信息\n有各自的空间。",
+          "fontSize": 62,
+          "appearance": {
+            "padding": 38
+          },
+          "enter": {
+            "type": "slide",
+            "at": 0.25,
+            "duration": 0.8,
+            "direction": "left"
+          },
+          "exit": {
+            "type": "slide",
+            "direction": "left",
+            "distance": 720,
+            "at": 2.7,
+            "duration": 0.9
+          }
+        },
+        {
+          "id": "right",
+          "type": "card",
+          "x": 1320,
+          "y": 340,
+          "w": 480,
+          "h": 480,
+          "title": "再筛选",
+          "body": "需要聚焦的时候\n把舞台让出来。",
+          "fontSize": 62,
+          "appearance": {
+            "padding": 38
+          },
+          "enter": {
+            "type": "slide",
+            "at": 0.45,
+            "duration": 0.8,
+            "direction": "right"
+          },
+          "exit": {
+            "type": "slide",
+            "direction": "right",
+            "distance": 720,
+            "at": 2.9,
+            "duration": 0.9
+          }
+        },
+        {
+          "id": "focus",
+          "type": "metric",
+          "x": 650,
+          "y": 300,
+          "w": 620,
+          "h": 560,
+          "title": "把注意力，留给一个重点。",
+          "label": "FOCUS",
+          "value": "100%",
+          "count": {
+            "to": 100,
+            "at": 0.9,
+            "duration": 1.2,
+            "suffix": "%"
+          },
+          "fontSize": 160,
+          "z": 5,
+          "appearance": {
+            "tone": "black",
+            "accent": "#d9ed70",
+            "align": "center",
+            "padding": 42,
+            "bodySize": 30
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.2,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.8
+            },
+            {
+              "t": 4.05,
+              "x": 120,
+              "y": 270,
+              "w": 1680,
+              "h": 630,
+              "fontSize": 250,
+              "radius": 38
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

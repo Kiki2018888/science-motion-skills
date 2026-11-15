@@ -1,0 +1,381 @@
+{
+  "mode": "freeform",
+  "version": 2,
+  "style": "neon",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "scenes": [
+    {
+      "style": "console",
+      "dur": 7.5,
+      "elements": [
+        {
+          "id": "edition",
+          "type": "text",
+          "x": 120,
+          "y": 55,
+          "w": 1680,
+          "h": 40,
+          "text": "011  /  FREEFORM CARDS                        08  /  CONSOLE",
+          "fontSize": 19,
+          "appearance": {
+            "color": "#96919a",
+            "fontWeight": 600
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.05,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "x": 120,
+          "y": 125,
+          "w": 1700,
+          "h": 110,
+          "text": "八种外观，同一份自由。",
+          "fontSize": 70,
+          "enter": {
+            "type": "slide",
+            "at": 0.08,
+            "duration": 0.8,
+            "direction": "down",
+            "distance": 55
+          }
+        },
+        {
+          "id": "caption",
+          "type": "text",
+          "x": 120,
+          "y": 960,
+          "w": 1700,
+          "h": 50,
+          "text": "011  /  自由卡片动效                                        按内容设计，而不是套进看板。",
+          "fontSize": 25,
+          "appearance": {
+            "color": "#96919a",
+            "fontWeight": 500
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.9,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "skin-0",
+          "type": "card",
+          "x": 95,
+          "y": 265,
+          "w": 390,
+          "h": 270,
+          "label": "01 / UI STYLE",
+          "title": "大色块分区",
+          "body": "大小 · 位置 · 动作",
+          "fontSize": 35,
+          "style": "blocks",
+          "rotate": -3,
+          "appearance": {
+            "padding": 28,
+            "bodySize": 20,
+            "labelSize": 15,
+            "tone": "coral"
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.25,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 3.8,
+              "x": 120,
+              "y": 280,
+              "rotate": 0
+            }
+          ],
+          "z": 2
+        },
+        {
+          "id": "skin-1",
+          "type": "image",
+          "x": 580,
+          "y": 300,
+          "w": 390,
+          "h": 270,
+          "label": "02 / UI STYLE",
+          "title": "图片卡片流",
+          "body": "图片，也独立成卡。",
+          "fontSize": 35,
+          "style": "photo",
+          "rotate": 3,
+          "appearance": {
+            "padding": 28,
+            "bodySize": 20,
+            "labelSize": 15
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.33999999999999997,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 3.8499999999999996,
+              "x": 550,
+              "y": 280,
+              "rotate": 0
+            }
+          ],
+          "z": 2,
+          "src": "../media/landscape-3.svg"
+        },
+        {
+          "id": "skin-2",
+          "type": "card",
+          "x": 955,
+          "y": 300,
+          "w": 390,
+          "h": 270,
+          "label": "03 / UI STYLE",
+          "title": "渐变玻璃",
+          "body": "大小 · 位置 · 动作",
+          "fontSize": 35,
+          "style": "glass",
+          "rotate": -3,
+          "appearance": {
+            "padding": 28,
+            "bodySize": 20,
+            "labelSize": 15
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.43,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 3.9,
+              "x": 980,
+              "y": 280,
+              "rotate": 0
+            }
+          ],
+          "z": 2
+        },
+        {
+          "id": "skin-3",
+          "type": "card",
+          "x": 1440,
+          "y": 265,
+          "w": 390,
+          "h": 270,
+          "label": "04 / UI STYLE",
+          "title": "高密度卡片",
+          "body": "大小 · 位置 · 动作",
+          "fontSize": 35,
+          "style": "dense",
+          "rotate": 3,
+          "appearance": {
+            "padding": 28,
+            "bodySize": 20,
+            "labelSize": 15
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.52,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 3.9499999999999997,
+              "x": 1410,
+              "y": 280,
+              "rotate": 0
+            }
+          ],
+          "z": 2
+        },
+        {
+          "id": "skin-4",
+          "type": "card",
+          "x": 95,
+          "y": 615,
+          "w": 390,
+          "h": 270,
+          "label": "05 / UI STYLE",
+          "title": "黑白灰＋荧光",
+          "body": "大小 · 位置 · 动作",
+          "fontSize": 35,
+          "style": "neon",
+          "rotate": -3,
+          "appearance": {
+            "padding": 28,
+            "bodySize": 20,
+            "labelSize": 15,
+            "tone": "lime",
+            "accent": "#212a15"
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.61,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 4.0,
+              "x": 120,
+              "y": 595,
+              "rotate": 0
+            }
+          ],
+          "z": 2
+        },
+        {
+          "id": "skin-5",
+          "type": "card",
+          "x": 580,
+          "y": 615,
+          "w": 390,
+          "h": 270,
+          "label": "06 / UI STYLE",
+          "title": "杂志排版",
+          "body": "大小 · 位置 · 动作",
+          "fontSize": 35,
+          "style": "editorial",
+          "rotate": 3,
+          "appearance": {
+            "padding": 28,
+            "bodySize": 20,
+            "labelSize": 15
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.7,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 4.05,
+              "x": 550,
+              "y": 595,
+              "rotate": 0
+            }
+          ],
+          "z": 2
+        },
+        {
+          "id": "skin-6",
+          "type": "card",
+          "x": 955,
+          "y": 580,
+          "w": 390,
+          "h": 270,
+          "label": "07 / UI STYLE",
+          "title": "深色压顶",
+          "body": "大小 · 位置 · 动作",
+          "fontSize": 35,
+          "style": "header",
+          "rotate": -3,
+          "appearance": {
+            "padding": 28,
+            "bodySize": 20,
+            "labelSize": 15
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.79,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 4.1,
+              "x": 980,
+              "y": 595,
+              "rotate": 0
+            }
+          ],
+          "z": 2
+        },
+        {
+          "id": "skin-7",
+          "type": "card",
+          "x": 1440,
+          "y": 615,
+          "w": 390,
+          "h": 270,
+          "label": "08 / UI STYLE",
+          "title": "暗色控制台",
+          "body": "大小 · 位置 · 动作",
+          "fontSize": 35,
+          "style": "console",
+          "rotate": 3,
+          "appearance": {
+            "padding": 28,
+            "bodySize": 20,
+            "labelSize": 15
+          },
+          "enter": {
+            "type": "scale",
+            "at": 0.88,
+            "duration": 0.8,
+            "direction": "down",
+            "scale": 0.86
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 4.1499999999999995,
+              "x": 1410,
+              "y": 595,
+              "rotate": 0
+            }
+          ],
+          "z": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "011 · 自由卡片动效"
+  short_description: "自由设计卡片的尺寸、位置、层级与动画时间，沿用八种 UI 风格制作视频"
+  default_prompt: "使用 $011-ppt-card-motion-render 按内容自由编排卡片的大小、位置和动作，选择合适的 UI 风格，先检查关键构图再渲染样片。"

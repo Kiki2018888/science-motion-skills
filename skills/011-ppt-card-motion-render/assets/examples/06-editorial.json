@@ -1,0 +1,86 @@
+{
+  "style": "editorial",
+  "fps": 30,
+  "fadeEnd": true,
+  "chapters": [
+    "011 · PPT动态卡片 / 06 杂志排版"
+  ],
+  "scenes": [
+    {
+      "type": "point",
+      "dur": 7,
+      "chapter": 0,
+      "no": "06",
+      "tag": "EDITORIAL",
+      "l1": "为信息留白",
+      "l2": "让重点呼吸",
+      "bullets": [
+        "数字随内容自然增长",
+        "卡片按阅读顺序展开"
+      ],
+      "note": "大字标题 · 轻盈排版",
+      "card": {
+        "title": "每一份进展",
+        "sub": "让信息各就其位",
+        "kpis": [
+          {
+            "label": "本周完成",
+            "value": "24",
+            "delta": "+ 8"
+          },
+          {
+            "label": "目标进度",
+            "value": "96%",
+            "delta": "+ 12%"
+          },
+          {
+            "label": "协作成员",
+            "value": "12",
+            "delta": "+ 3"
+          },
+          {
+            "label": "平均用时",
+            "value": "3.2h",
+            "delta": "− 0.8h"
+          }
+        ],
+        "bars": [
+          4,
+          7,
+          5,
+          8,
+          6,
+          9,
+          8,
+          10
+        ],
+        "barHl": 7,
+        "chartTitle": "八周进展",
+        "list": [
+          {
+            "title": "方案整理",
+            "meta": "完成"
+          },
+          {
+            "title": "视觉设计",
+            "meta": "完成"
+          },
+          {
+            "title": "交付检查",
+            "meta": "进行中"
+          }
+        ],
+        "listTitle": "当前任务",
+        "hl": 1,
+        "tabs": [
+          "概览",
+          "日程"
+        ]
+      },
+      "caption": [
+        "[杂志排版]",
+        "把重点，放在[第一眼]"
+      ]
+    }
+  ]
+}

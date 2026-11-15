@@ -1,0 +1,218 @@
+{
+  "mode": "freeform",
+  "version": 2,
+  "style": "neon",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "scenes": [
+    {
+      "style": "photo",
+      "dur": 6,
+      "elements": [
+        {
+          "id": "edition",
+          "type": "text",
+          "x": 120,
+          "y": 55,
+          "w": 1680,
+          "h": 40,
+          "text": "011  /  FREEFORM CARDS                        02  /  PHOTO",
+          "fontSize": 19,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 600
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.05,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "x": 120,
+          "y": 125,
+          "w": 1700,
+          "h": 110,
+          "text": "图片，也能走自己的路线。",
+          "fontSize": 70,
+          "enter": {
+            "type": "slide",
+            "at": 0.08,
+            "duration": 0.8,
+            "direction": "down",
+            "distance": 55
+          }
+        },
+        {
+          "id": "caption",
+          "type": "text",
+          "x": 120,
+          "y": 960,
+          "w": 1700,
+          "h": 50,
+          "text": "曲线路径 · 独立旋转 · 前后层级",
+          "fontSize": 25,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 500
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.9,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "mountain",
+          "type": "image",
+          "x": 120,
+          "y": 285,
+          "w": 490,
+          "h": 595,
+          "src": "../media/landscape-1.svg",
+          "title": "去山野",
+          "body": "沿一条从容的弧线",
+          "fontSize": 58,
+          "z": 4,
+          "appearance": {
+            "radius": 32
+          },
+          "enter": {
+            "type": "slide",
+            "at": 0.2,
+            "duration": 0.8,
+            "direction": "left"
+          },
+          "motionPath": {
+            "at": 2.7,
+            "duration": 1.8,
+            "points": [
+              [
+                120,
+                285
+              ],
+              [
+                270,
+                150
+              ],
+              [
+                940,
+                140
+              ],
+              [
+                1140,
+                285
+              ]
+            ]
+          },
+          "keyframes": [
+            {
+              "t": 2.7
+            },
+            {
+              "t": 3.35,
+              "rotate": -5
+            },
+            {
+              "t": 4.5,
+              "rotate": 0,
+              "w": 660,
+              "h": 595
+            }
+          ]
+        },
+        {
+          "id": "coast",
+          "type": "image",
+          "x": 660,
+          "y": 405,
+          "w": 680,
+          "h": 475,
+          "src": "../media/landscape-2.svg",
+          "title": "看海岸",
+          "fontSize": 52,
+          "z": 2,
+          "enter": {
+            "type": "slide",
+            "at": 0.4,
+            "duration": 0.8,
+            "direction": "down"
+          },
+          "keyframes": [
+            {
+              "t": 2.9
+            },
+            {
+              "t": 4.5,
+              "x": 120,
+              "w": 760,
+              "rotate": 0
+            }
+          ]
+        },
+        {
+          "id": "forest",
+          "type": "image",
+          "x": 1390,
+          "y": 285,
+          "w": 410,
+          "h": 315,
+          "src": "../media/landscape-4.svg",
+          "title": "森林",
+          "fontSize": 34,
+          "z": 1,
+          "enter": {
+            "type": "slide",
+            "at": 0.6,
+            "duration": 0.8,
+            "direction": "right"
+          },
+          "keyframes": [
+            {
+              "t": 2.8
+            },
+            {
+              "t": 4.4,
+              "x": 930,
+              "y": 625,
+              "w": 160,
+              "h": 255,
+              "opacity": 0.72,
+              "fontSize": 23
+            }
+          ]
+        },
+        {
+          "id": "travel-line",
+          "type": "text",
+          "x": 680,
+          "y": 285,
+          "w": 590,
+          "h": 75,
+          "text": "画面之间，也有呼吸。",
+          "fontSize": 34,
+          "appearance": {
+            "fontWeight": 500,
+            "color": "#9b826d"
+          },
+          "enter": {
+            "type": "fade",
+            "at": 1,
+            "duration": 0.8,
+            "direction": "down"
+          },
+          "exit": {
+            "type": "fade",
+            "at": 2.5,
+            "duration": 0.4
+          }
+        }
+      ]
+    }
+  ]
+}

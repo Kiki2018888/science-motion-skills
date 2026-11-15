@@ -1,0 +1,236 @@
+{
+  "mode": "freeform",
+  "version": 2,
+  "style": "neon",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "scenes": [
+    {
+      "style": "dense",
+      "dur": 6,
+      "elements": [
+        {
+          "id": "edition",
+          "type": "text",
+          "x": 120,
+          "y": 55,
+          "w": 1680,
+          "h": 40,
+          "text": "011  /  FREEFORM CARDS                        04  /  DENSE",
+          "fontSize": 19,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 600
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.05,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "x": 120,
+          "y": 125,
+          "w": 1700,
+          "h": 110,
+          "text": "内容变了，版式也可以跟着变。",
+          "fontSize": 70,
+          "enter": {
+            "type": "slide",
+            "at": 0.08,
+            "duration": 0.8,
+            "direction": "down",
+            "distance": 55
+          }
+        },
+        {
+          "id": "caption",
+          "type": "text",
+          "x": 120,
+          "y": 960,
+          "w": 1700,
+          "h": 50,
+          "text": "保持卡片身份 · 改变布局 · 重新组织主次",
+          "fontSize": 25,
+          "appearance": {
+            "color": "#8b8c87",
+            "fontWeight": 500
+          },
+          "enter": {
+            "type": "fade",
+            "at": 0.9,
+            "duration": 0.8,
+            "direction": "down"
+          }
+        },
+        {
+          "id": "lead",
+          "type": "card",
+          "x": 120,
+          "y": 300,
+          "w": 460,
+          "h": 580,
+          "label": "01 / THE POINT",
+          "title": "先把重点说清楚。",
+          "body": "每个元素拥有自己的位置。",
+          "fontSize": 67,
+          "appearance": {
+            "fill": "#7957e7",
+            "color": "#fff",
+            "muted": "#e6dfff",
+            "padding": 38
+          },
+          "rotate": -2,
+          "enter": {
+            "type": "slide",
+            "at": 0.2,
+            "duration": 0.8,
+            "direction": "down"
+          },
+          "keyframes": [
+            {
+              "t": 2.9
+            },
+            {
+              "t": 4.2,
+              "x": 120,
+              "y": 280,
+              "w": 1680,
+              "h": 260,
+              "rotate": 0,
+              "fontSize": 52
+            }
+          ]
+        },
+        {
+          "id": "two",
+          "type": "card",
+          "x": 630,
+          "y": 280,
+          "w": 420,
+          "h": 270,
+          "label": "02",
+          "title": "组织信息",
+          "fontSize": 46,
+          "enter": {
+            "type": "slide",
+            "at": 0.4,
+            "duration": 0.8,
+            "direction": "down"
+          },
+          "keyframes": [
+            {
+              "t": 3.05
+            },
+            {
+              "t": 4.3,
+              "x": 120,
+              "y": 585,
+              "w": 390,
+              "h": 290,
+              "fontSize": 42
+            }
+          ]
+        },
+        {
+          "id": "three",
+          "type": "card",
+          "x": 1100,
+          "y": 305,
+          "w": 700,
+          "h": 245,
+          "label": "03",
+          "title": "建立联系",
+          "fontSize": 46,
+          "rotate": 1,
+          "enter": {
+            "type": "slide",
+            "at": 0.55,
+            "duration": 0.8,
+            "direction": "down"
+          },
+          "keyframes": [
+            {
+              "t": 3.15
+            },
+            {
+              "t": 4.4,
+              "x": 550,
+              "y": 585,
+              "w": 390,
+              "h": 290,
+              "rotate": 0,
+              "fontSize": 42
+            }
+          ]
+        },
+        {
+          "id": "four",
+          "type": "card",
+          "x": 630,
+          "y": 600,
+          "w": 710,
+          "h": 280,
+          "label": "04",
+          "title": "看见差异",
+          "fontSize": 46,
+          "enter": {
+            "type": "slide",
+            "at": 0.7,
+            "duration": 0.8,
+            "direction": "down"
+          },
+          "keyframes": [
+            {
+              "t": 3.25
+            },
+            {
+              "t": 4.5,
+              "x": 980,
+              "y": 585,
+              "w": 390,
+              "h": 290,
+              "fontSize": 42
+            }
+          ]
+        },
+        {
+          "id": "five",
+          "type": "card",
+          "x": 1390,
+          "y": 600,
+          "w": 410,
+          "h": 280,
+          "label": "05",
+          "title": "留下重点",
+          "fontSize": 44,
+          "rotate": -1,
+          "enter": {
+            "type": "slide",
+            "at": 0.85,
+            "duration": 0.8,
+            "direction": "down"
+          },
+          "keyframes": [
+            {
+              "t": 3.35
+            },
+            {
+              "t": 4.6,
+              "x": 1410,
+              "y": 585,
+              "w": 390,
+              "h": 290,
+              "rotate": 0,
+              "fontSize": 42
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
