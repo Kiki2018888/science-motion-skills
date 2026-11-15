@@ -1,0 +1,166 @@
+{
+  "appearance": "amber-night",
+  "readability": "wrap",
+  "text": {
+    "title": "终端记录",
+    "subtitle": "从任务配置，到完成记录",
+    "eyebrow": "TERMINAL / TRACE",
+    "session": "monitor@local / workspace",
+    "footer": "",
+    "footerLabel": ""
+  },
+  "counters": [
+    {
+      "label": "已完成的任务处理数量",
+      "caption": "条已归档记录",
+      "from": 0,
+      "to": 1200,
+      "at": 0,
+      "duration": 14.5
+    }
+  ],
+  "segments": [
+    {
+      "kind": "shell",
+      "label": "读取任务配置并开始执行",
+      "tab": "session.log",
+      "duration": 4.5,
+      "fontSize": 27,
+      "rows": [
+        {
+          "kind": "command",
+          "at": 0.3,
+          "duration": 2,
+          "text": "agent run --workspace ./science-observatory --input ./events/quarterly-review.json --output ./reports/monitoring-session --trace-level detailed",
+          "breaks": [
+            44,
+            83
+          ]
+        },
+        {
+          "at": 2.6,
+          "text": "[ready] 工作目录与记录目标已加载"
+        },
+        {
+          "at": 3.1,
+          "text": "[trace] 事件输入与输出路径已连接"
+        },
+        {
+          "at": 3.8,
+          "text": "[ready] 执行器进入工作状态"
+        }
+      ]
+    },
+    {
+      "kind": "code",
+      "label": "检查处理链与返回条件",
+      "tab": "pipeline.ts",
+      "duration": 4,
+      "fontSize": 27,
+      "lines": [
+        "import { createSession } from \"./runtime\";",
+        "const tools = [\"search\", \"read\", \"summarize\"];",
+        "const input = await loadEventQueue();",
+        "const session = createSession({ mode: \"monitor\", trace: true });",
+        "const result = await session.run({ input, tools, output: \"structured-record\", preserveSources: true, includeTiming: true });",
+        "await saveRecords(result.records);",
+        {
+          "text": "return result.status === \"complete\" ? result.records : retryWithContext(result);",
+          "emphasis": [
+            {
+              "text": "result.records"
+            }
+          ]
+        }
+      ],
+      "scroll": [
+        {
+          "at": 0,
+          "value": 0
+        },
+        {
+          "at": 4,
+          "value": 0
+        }
+      ],
+      "highlights": [
+        {
+          "at": 1.8,
+          "line": 4,
+          "hold": 1.2,
+          "caption": "输入、工具和输出条件，在这里汇合。",
+          "kicker": "SOURCE LINE / 0002"
+        }
+      ]
+    },
+    {
+      "kind": "logs",
+      "label": "定位耗时与处理结果",
+      "tab": "worker-trace.log",
+      "duration": 6,
+      "fontSize": 27,
+      "lines": [
+        {
+          "stamp": "00:08.500",
+          "tag": "PIPELINE / DISPATCH",
+          "text": "任务队列已接入，等待执行器返回处理状态。"
+        },
+        {
+          "stamp": "00:08.700",
+          "tag": "INPUT / READY",
+          "text": "输入队列包含三个任务分组，来源标记已保留。"
+        },
+        {
+          "stamp": "00:08.900",
+          "tag": "TOOL / CONNECT",
+          "text": "检索与读取工具已建立连接。"
+        },
+        {
+          "stamp": "00:09.000",
+          "tag": "PROCESS / START",
+          "text": "处理开始：读取上下文、归并内容、整理结构。"
+        },
+        {
+          "stamp": "00:09.100",
+          "tag": "OUTPUT / WRITE",
+          "text": "记录结果已写入工作目录。"
+        },
+        {
+          "stamp": "00:09.200",
+          "tag": "TOOL_EXECUTION_COMPLETED",
+          "text": "request_id=Q031 status=complete latency_ms=320 records=1200 output=./reports/monitoring-session/result.json",
+          "emphasis": [
+            {
+              "text": "latency_ms=320"
+            },
+            {
+              "text": "records=1200"
+            }
+          ]
+        }
+      ],
+      "scroll": [
+        {
+          "at": 0,
+          "value": 0
+        },
+        {
+          "at": 2.5,
+          "value": 5
+        },
+        {
+          "at": 6,
+          "value": 5
+        }
+      ],
+      "highlights": [
+        {
+          "at": 3.2,
+          "line": 5,
+          "style": "inline",
+          "hold": 1.1
+        }
+      ]
+    }
+  ]
+}

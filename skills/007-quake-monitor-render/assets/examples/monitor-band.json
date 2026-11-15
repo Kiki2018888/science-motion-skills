@@ -1,0 +1,39 @@
+{
+  "layout": "monitor-band",
+  "appearance": "amber-night",
+  "duration": 14,
+  "text": {
+    "title": "事件监测中心",
+    "subtitle": "连续记录 · 关键节点定格",
+    "online": "MONITOR ONLINE",
+    "footerRight": ""
+  },
+  "monitor": {
+    "events": [
+      {
+        "id": "e1",
+        "at": 1,
+        "month": 1,
+        "title": "能力扩展",
+        "subtitle": "新能力进入观察范围",
+        "value": 6.4
+      },
+      {
+        "id": "e2",
+        "at": 5.1,
+        "month": 2,
+        "title": "工具协同",
+        "subtitle": "多个环节形成连续协作",
+        "value": 7.8
+      },
+      {
+        "id": "e3",
+        "at": 9.2,
+        "month": 3,
+        "title": "推理提速",
+        "subtitle": "记录下一次关键变化",
+        "value": 8.6
+      }
+    ]
+  }
+}

@@ -35,7 +35,7 @@ def main():
     from playwright.sync_api import sync_playwright
     from PIL import Image,ImageDraw
     source.mkdir(parents=True,exist_ok=True)
-    for name in ['index.html','engine.js','OFL.txt']+([] if a.shared_font else ['body.otf']):shutil.copy2(skill/'assets/template'/name,source/name)
+    for name in ['index.html','engine.js','readable.js','OFL.txt']+([] if a.shared_font else ['body.otf']):shutil.copy2(skill/'assets/template'/name,source/name)
     if a.shared_font:
         require(a.shared_font.is_file(),'Shared font missing')
         font_url=Path(os.path.relpath(a.shared_font.resolve(),source)).as_posix()
@@ -88,6 +88,9 @@ def main():
                     page.evaluate('(t)=>window.__seek(t)',t);digest=hashlib.sha256(page.screenshot()).hexdigest()
                     page.evaluate('window.__seek(window.__dur)');page.evaluate('window.__seek(0)');page.evaluate('(t)=>window.__seek(t)',t)
                     require(digest==hashlib.sha256(page.screenshot()).hexdigest(),'Non-deterministic seek at '+str(t))
+                mapping=page.evaluate('window.__displayMap');(source/'display-lines.json').write_text(json.dumps(mapping,ensure_ascii=False,indent=2),encoding='utf-8')
+                require(all(''.join(part['text'] for part in row['displayRows'])==row['sourceText'] for seg in mapping for row in seg['rows']),'Wrapped source text changed')
+                report['wrapped_segments']=len(mapping);report['source_mapping_pass']=True
                 report.update(timeline_pass=True,hold_pixels_pass=True,counters_pass=True,seek_pixels_pass=True,layout_pass=True,sample_times=selected)
                 plan.export_previews(page);report.update(plan.metadata())
                 if not a.check_only:

@@ -125,8 +125,24 @@
       "sha256": "c037c79e3da0fb0c3d2e6c89cd2382f895d023558b4ea63f26d459229a60dcf2",
       "revision": "v02",
       "title": "像素角色与细节跑道"
+    },
+    {
+      "skill": "007-quake-monitor-render",
+      "video": "previews/007-quake-monitor-render-v02.mp4",
+      "bytes": 545891,
+      "sha256": "2486c96d1d677e6c376910131bb104b67fd609b8381d7c06f7d1d6984efc3c2f",
+      "revision": "v02",
+      "title": "固定监测带与事件定格"
+    },
+    {
+      "skill": "008-terminal-motion-render",
+      "video": "previews/008-terminal-motion-render-v02.mp4",
+      "bytes": 979495,
+      "sha256": "c871264780679b47f962dbc87b9a277a7b30cb5261b3a6f7eeef3df7fc9e2e41",
+      "revision": "v02",
+      "title": "长命令与日志可读排版"
     }
   ],
-  "version": "1.1.0",
+  "version": "1.2.0",
   "shared_renderer_version": "2.0.0"
 }

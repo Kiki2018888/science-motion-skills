@@ -43,7 +43,7 @@ def main():
     from PIL import Image,ImageDraw
     source.mkdir(parents=True,exist_ok=True);(source/'media').mkdir(exist_ok=True)
     for p,name in prepared:shutil.copy2(p,source/'media'/name)
-    for name in ['index.html','engine.js','map.js','OFL.txt']+([] if a.shared_font else ['body.otf']):shutil.copy2(skill/'assets/template'/name,source/name)
+    for name in ['index.html','engine.js','monitor-band.js','map.js','OFL.txt']+([] if a.shared_font else ['body.otf']):shutil.copy2(skill/'assets/template'/name,source/name)
     if a.shared_font:
         require(a.shared_font.is_file(),'Shared font missing')
         font_url=Path(os.path.relpath(a.shared_font.resolve(),source)).as_posix()
@@ -68,6 +68,7 @@ def main():
                 times.update(r['lockAt']+.3 for r in c['magnitudes'])
                 times.update(b['at']+b['duration'] for b in c['badges'])
                 if c['cracks']['show']:times.update([c['cracks']['at']+c['cracks']['duration']*.5,c['cracks']['at']+c['cracks']['duration']])
+                if c['layout']=='monitor-band':times.update(t for e in c['monitor']['events'] for t in [e['at']+.3,e['lockAt']+.4,e['releaseAt']+.25])
                 selected=sorted(t for t in times if t<c['duration'])
                 if len(selected)>15:selected=[selected[round(i*(len(selected)-1)/14)] for i in range(15)]
                 sheet=Image.new('RGB',(1440,math.ceil(len(selected)/2)*432),'#e8e9e3');pen=ImageDraw.Draw(sheet)
@@ -95,6 +96,13 @@ def main():
                     page.evaluate('(t)=>window.__seek(t)',t);digest=hashlib.sha256(page.screenshot()).hexdigest()
                     page.evaluate('window.__seek(window.__dur)');page.evaluate('window.__seek(0)');page.evaluate('(t)=>window.__seek(t)',t)
                     require(digest==hashlib.sha256(page.screenshot()).hexdigest(),'Non-deterministic seek at '+str(t))
+                if c['layout']=='monitor-band':
+                    for e in c['monitor']['events']:
+                        locked=state(e['lockAt']+.05)['monitor'];b=state(e['releaseAt']-.01)['monitor'];r=state(e['releaseAt']+.1)['monitor']
+                        require(locked['eventId']==e['id'] and locked['month']==e['month'] and locked['year']==e['year'],'Monitor event/month mismatch')
+                        require(locked['held'] and b['held'] and abs(locked['clock']-b['clock'])<1e-8 and locked['value']==e['value'],'Monitor peak hold failed')
+                        require(not r['held'] and r['clock']>b['clock'],'Monitor clock did not resume')
+                    report['monitor_events_checked']=len(c['monitor']['events'])
                 report.update(timeline_pass=True,seek_pixels_pass=True,layout_pass=True,sample_times=selected)
                 plan.export_previews(page);report.update(plan.metadata())
                 if not a.check_only:

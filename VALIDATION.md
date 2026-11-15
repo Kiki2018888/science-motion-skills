@@ -1,5 +1,13 @@
 # Release validation
 
+## v1.2.0 — 2026-11-14
+
+- 007 monitor-band and 008 readable-terminal portable examples completed actual 24-frame exports at their original timeline positions; layout, timing, BT.709 metadata, timestamps and full decode checks passed.
+- Six existing configurations passed portable regression checks: monitor, network, cracks, terminal, training and logs-only.
+- Both full-length v02 sample videos were copied byte-for-byte from the approved, previously encoded and validated local samples. All 12 earlier public previews remain unchanged.
+- Both skill packages passed metadata, Python/JavaScript syntax, bundled font license and shared-runtime checks. Public text was scanned for private paths and common credential patterns; no matches.
+- Tested on Windows with Chrome and FFmpeg discovered through environment variables. macOS/Linux full rendering remains unverified.
+
 ## v1.1.0 — 2026-11-14
 
 - Nine portable renderers completed real short exports of original frames 24–35, plus PNG previews, with frame counts, timestamps, BT.709 encoding and full decode checks.

@@ -95,3 +95,30 @@ UTF-8 JSON；所有文字按单行填写，换行应拆成多个数组项。未�
 `--check-only` 输出源包与预览图，不编码 MP4。`--overwrite` 更新同名目标，不清空其他目录。`report.json` 的 `encoded/full_decode_pass` 才表明视频成功导出。
 
 输出 `_source/input.json` 是原始配置，`resolved.json` 包含默认值与最终时间轴。预览默认随附中文字体；使用 `--shared-font` 后须保留公共字体相对路径。Consolas/Courier New 来自系统，跨机器要检查字体回退。
+
+## 可读折行模式（v02）
+
+根配置 readability: wrap 启用可读标签，并使各段默认使用软折行；省略时为 legacy，保持旧默认。段内 overflow 可单独设 wrap/legacy。appearance: amber-night 独立控制暗夜配色。
+
+- wrap段 fontSize 至少22，最高仍为34设计像素；lineHeight沿用34–50。超过显示空间时换行或报错，不缩成小字。
+- `wrap:{"indent":2,"maxRows":6}`：续行缩进0–8个空格的显示宽度；每条原始行最多1–8个显示行。缩进只影响位置，不添加到源字符串。
+- 每个row或line对象可加`breaks:[51,90]`。数值是原始字符串的Unicode码点偏移，严格递增，位于0和原文长度之间；到此处强制折行，之前仍可按容器自动折行。建议在完整参数或语义单元前指定，不在单词中间硬断。
+- 软折行保留所有原始字符、空格和顺序；没有添加反斜线、换行符或命令续接语法。复制/复现仍使用input.json中的原文，不使用屏上排版拼成新命令。
+- 日志时间戳与长tag显示在正文上方，正文可使用更宽的区域。日志行号、scroll与highlight.line始终指原始行；堆叠高度由真实字体测量决定。
+- shell按真实显示行数滚动，命令光标跨行移动。新模式的长命令提示符最多180设计像素；超长应改短或分开显示上下文。
+
+字段强调示例：
+
+```json
+{"stamp":"00:09.200","tag":"TOOL_EXECUTION_COMPLETED",
+ "text":"status=complete latency_ms=320 records=1200",
+ "emphasis":[{"text":"latency_ms=320","color":"#F3BB66"},{"text":"records=1200"}]}
+```
+
+emphasis精确匹配原文，默认取第0次出现；可用occurrence选取后续同名字段。匹配不到或区间重叠时报错。字段可以跨显示行，不截断或改写原文。颜色默认theme.gold。此能力及breaks仅在overflow:wrap时有效。
+
+折行后的focus仍增加enter+hold+exit时长，并冻结计数与滚动。`highlights[].fontSize`为放大字号28–56，默认40；`maxRows`为放大后的最大行数1–5，默认5。过长应拆解叙述、调整容器或改用inline，不突破最小字号。inline描边覆盖整条原始行的全部显示行；focus完整放大该原始行。原始行任何一部分出界时拒绝强调，应调整scroll。
+
+根readability:wrap还使阶段名、窗口标签和计数器标签在各自区域最多两行，至少22设计像素；计数器副标题保持一行，超限报错。大数字、标题与旧布局仍各按自己的容器检查，不表示任意文案都能放入模板。
+
+输出增加display-lines.json：每段、原始行号、原文、显示片段start/end及text。start含、end不含，单位Unicode码点，不是UTF-16索引；拼接全部text必须等于原文。report中的source_mapping_pass、wrapped_segments记录验收结果。浏览器window.__displayMap提供同样映射。

@@ -28,6 +28,11 @@ def normalize(raw):
     for k in ['width','height']:require(type(c[k]) is int and 360<=c[k]<=3840 and c[k]%2==0,k+' must be even, 360–3840')
     require(abs(c['width']/c['height']-16/9)<.002,'16:9 only');require(c['fps'] in [24,25,30,60],'fps: 24/25/30/60')
     c['theme']=dict({'bg':'#0a1018','panel':'#101b27','bar':'#192532','line':'#263747','ink':'#e1eaf0','muted':'#718596','green':'#8ee3bb','blue':'#8dbef3','gold':'#eac17a','red':'#ff786b','purple':'#b9a4f0','focusFill':'#2b2025'},**c.get('theme',{}))
+    c.setdefault('appearance','default');require(c['appearance'] in ['default','amber-night'],'appearance default/amber-night')
+    if c['appearance']=='amber-night':
+        c['theme'].update(dict(bg='#323232',panel='#383838',bar='#414141',line='#5A5A5A',ink='#FFFFFF',muted='#A3A3A3',green='#E4893A',gold='#F3BB66',red='#E4893A',focusFill='#3F3832'))
+        c['theme'].update(raw.get('theme',{}))
+    c.setdefault('readability','legacy');require(c['readability'] in ['legacy','wrap'],'readability legacy/wrap')
     c['text']=dict({'title':'终端 / 代码','subtitle':'从执行过程，到关键证据','eyebrow':'TERMINAL / MOTION','session':'demo@local / workspace','footer':'演示日志 · 非真实服务记录','footerLabel':'DEMO SESSION','holdLabel':'HOLD'},**c.get('text',{}))
     for k,v in c['text'].items():string(v,'text.'+k)
     c.setdefault('font','Consolas');require(c['font'] in ['Consolas','Courier New','monospace'],'font must be Consolas, Courier New or monospace')
@@ -40,8 +45,12 @@ def normalize(raw):
         require(s.get('kind') in ['shell','code','logs'],'Segment kind: shell/code/logs');number(s['duration'],'segment.duration',.2,600);d=s['duration']
         s.setdefault('label',s['id']);s.setdefault('tab',dict(shell='shell',code='source.ts',logs='trace.log')[s['kind']]);s.setdefault('context','~/workspace');s.setdefault('note','')
         for k in ['label','tab','context','note']:string(s[k],k)
+        s.setdefault('overflow','wrap' if c['readability']=='wrap' else 'legacy');require(s['overflow'] in ['legacy','wrap'],'overflow legacy/wrap')
+        s['wrap']=dict(dict(indent=2,maxRows=6),**s.get('wrap',{}));require(set(s['wrap'])<=set(['indent','maxRows']),'Unknown wrap option')
+        require(type(s['wrap']['indent']) is int and 0<=s['wrap']['indent']<=8,'wrap.indent 0–8');require(type(s['wrap']['maxRows']) is int and 1<=s['wrap']['maxRows']<=8,'wrap.maxRows 1–8')
         s.setdefault('fontSize',25);number(s['fontSize'],'fontSize',16,34)
         s.setdefault('lineHeight',39);number(s['lineHeight'],'lineHeight',34,50)
+        if s['overflow']=='wrap':require(s['fontSize']>=22,'Wrapped text must be at least 22px')
         s['start']=wall;s['contentStart']=content
         if s['kind']=='shell':
             s.setdefault('rows',[]);require(len(s['rows'])<=500,'At most 500 shell rows');prev=-1;typing_end=-1
@@ -64,7 +73,17 @@ def normalize(raw):
             require(isinstance(s['keywords'],list) and all(isinstance(v,str) for v in s['keywords']),'keywords must be strings')
             end=max(0,len(s['lines'])-12) if s['kind']=='code' else len(s['lines'])-1
             s.setdefault('scroll',[{'at':0,'value':0},{'at':d,'value':end}]);points(s['scroll'],d,'scroll',len(s['lines'])-1)
+        for row in s.get('rows',s.get('lines',[])):
+            row.setdefault('breaks',[]);require(isinstance(row['breaks'],list) and all(type(n) is int and 0<n<len(row['text']) for n in row['breaks']) and row['breaks']==sorted(set(row['breaks'])),'breaks must be sorted unique source code-point positions')
+            row.setdefault('emphasis',[]);used=[]
+            for mark in row['emphasis']:
+                string(mark.get('text'),'emphasis.text');require(bool(mark['text']),'Emphasis cannot be empty');mark.setdefault('occurrence',0);require(type(mark['occurrence']) is int and mark['occurrence']>=0,'emphasis.occurrence nonnegative integer');mark.setdefault('color',c['theme']['gold']);start=-1
+                for occurrence in range(mark['occurrence']+1):
+                    start=row['text'].find(mark['text'],start+1);require(start>=0,'Emphasis text occurrence not found')
+                mark['start']=start;mark['end']=start+len(mark['text']);require(not any(start<b and mark['end']>a for a,b in used),'Emphasis fields overlap');used.append((start,mark['end']))
+            if s['overflow']=='legacy':require(not row['breaks'] and not row['emphasis'],'breaks/emphasis require overflow:wrap')
         if s.get('progress'):
+
             p=s['progress'];points(p['points'],d,'progress',1);p.setdefault('label','RUNNING');p.setdefault('doneLabel','COMPLETE');p.setdefault('color',c['theme']['green'])
             for k in ['label','doneLabel']:string(p[k],k)
         s.setdefault('highlights',[]);previous=-1;added=0
@@ -73,10 +92,11 @@ def normalize(raw):
             require(type(h.get('line')) is int and 0<=h['line']<len(s['lines']),'highlight.line is zero-based valid line index')
             h.setdefault('enter',.6);h.setdefault('hold',2);h.setdefault('exit',.6)
             number(h['enter'],'highlight.enter',.1,5);number(h['hold'],'highlight.hold',.1,120);number(h['exit'],'highlight.exit',.1,5)
+            h.setdefault('fontSize',40);number(h['fontSize'],'highlight.fontSize',28,56);h.setdefault('maxRows',5);require(type(h['maxRows']) is int and 1<=h['maxRows']<=5,'highlight.maxRows 1–5')
             h.setdefault('style','focus');require(h['style'] in ['focus','inline'],'style: focus/inline');h.setdefault('caption','关键行，停下来才看得清。');h.setdefault('kicker',f"LINE {h['line']+1:04d}");h.setdefault('color',c['theme']['red']);h.setdefault('dim',.79);number(h['dim'],'dim',0,1)
             for k in ['caption','kicker']:string(h[k],k)
             pos=sample(s['scroll'],h['at']);y=359+(h['line']-pos)*s['lineHeight'] if s['kind']=='code' else 810-(pos-h['line'])*s['lineHeight']
-            require(350<=y<=820 and (s['kind']=='code' or h['line']<=math.floor(pos+1e-8)),'Highlight target must be visible at its local time; adjust scroll keyframes')
+            if s['overflow']=='legacy':require(350<=y<=820 and (s['kind']=='code' or h['line']<=math.floor(pos+1e-8)),'Highlight target must be visible at its local time; adjust scroll keyframes')
             h['wallAt']=wall+h['at']+added;h['length']=h['enter']+h['hold']+h['exit'];h['contentAt']=content+h['at'];h['until']=h['wallAt']+h['length'];added+=h['length'];pauses.append(h)
         s['end']=wall+d+added;wall=s['end'];content+=d
     c['contentDuration']=content+tl['tail'];c['duration']=wall+tl['tail'];c['pauses']=pauses;require(c['duration']<=1800,'Video exceeds 1800 seconds')

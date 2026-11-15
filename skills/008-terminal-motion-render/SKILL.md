@@ -1,6 +1,6 @@
 ---
 name: 008-terminal-motion-render
-description: 将命令、代码和日志制作成终端动效视频，配置逐字输入、进度条、滚动、计数器、关键行放大或行内高亮、定格时间、界面配色与时间轴。用于科普软件过程、安装演示、代码展示、日志追踪和数字增长；只渲染画面，不执行展示的命令或连接真实终端。
+description: 将命令、代码和日志制作成终端动效视频，支持逐字输入、进度、滚动、计数、关键行放大定格，以及长命令软折行、长标签排版和日志字段强调。保留原文与显示行映射，折行后仍按原始行定位和冻结。用于科普软件过程、代码展示和日志追踪；只渲染画面，不执行命令或连接真实终端。
 ---
 
 # 终端 / 代码动效
@@ -8,6 +8,8 @@ description: 将命令、代码和日志制作成终端动效视频，配置逐�
 使用随附 Canvas 引擎制作离线 HTML 与静音 H.264 MP4。保留认可样片的命令输入、安装读条、语法着色代码、日志滚动、计数增长、关键行放大定格和回位。默认 1920×1080、24 fps；当前支持 16:9 横屏。
 
 先读 [参数说明](references/config.md)，再从 `assets/examples/terminal.json` 复制业务配置。`training.json` 演示换配色、多命令、Python 代码、三个强调时刻、百分比和下降计数；`logs-only.json` 演示无计数器的宽屏中文日志。
+
+长命令、代码或日志参考 `readable-terminal.json`，使用 `readability: wrap`。字号保持可读，按容器软折行，可指定原文断点与字段强调；长标签最多两行。默认 legacy 保留旧配置的画面。暗夜配色通过 `appearance: amber-night` 单独选择。
 
 ## 编排
 
@@ -17,15 +19,17 @@ description: 将命令、代码和日志制作成终端动效视频，配置逐�
 
 关键行用零基索引 `line` 指定，必须在强调时已显示。`focus` 放大到中央并压暗背景，`inline` 留在原行描边；都完整冻结内容，结束后连续恢复。停留长度不含进入与回位。代码采用轻量词法着色，适合展示，不是完整语言解析器。
 
+折行模式的 `line` 和 `scroll` 仍引用原始行，不引用显示行。字体测量完成后检查整条目标是否可见；不要为了突出后半行改写原文或填显示行序号。输出 `display-lines.json` 可追溯每个显示片段的原始字符区间。
+
 ## 预览与导出
 
 ```powershell
 python -B -X utf8 '<技能目录>\scripts\render_terminal.py' --config '<工作目录>\config.json' --output '<工作目录>\terminal.mp4' --check-only
 ```
 
-查看 `_source/contact.jpg` 或 `index.html`，确认滚动速度、文字大小和重点行后，去掉 `--check-only` 导出。同名更新明确加 `--overwrite`。另支持 `--chrome`、`--ffmpeg`、`--scale 1|2`。使用现有 Python（Playwright、Pillow）、Chrome 和 FFmpeg/ffprobe，不复制运行环境到项目。
+查看 `_source/contact.jpg` 或 `index.html`，确认滚动速度、文字大小和重点行后，去掉 `--check-only` 导出。同名更新明确加 `--overwrite`。另支持 `--chrome`、`--ffmpeg`、`--scale 1|2`。使用含 Playwright、Pillow 的 Python 环境、Chrome 和 FFmpeg/ffprobe，不复制运行环境到项目。
 
-中文字体随模板提供并保留 OFL 许可；等宽字体默认使用 Windows Consolas，可选 Courier New 或 monospace。系统字体不打包分发。换机器需检查字体和文字布局。长行自动缩小，低于可读尺寸会报错；此时精简单行或分行，不靠继续缩小解决。
+中文字体随模板提供并保留 OFL 许可；等宽字体默认使用 Windows Consolas，可选 Courier New 或 monospace。系统字体不打包分发。换机器需检查字体和文字布局。legacy 模式的长行自动缩小，低于可读尺寸会报错；wrap 模式保持配置字号并折行，超出允许行数时报错。调整容器、断点或段落编排，不靠继续缩小解决。
 
 ## 验收与交付
 
@@ -37,11 +41,11 @@ python -B -X utf8 '<技能目录>\scripts\render_terminal.py' --config '<工作�
 
 引擎接口：`window.__dur`、`window.__stateAt(t)`、`await window.__seek(t)`、`window.__inspect()`。每帧独立求值，不依赖播放顺序。
 
-## Portable runtime
-
-需要 Python 3.10+、Playwright、Pillow、Chrome/Chromium 与 FFmpeg/ffprobe。自动查找 PATH 和常见安装位置；也可传 `--chrome` / `--ffmpeg`，或设置 `CHROME_BIN` / `FFMPEG_BIN`。输出必须位于技能目录之外。
-
 
 ## 局部预览与统一编码
 
-读 [共同渲染接口](references/rendering.md)。支持 `--frames START:END`、`--preview-frames` 和 `--profile bt709|legacy`；默认有限范围 BT.709，时间仍使用原场景时间轴。
+需要只改某一段、查看指定关键帧或对齐成片色彩时，读 [共同渲染接口](references/rendering.md)。支持 `--frames START:END`、`--preview-frames` 和 `--profile bt709|legacy`，默认统一BT.709；原配置中的时间仍为完整场景时间。
+
+## Portable runtime
+
+需要 Python 3.10+、Playwright、Pillow、Chrome/Chromium 与 FFmpeg/ffprobe。自动查找 PATH 和常见安装位置；也可传 `--chrome` / `--ffmpeg`，或设置 `CHROME_BIN` / `FFMPEG_BIN`。输出必须位于技能目录之外。

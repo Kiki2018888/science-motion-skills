@@ -18,8 +18,12 @@ def normalize(raw):
     c.setdefault('width',1920);c.setdefault('height',1080);c.setdefault('fps',24);c.setdefault('duration',28)
     for k in ['width','height']:require(type(c[k]) is int and 360<=c[k]<=3840 and c[k]%2==0,k+' must be even, 360–3840')
     require(abs(c['width']/c['height']-16/9)<.002,'Use a 16:9 canvas');require(c['fps'] in [24,25,30,60],'Invalid fps');num(c['duration'],'duration',1,1800);dur=c['duration']
-    c.setdefault('layout','dashboard');require(c['layout'] in ['dashboard','map','calendar','magnitude','cracks','wave'],'Invalid layout')
+    c.setdefault('layout','dashboard');require(c['layout'] in ['dashboard','map','calendar','magnitude','cracks','wave','monitor-band'],'Invalid layout')
     c['theme']=dict({'bg':'#090f16','panel':'#0d1922','line':'#233946','ink':'#e4edf0','muted':'#7d97a4','accent':'#ff654e','gold':'#e3be76','signal':'#79c6cd','land':'#203843','coast':'#486570','dots':'#54717b','grid':'#20333e','calendar':'#dfe8e7','calendarHeader':'#bf4c3c','calendarInk':'#18333d','calendarMuted':'#587278'},**c.get('theme',{}))
+    c.setdefault('appearance','default');require(c['appearance'] in ['default','amber-night'],'Invalid appearance')
+    if c['appearance']=='amber-night':
+        c['theme'].update(dict(bg='#323232',panel='#383838',line='#505050',ink='#FFFFFF',muted='#A3A3A3',accent='#E4893A',gold='#F3BB66',signal='#E4893A',grid='#414141'))
+        c['theme'].update(raw.get('theme',{}))
     c['text']=dict({'title':'事件监测中心','subtitle':'监测屏动效演示','online':'MONITOR ONLINE','hold':'PEAK HOLD','mapTitle':'全球事件监测','mapSubtitle':'WORLD / SCHEMATIC','waiting':'等待事件信号','detected':'已捕获事件脉冲','calendarTitle':'观察月份','calendarLabel':'月度观察','calendarFooter':'MONTHLY OBSERVATION','calendarNote':'月份翻页 / 连续推进','waveTitle':'事件脉冲','waveSubtitle':'DEMO SIGNAL','waveLive':'LIVE TRACE','waveHold':'PEAK HOLD','footerLeft':'EVENT OBSERVATORY','footerRight':'示意信号 · 非实测','rising':'强度上升','locked':'峰值锁定'},**c.get('text',{}))
     require(all(isinstance(v,str) for v in c['text'].values()),'Text fields must be strings')
     tl=dict({'fadeIn':.7,'fadeOut':.8,'phases':[]},**c.get('timeline',{}))
@@ -106,4 +110,19 @@ def normalize(raw):
     require(not any(crack['show'] and r['at']<crack['until'] and r['until']>crack['at'] for r in c['magnitudes']),'Magnitude and crack panels overlap; schedule them separately')
     require(c['layout']!='magnitude' or c['magnitudes'],'Magnitude layout needs a magnitude event')
     require(c['layout']!='cracks' or crack['show'],'Crack layout needs cracks.show=true')
+    m=dict(height=112,bottom=40,margin=88,speed=160,noise=1,valueSize=186,stampDuration=.35,month=1,year=2026,waiting='等待事件接入',liveLabel='CONTINUOUS TRACE',holdLabel='PEAK HOLD',riseLabel='信号上升',lockLabel='峰值已锁定',stampLabel='PEAK LOCK',events=[])
+    require(isinstance(c.get('monitor',{}),dict),'monitor must be object');require(not set(c.get('monitor',{}))-set(m),'Unknown monitor field');m.update(c.get('monitor',{}));c['monitor']=m
+    if c['layout']=='monitor-band':
+        require(not c['magnitudes'] and not c['badges'] and not c['map']['events'] and not c['calendar']['changes'] and not c['cracks']['show'],'monitor-band uses monitor.events; do not mix legacy event arrays')
+        for k,lo,hi in [('height',96,120),('bottom',26,64),('margin',64,120),('speed',80,300),('noise',0,3),('valueSize',120,220),('stampDuration',.15,.6)]:num(m[k],'monitor.'+k,lo,hi)
+        require(type(m['month']) is int and 1<=m['month']<=12,'monitor.month 1–12');require(type(m['year']) is int and 1<=m['year']<=9999,'monitor.year 1–9999')
+        for k in ['waiting','liveLabel','holdLabel','riseLabel','lockLabel','stampLabel']:require(isinstance(m[k],str),'monitor labels must be strings')
+        require(isinstance(m['events'],list) and 1<=len(m['events'])<=100,'monitor.events needs 1–100 items');seen=set();end=-1
+        for i,e in enumerate(m['events']):
+            e.setdefault('id',f'event-{i+1}');require(isinstance(e['id'],str) and e['id'] not in seen,'Monitor event IDs unique');seen.add(e['id'])
+            e.setdefault('rise',.65);e.setdefault('hold',1);e.setdefault('from',0);e.setdefault('decimals',1);e.setdefault('unit','级');e.setdefault('peak',.7);e.setdefault('month',m['month']);e.setdefault('year',m['year']);e.setdefault('label',f'EVENT / {i+1:02d}');e.setdefault('subtitle','');e.setdefault('stamp','峰值锁定')
+            for k,lo,hi in [('at',0,dur),('rise',.5,4),('hold',.4,8),('value',0,999999),('from',0,999999),('peak',.25,.72)]:num(e.get(k),'monitor.event.'+k,lo,hi)
+            require(e['at']>=end,'Monitor events overlap hold/recovery');e['lockAt']=e['at']+e['rise'];e['releaseAt']=e['lockAt']+e['hold'];end=e['releaseAt']+.35;require(end<=dur,'Monitor event recovery exceeds duration')
+            require(e['hold']>=m['stampDuration'],'Stamp entrance exceeds hold');require(type(e['decimals']) is int and 0<=e['decimals']<=3,'decimals 0–3');require(type(e['month']) is int and 1<=e['month']<=12,'Event month 1–12');require(type(e['year']) is int and 1<=e['year']<=9999,'Event year 1–9999')
+            for k in ['title','subtitle','label','unit','stamp']:require(isinstance(e.get(k),str),'Monitor '+k+' must be text')
     return c

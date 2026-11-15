@@ -1,4 +1,4 @@
 interface:
   display_name: "007 · 地震局与事件监测屏"
-  short_description: "制作可配置波形、多点事件、月份翻页、震级徽章和裂缝生长的监测屏动效"
+  short_description: "监测仪表盘与固定监测带，按统一事件同步月份、波峰、数值定格和落印"
   default_prompt: "使用 $007-quake-monitor-render，把我的事件、文字和时间安排制作成监测屏动效，先检查预览再导出视频。"

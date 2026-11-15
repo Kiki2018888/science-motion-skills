@@ -85,3 +85,37 @@
 ## 输出
 
 `--check-only` 仍会生成可复现源包和检查图，但不编码视频；不代表成片已导出。编码不落地帧序列。`--overwrite` 只替换目标视频与源包同名文件，不清空其他目录。最终检查 `report.json` 的 `encoded` 与 `full_decode_pass`，勿把检查阶段的报告当成成片报告。
+
+## 固定监测带（v02）
+
+选择 layout: monitor-band，使用独立 monitor.events，不混用旧 magnitudes、badges、map.events、calendar.changes 和 cracks。旧 wave.pulses/holds 不驱动本模式。appearance: amber-night 是可选配色；不改变未指定主题的旧配置。
+
+```json
+"monitor": {
+  "height":112,"bottom":40,"margin":88,"speed":160,"noise":1,
+  "valueSize":186,"stampDuration":0.35,"month":1,"year":2026,
+  "events":[{"id":"e1","at":1,"rise":0.65,"hold":1,"month":1,"year":2026,
+    "title":"能力扩展","subtitle":"新能力进入观察范围","label":"EVENT / 01",
+    "value":6.4,"from":0,"decimals":1,"unit":"级","peak":0.7,"stamp":"峰值锁定"}]
+}
+```
+
+- height 96–120；bottom 26–64；margin 64–120，均为1920×1080设计坐标。波形为2px线，网格为0.5px白线。
+- speed 80–300像素/秒；noise 0–3；valueSize 120–220；stampDuration .15–.6秒。数值超过容器宽度时报错，不继续缩字。
+- events 1–100项，按 at 排序，id唯一。at/rise/hold都用全片原始秒数；rise .5–4，hold .4–8。lockAt=at+rise，同时锁定数值、冻结波形并开始落印；releaseAt=lockAt+hold，波形连续恢复。
+- 每项结束后须留至少.35秒恢复区，再进入下一事件。hold不得短于落印时长；最后恢复区不得超出总时长。此模式不延长视频时长。
+- peak .25–.72，控制相对带高的向上峰值，默认约70%；它与value独立，不计算真实震级。value/from 0–999999，decimals 0–3。画面示例数值用于验证动效。
+- month/year默认monitor的初始值；跨月和跨年请在事件中明确填写，不根据月份倒退推断年份。
+- title/subtitle各最多三行；label、unit、stamp须放得进各自容器。定格卡保留至下一事件接替。铭牌透明底、细边框、小圆角。
+- monitor还可覆盖 waiting/liveLabel/holdLabel/riseLabel/lockLabel/stampLabel；空串可以隐藏文字。固定带布局不显示旧版页脚。
+
+复用组件：`assets/template/monitor-band.js` 不依赖仪表盘DOM或私有工程。加载字体后，以归一化配置创建：
+
+```js
+const spine = MonitorBand.create(resolved.monitor, resolved.theme);
+const event = spine.stateAt(originalSeconds);
+spine.drawBand(ctx, originalSeconds, {x:88,y:928,w:1744,h:112});
+spine.drawEvent(ctx, originalSeconds, {x:88,y:218,w:1744,h:682});
+```
+
+两个绘制接口可分开使用：不同镜头绘制自己的主体，共用同一事件表及原时间。输入使用config.py生成的monitor部分（包含lockAt/releaseAt），不是未校验的原始JSON。组件issues记录文字越界，调用方应检查；独立嵌入的任意尺寸仍需自行审图。页面 window.__monitor 暴露同一实例，报告记录 monitor_events_checked。
