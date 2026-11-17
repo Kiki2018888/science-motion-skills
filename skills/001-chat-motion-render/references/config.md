@@ -16,9 +16,9 @@
 
 | 字段 | 取值 / 默认 | 用途 |
 |---|---|---|
-| ui | modern / legacy；默认 modern | 七套新版 UI 或旧版布局；minimal 自动用 legacy |
-| theme | apple / wechat / whatsapp / claude / chatgpt / x / gemini；默认 wechat | 界面；旧版另支持 minimal |
-| appearance | light / dark；默认 light | 新版均有浅深色；legacy 仅支持 light |
+| ui | 可省略，显式填写时仅接受 modern | 使用当前七套 UI |
+| theme | apple / wechat / whatsapp / claude / chatgpt / x / gemini；默认 wechat | 界面 |
+| appearance | light / dark；默认 light | 七套界面均支持浅深色 |
 | aspect | portrait / landscape；默认 portrait | 1080×1920 或 1920×1080 |
 | mode | type / pop；默认 pop | 无光标逐字输入或整条弹出 |
 | title | 默认 对话记录 | 画面上方标题 |
@@ -27,11 +27,11 @@
 | readHold | 非负秒数；默认 0.55 | 逐字结束后的停留 |
 | popHold | 非负秒数；默认 1.45 | 弹出后的最短停留，自动与字数/8取较大值 |
 | tail | 非负秒数；默认 1.2 | 末尾额外停留 |
-| duration | 可省略；新版可用 | 最短总时长，不截断消息或尾部停留 |
+| duration | 可省略 | 最短总时长，不截断消息或尾部停留 |
 | dateLabel / timeLabel | 默认 今天 / 09:41 | 聊天界面的日期与时间示例文字 |
 | userLabel | 默认 我 | Gemini 右上角用户标记 |
 | modelLabel | 默认依界面而定 | Claude / Gemini 输入区的模型或模式标签 |
-| eyebrow / showLabels | 默认空字符串 / false | 兼容旧配置的辅助标签，新版保持简洁布局 |
+| eyebrow / showLabels | 默认空字符串 / false | 辅助标签，默认不显示 |
 | messages | 非空数组 | 按顺序填写 |
 
 每条消息：
@@ -42,9 +42,9 @@
 
 显式 start 的入场间隔至少 0.5 秒，并且不能早于上一条逐字结束。长回答可拆为同一侧连续多条消息；长对话自动滚动。输入文本以文本节点或转义方式显示，不能注入 HTML。不得把界面中的示例日期、账号、状态与互动数当作真实记录。
 
-七套示例：`assets/examples/apple.json`、`wechat.json`、`whatsapp.json`、`claude.json`、`chatgpt.json`、`x.json`、`gemini.json`。它们使用同一组四条对话和起始时间，便于切换 type/pop 对照。`basic.json` 演示逐条混用；`legacy.json` 演示旧版简洁卡片。
+七套示例：`assets/examples/apple.json`、`wechat.json`、`whatsapp.json`、`claude.json`、`chatgpt.json`、`x.json`、`gemini.json`。它们使用同一组四条对话和起始时间，便于切换 type/pop 对照。`basic.json` 演示逐条混用。
 
-旧配置的字段继续接受，但 wechat / claude / chatgpt 默认采用新版视觉。复现旧布局请显式增加 `"ui":"legacy"`；minimal 自动走旧版。逐字输入在新旧两版均无光标。
+逐字输入不显示光标。消息内容、时间轴与界面风格可独立配置。
 
 导出参数：
 - `--config` 输入 JSON，`--output` 输出 MP4，输出必须在技能目录外。

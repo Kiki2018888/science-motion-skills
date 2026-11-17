@@ -99,7 +99,7 @@ Ten configurable motion-rendering skills for science communication: chat, flow a
 
 001 聊天动效升级为七套 UI：Messages、微信、WhatsApp、Claude、ChatGPT、X 公开回复串、Google Gemini。支持浅色/深色、横屏/竖屏、逐字输入和整条弹出，逐字输入已去掉光标；消息时间和反馈操作在正文完成后出现。94.5 秒无声对比样片与七份配置示例随包提供。
 
-新版默认 `ui: modern`；旧版四套布局可用 `ui: legacy`，简洁卡片 `theme: minimal` 自动使用旧版。新旧两版均无光标，且仍导出无声视频。本次不加入音效。界面为独立风格化重绘，系统字体不可用时回退到随包 OFL 中文字体。
+当前仅提供七套 UI，逐字输入无光标，导出无声视频。界面为独立风格化重绘，系统字体不可用时回退到随包 OFL 中文字体。
 
 例如导出深色 X 公开回复串：
 
@@ -108,3 +108,7 @@ python skills/001-chat-motion-render/scripts/render_chat.py --config skills/001-
 ```
 
 完整配置见 [001 参数说明](skills/001-chat-motion-render/references/config.md)，UI 参考与字体说明见 [设计依据](skills/001-chat-motion-render/references/design.md)。
+
+## v1.4.1 · 2026-11-17
+
+001 技能更新为 v2.1.0，删除旧版四套模板、简洁卡片配置和旧代表样片，保留七套已认可的 UI 与无光标 v02 对比样片。旧配置中的 `ui: legacy` 与 `theme: minimal` 不再接受，请改用七套界面之一。其余技能保持原版本。

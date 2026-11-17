@@ -10,16 +10,13 @@ def require(ok,message):
 def normalize(raw):
  require(isinstance(raw,dict),'Config must be an object')
  cfg={'aspect':'portrait','theme':'wechat','mode':'pop','appearance':'light','title':'对话记录','cps':15,'readHold':.55,'popHold':1.45,'tail':1.2,**raw}
- cfg.setdefault('ui','legacy' if cfg['theme']=='minimal' else 'modern')
- for key,values in {'aspect':['portrait','landscape'],'theme':['apple','wechat','whatsapp','claude','chatgpt','x','gemini','minimal'],'mode':['type','pop'],'appearance':['light','dark'],'ui':['modern','legacy']}.items():require(cfg[key] in values,f'Invalid {key}')
- require(cfg['ui']!='modern' or cfg['theme']!='minimal','minimal uses ui: legacy')
- require(cfg['ui']!='legacy' or cfg['theme'] in ['wechat','claude','chatgpt','minimal'],'New themes require ui: modern')
- require(cfg['ui']!='legacy' or cfg['appearance']=='light','Dark appearance requires ui: modern')
+ cfg.setdefault('ui','modern')
+ for key,values in {'aspect':['portrait','landscape'],'theme':['apple','wechat','whatsapp','claude','chatgpt','x','gemini'],'mode':['type','pop'],'appearance':['light','dark']}.items():require(cfg[key] in values,f'Invalid {key}')
+ require(cfg['ui']=='modern','Only ui: modern is supported; choose one of the seven current themes')
  for key in ['cps','readHold','popHold','tail']:
   value=cfg[key];require(type(value) in (int,float) and math.isfinite(value) and (value>0 if key=='cps' else value>=0),f'Invalid {key}')
  if 'duration' in cfg:
   require(type(cfg['duration']) in (int,float) and math.isfinite(cfg['duration']) and cfg['duration']>=0,'Invalid duration')
-  require(cfg['ui']=='modern','duration is available in modern UI only')
  for key in ['title','chatTitle','eyebrow','dateLabel','timeLabel','userLabel','modelLabel']:
   if key in cfg:require(isinstance(cfg[key],str),f'{key} must be text')
  if 'showLabels' in cfg:require(type(cfg['showLabels']) is bool,'showLabels must be boolean')
@@ -36,8 +33,8 @@ def normalize(raw):
  cfg['longMessages']=cfg['messages'];return cfg
 
 def prepare_source(skill,source,cfg):
- template=skill/'assets/template';variant=template/'modern' if cfg['ui']=='modern' else template
- names=['index.html','engine.js','base.css','skins.css','skins.js'] if cfg['ui']=='modern' else ['index.html','engine.js','styles.css']
+ template=skill/'assets/template';variant=template/'modern'
+ names=['index.html','engine.js','base.css','skins.css','skins.js']
  source.mkdir(parents=True,exist_ok=True)
  for name in names:shutil.copy2(variant/name,source/name)
  for name in ['body.otf','OFL.txt']:shutil.copy2(template/name,source/name)

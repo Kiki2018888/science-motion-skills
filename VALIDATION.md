@@ -1,5 +1,13 @@
 # Release validation
 
+## v1.4.1 — 2026-11-17
+
+- Removed the retired 001 four-layout templates, minimal example and original preview from the current package and gallery. The current package supports only the seven approved UI themes; removed UI options fail validation instead of silently selecting another design.
+- The cleaned public package passed all 56 UI combinations, 14 mixed long-dialogue cases and seven bundled-font fallback cases. All 28 portrait final frames still match the approved baseline; typing is cursor-free.
+- The installed package completed a full 144-frame, six-second dark landscape export with both type and pop messages. Dimensions, timestamps, BT.709 metadata and full decoding passed. Audio remains absent.
+- Local, installed and portable public packages contain the same 23 files; the public skill instructions omit only project-specific paths. The approved v02 preview, other skill packages and shared runtime are unchanged. Local and public preview links were checked, with no broken links.
+- Metadata, structure, Python syntax, JSON, licenses, shared-runtime consistency and private-path scanning passed. Earlier sections describe historical releases, including features removed in this cleanup.
+
 ## v1.4.0 — 2026-11-17
 
 - 001 modern UI passed 56 combinations: seven themes, portrait/landscape, light/dark and type/pop. All 28 portrait final-state renders match the approved static UI at pixel level; typing remains cursor-free. Mixed long-dialogue scrolling passed for all seven themes in both orientations.

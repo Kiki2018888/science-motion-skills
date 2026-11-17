@@ -1,6 +1,6 @@
 ---
 name: 001-chat-motion-render
-description: 将对话制作成聊天动效视频。支持 Messages、微信、WhatsApp、Claude、ChatGPT、X 公开回复串、Google Gemini 七套 UI、浅深色、横竖屏、无光标逐字输入与整条弹出，可逐条混用和长对话滚动；保留旧版简洁卡片。只渲染视频，不向真实软件发送消息。
+description: 将对话制作成聊天动效视频。支持 Messages、微信、WhatsApp、Claude、ChatGPT、X 公开回复串、Google Gemini 七套 UI、浅深色、横竖屏、无光标逐字输入与整条弹出，可逐条混用和长对话滚动。只渲染视频，不向真实软件发送消息。
 ---
 
 # 聊天动效视频
@@ -16,11 +16,11 @@ description: 将对话制作成聊天动效视频。支持 Messages、微信、W
 - Messages / iMessage → `theme: apple`；微信 → `wechat`；WhatsApp → `whatsapp`；Claude → `claude`；ChatGPT → `chatgpt`；X 公开回复串 → `x`；Google Gemini → `gemini`。
 - 浅色 / 深色 → `appearance: light / dark`。
 - 逐字输入 → `mode: type`；整条弹出 → `pop`。每条消息可覆盖 `mode`，两种方式均无光标。
-- 新版默认 `ui: modern`。需要旧版四套布局时用 `ui: legacy`；`theme: minimal` 自动使用旧版简洁卡片，旧版仅提供浅色。
+- 仅提供这七套 UI；`ui` 可省略，显式填写时为 `modern`。
 
 优先沿用用户已选参数；未指定时默认竖屏、微信、浅色、整条弹出，并简短说明。按角色维持左右关系，通常提问者在右、回答者在左；X 按公开回复串排列。不要从姓名推断身份。
 
-读 [references/config.md](references/config.md) 构造 JSON。`assets/examples/` 含七套界面和新旧配置示例。指定配音时间时可用逐条 `start`、`hold`、`cps` 对齐。本技能不生成配音、BGM 或音效轨；默认交付无声视频。
+读 [references/config.md](references/config.md) 构造 JSON。`assets/examples/` 含七套界面和逐条混用配置示例。指定配音时间时可用逐条 `start`、`hold`、`cps` 对齐。本技能不生成配音、BGM 或音效轨；默认交付无声视频。
 
 ## 导出
 

@@ -6,7 +6,7 @@
       "name": "001-chat-motion-render",
       "title": "聊天动效",
       "path": "skills/001-chat-motion-render",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "default_preview": "previews/001-chat-motion-render-v02.mp4"
     },
     {
@@ -66,11 +66,6 @@
     }
   ],
   "previews": [
-    {
-      "skill": "001-chat-motion-render",
-      "video": "previews/001-chat-motion-render.mp4",
-      "bytes": 56915
-    },
     {
       "skill": "002-flow-motion-render",
       "video": "previews/002-flow-motion-render.mp4",
@@ -169,7 +164,7 @@
       "duration_seconds": 94.5
     }
   ],
-  "version": "1.4.0",
+  "version": "1.4.1",
   "shared_renderer_version": "2.0.0",
   "retired_numbers": [
     "010"
