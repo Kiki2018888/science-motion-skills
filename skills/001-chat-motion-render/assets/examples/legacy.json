@@ -1,0 +1,19 @@
+{
+  "theme": "minimal",
+  "mode": "pop",
+  "title": "一个好问题",
+  "messages": [
+    {
+      "side": "right",
+      "name": "小林",
+      "text": "为什么要先把问题拆开？"
+    },
+    {
+      "side": "left",
+      "name": "讲解员",
+      "text": "因为每次只理解一个重点，会更清楚。",
+      "mode": "type"
+    }
+  ],
+  "ui": "legacy"
+}

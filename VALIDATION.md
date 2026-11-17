@@ -1,5 +1,15 @@
 # Release validation
 
+## v1.4.0 — 2026-11-17
+
+- 001 modern UI passed 56 combinations: seven themes, portrait/landscape, light/dark and type/pop. All 28 portrait final-state renders match the approved static UI at pixel level; typing remains cursor-free. Mixed long-dialogue scrolling passed for all seven themes in both orientations.
+- Eight legacy layout cases and seven forced bundled-OFL-font cases passed. Random seeking, message completeness, clipping and browser error checks passed.
+- The portable public renderer completed a full 324-frame, 13.5-second X thread export. The installed package also completed a 30-frame export at 30fps from frames 15–44 of an independently authored dark landscape mixed-mode configuration. Both passed BT.709 metadata, dimensions, timestamps and full decoding.
+- The 94.5-second seven-theme comparison preview is byte-identical to the approved local no-cursor v02. All 15 earlier public preview videos and the other nine skill packages remain unchanged.
+- Skill metadata, package structure, Python syntax, JSON examples, licenses and shared-runtime consistency passed. New public files were scanned for private machine paths and common credential patterns, with no matches.
+- This release remains silent: no sound effects, audio generation or mixing are included. Product UI is independently redrawn; proprietary product assets, system fonts and runtime binaries are not bundled.
+- Tested on Windows with Chrome and FFmpeg. Full macOS/Linux rendering remains unverified.
+
 ## v1.3.0 — 2026-11-15
 
 - New 011 freeform renderer completed an actual 30-frame export from original frames 90–119 using CHROME_BIN and FFMPEG_BIN dependency discovery. Layout, 60 timeline inspections, random seek state/pixel checks, BT.709 metadata, timestamps and full decode passed.

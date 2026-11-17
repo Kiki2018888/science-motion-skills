@@ -1,0 +1,58 @@
+{
+  "ui": "modern",
+  "theme": "x",
+  "appearance": "dark",
+  "aspect": "portrait",
+  "mode": "type",
+  "title": "把问题聊清楚",
+  "cps": 15,
+  "readHold": 0.85,
+  "popHold": 1.45,
+  "tail": 1.2,
+  "duration": 13.5,
+  "messages": [
+    {
+      "side": "right",
+      "text": "这段内容，能做成聊天吗？",
+      "start": 0.7,
+      "hold": 0.85,
+      "name": "小林",
+      "handle": "@xiaolin",
+      "replies": 3,
+      "likes": 8,
+      "time": "09:41 · 2026年11月16日",
+      "views": 128,
+      "reposts": 2
+    },
+    {
+      "side": "left",
+      "text": "可以，让问题和解释一来一回。",
+      "start": 3.6,
+      "hold": 0.85,
+      "name": "科普讨论",
+      "handle": "@science_notes",
+      "replies": 1,
+      "likes": 2
+    },
+    {
+      "side": "right",
+      "text": "内容很多的时候呢？",
+      "start": 6.5,
+      "hold": 0.85,
+      "name": "小林",
+      "handle": "@xiaolin",
+      "replies": 1,
+      "likes": 2
+    },
+    {
+      "side": "left",
+      "text": "整条弹出，给观众留时间看懂。",
+      "start": 9.4,
+      "hold": 0.85,
+      "name": "科普讨论",
+      "handle": "@science_notes",
+      "replies": 1,
+      "likes": 2
+    }
+  ]
+}

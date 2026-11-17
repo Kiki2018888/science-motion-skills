@@ -1,48 +1,57 @@
 # 配置与导出
 
-配置采用 UTF-8 JSON；脚本兼容 BOM。最小可用示例：
+输入采用 UTF-8 JSON，兼容 BOM。最小示例：
 
 ```json
 {
-  "aspect": "portrait",
   "theme": "wechat",
   "mode": "pop",
   "title": "一个好问题",
   "messages": [
-    {"side": "right", "name": "小林", "avatar": "林", "text": "为什么要先把问题拆开？"},
-    {"side": "left", "name": "讲解员", "avatar": "答", "text": "因为每次只理解一个重点，会更清楚。", "mode": "type"}
+    {"side": "right", "name": "小林", "text": "为什么要先把问题拆开？"},
+    {"side": "left", "name": "讲解员", "text": "因为每次只理解一个重点，会更清楚。", "mode": "type"}
   ]
 }
 ```
 
-全局字段：
-
 | 字段 | 取值 / 默认 | 用途 |
 |---|---|---|
-| aspect | portrait / landscape；默认 portrait | 画幅 |
-| theme | wechat / claude / chatgpt / minimal；默认 wechat | 界面 |
-| mode | pop / type；默认 pop | 消息动作 |
-| title | 短标题；默认 对话记录 | 视频上方标题 |
-| chatTitle | 可省略 | 对话框顶部名称；默认各样式名称 |
-| eyebrow | 可省略；默认空字符串 | 标题上方小字 |
-| showLabels | 默认 false | true 时额外展示动效标签及示例说明；正式视频通常 false |
-| cps | 正数；默认 15 | 逐字速度，每秒字素数，标点另加停顿 |
-| readHold | 非负秒数；默认 0.55 | 打完后的阅读停留 |
-| popHold | 非负秒数；默认 1.45 | 弹出后最短停留；自动取它与字数/8中的较大值 |
-| tail | 非负秒数；默认 1.2 | 片尾额外停留 |
-| messages | 非空数组 | 必需，按顺序填写 |
+| ui | modern / legacy；默认 modern | 七套新版 UI 或旧版布局；minimal 自动用 legacy |
+| theme | apple / wechat / whatsapp / claude / chatgpt / x / gemini；默认 wechat | 界面；旧版另支持 minimal |
+| appearance | light / dark；默认 light | 新版均有浅深色；legacy 仅支持 light |
+| aspect | portrait / landscape；默认 portrait | 1080×1920 或 1920×1080 |
+| mode | type / pop；默认 pop | 无光标逐字输入或整条弹出 |
+| title | 默认 对话记录 | 画面上方标题 |
+| chatTitle | 可省略 | 聊天窗口顶部标题，默认依界面而定 |
+| cps | 正数；默认 15 | 每秒字素数，标点另加停顿 |
+| readHold | 非负秒数；默认 0.55 | 逐字结束后的停留 |
+| popHold | 非负秒数；默认 1.45 | 弹出后的最短停留，自动与字数/8取较大值 |
+| tail | 非负秒数；默认 1.2 | 末尾额外停留 |
+| duration | 可省略；新版可用 | 最短总时长，不截断消息或尾部停留 |
+| dateLabel / timeLabel | 默认 今天 / 09:41 | 聊天界面的日期与时间示例文字 |
+| userLabel | 默认 我 | Gemini 右上角用户标记 |
+| modelLabel | 默认依界面而定 | Claude / Gemini 输入区的模型或模式标签 |
+| eyebrow / showLabels | 默认空字符串 / false | 兼容旧配置的辅助标签，新版保持简洁布局 |
+| messages | 非空数组 | 按顺序填写 |
 
-消息字段：`side`（left/right）、`text`（非空字符串）必需；`name`、`avatar`（文字）可选，头像暂不接受图片 URL。`mode`、`cps` 可逐条覆盖；`hold` 直接指定阅读停留秒数；`start` 为绝对起始秒数。
+每条消息：
+- `side`（left/right）与非空 `text` 必需；`name`、`avatar`（文字）可选。
+- `mode`、`cps` 可逐条覆盖；`hold` 指定该条阅读停留，`start` 指定绝对起始秒数。不指定时自动接续。
+- `time` 可覆盖 WhatsApp 消息时间或 X 主帖时间。
+- X 可配置 `handle`、`replyTo`、`age`；省略 replyTo 时回复上一条。`views`、`replies`、`reposts`、`likes` 可填写非负整数或展示文字，未给定时不编造互动数字。
 
-显式 start 不应使两条入场间隔小于 0.5 秒，也不应在上一条逐字输入结束前启动下一条；不设置时自动接续。增加 hold 可放慢快节奏对话，减少 hold 需保留可读性。同一侧连续多条消息可表达长回答，无须伪造角色轮换。
+显式 start 的入场间隔至少 0.5 秒，并且不能早于上一条逐字结束。长回答可拆为同一侧连续多条消息；长对话自动滚动。输入文本以文本节点或转义方式显示，不能注入 HTML。不得把界面中的示例日期、账号、状态与互动数当作真实记录。
 
-文本按 JSON 编码，不拼接到 shell 命令。可含换行、引号和中英文；文字使用 textContent 插入页面。
+七套示例：`assets/examples/apple.json`、`wechat.json`、`whatsapp.json`、`claude.json`、`chatgpt.json`、`x.json`、`gemini.json`。它们使用同一组四条对话和起始时间，便于切换 type/pop 对照。`basic.json` 演示逐条混用；`legacy.json` 演示旧版简洁卡片。
 
-渲染器参数：
-- `--config` 输入 JSON；`--output` 输出 MP4。
+旧配置的字段继续接受，但 wechat / claude / chatgpt 默认采用新版视觉。复现旧布局请显式增加 `"ui":"legacy"`；minimal 自动走旧版。逐字输入在新旧两版均无光标。
+
+导出参数：
+- `--config` 输入 JSON，`--output` 输出 MP4，输出必须在技能目录外。
 - `--fps 24` 或 `--fps 30`。
-- `--check-only` 只生成源文件、排版截图和检查报告，不编码视频。
-- `--overwrite` 允许覆盖明确指定的既有视频及其同名 source 目录中的生成文件，不递归删除。
-- `--chrome` / `--ffmpeg` 用于指定本机程序；ffprobe 应与 ffmpeg 同目录。
+- `--check-only` 只生成源文件、关键帧和检查报告。
+- `--overwrite` 覆盖明确指定的输出及对应生成源文件；不递归删除其他内容。
+- `--chrome`、`--ffmpeg` 显式指定本机程序，ffprobe 应位于 ffmpeg 同目录。
+- `--frames`、`--preview-frames`、`--profile` 见 rendering.md。
 
-每个输出旁边生成 `<文件名>_source/`，含 input.json、dialogue.js、HTML/CSS/JS、字体和 OFL.txt、contact.jpg、report.json。双击 index.html 可预览及临时改文案；永久修改应编辑输入 JSON 再重渲。渲染中间视频先写到 source 内，完整验收通过才移动到最终 MP4 路径。
+输出旁 `_source/` 包含 HTML/CSS/JS、输入配置、字体、OFL.txt、contact.jpg 与 report.json，可离线预览。永久改动应编辑 JSON 并重新渲染。视频为无声音轨的 H.264 MP4，默认有限范围 BT.709；没有音效参数。

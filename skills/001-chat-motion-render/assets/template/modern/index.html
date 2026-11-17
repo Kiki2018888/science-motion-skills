@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>001 · 聊天动效 · 七套 UI</title><link rel="stylesheet" href="base.css"><link rel="stylesheet" href="skins.css"></head><body>
+<nav id="controls"><strong>001 · 聊天动效 · 七套 UI</strong>
+<label>界面 <select id="theme"><option value="apple">Messages</option><option value="wechat">微信</option><option value="whatsapp">WhatsApp</option><option value="claude">Claude</option><option value="chatgpt">ChatGPT</option><option value="x">X · 公开回复串</option><option value="gemini">Google Gemini</option></select></label>
+<label>外观 <select id="appearance"><option value="light">浅色</option><option value="dark">深色</option></select></label>
+<label>画幅 <select id="aspect"><option value="portrait">竖屏</option><option value="landscape">横屏</option></select></label>
+<label>动作 <select id="mode"><option value="pop">整条弹出</option><option value="type">逐字输入</option></select></label>
+<label>内容 <select id="content"><option value="short">四条对话</option><option value="long">长对话</option></select></label>
+<button id="replay">重播</button><button id="pause">暂停</button><button id="edit">编辑对话</button></nav>
+<div id="view"><main id="stage" data-appearance="light"><div class="scene-heading"><div class="kicker"></div><h1 id="style-title"></h1><span id="mode-title"></span></div>
+<section class="chat" aria-label="对话样稿"><div id="skin-header"></div><div class="conversation-time" id="skin-time"></div><div id="clip"><div id="track"></div></div><div id="skin-composer"></div></section><div class="note"></div></main></div>
+<div id="playback"><input id="scrub" type="range" min="0" step="0.01"><output id="clock"></output></div>
+<dialog id="editor"><h2>编辑示例对话</h2><p>每行一条，以“我：”或“对方：”开头。</p><textarea id="script" rows="10"></textarea><button id="apply">应用</button><button id="close">取消</button></dialog>
+<script src="dialogue.js"></script><script src="skins.js"></script><script src="engine.js"></script>
+</body></html>

@@ -26,7 +26,7 @@ function build(){window.__ready=false;if(!themes[cfg.theme])throw Error('Unknown
 function draw(t){now=clamp(t,0,window.__dur);let active=null,latest=null;
  for(const r of rows){const age=now-r.start,entered=age>=0,duration=r.mode==='pop'?.48:.38;r.row.style.visibility=entered?'visible':'hidden';r.row.style.setProperty('--age',Math.max(0,age));r.row.style.animationName=age>=duration?'none':r.mode==='pop'?'popArrival':'arrive';r.row.querySelector('.bubble').style.animationName=r.mode==='pop'&&age<duration?'bubbleInflate':'none';const n=r.mode==='pop'?(entered?r.chars.length:0):r.times.filter(x=>x<=now).length;
   r.typed.replaceChildren(document.createTextNode(r.chars.slice(0,n).join('')));r.dots.style.display=entered&&r.mode==='type'&&n===0?'flex':'none';
-  if(entered){latest=r;if(r.mode==='type'&&now<r.end){active=r;if(n>0){const cursor=document.createElement('span');cursor.className='cursor';cursor.style.opacity=String(.4+.6*(.5+.5*Math.cos(age*10)));r.typed.append(cursor);}Array.from(r.dots.children).forEach((e,j)=>e.style.transform=`translateY(${-3*(.5+.5*Math.sin(age*10-j))}px)`);}}
+  if(entered){latest=r;if(r.mode==='type'&&now<r.end){active=r;Array.from(r.dots.children).forEach((e,j)=>e.style.transform=`translateY(${-3*(.5+.5*Math.sin(age*10-j))}px)`);}}
  }
  let scroll=0;if(latest){const x=clamp((now-latest.start)/.38,0,1),ease=x*x*(3-2*x);scroll=latest.scrollFrom+(latest.scrollTo-latest.scrollFrom)*ease;}$('#track').style.transform=`translateY(${-scroll}px)`;$('#clip').scrollTop=0;
  $('#status').textContent=active?active.name+'正在输入…':cfg.mode==='pop'?'消息按顺序送达':'在线';$('#scrub').value=now;$('#clock').textContent=`${now.toFixed(1)} / ${window.__dur.toFixed(1)} s`;return now;
