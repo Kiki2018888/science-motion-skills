@@ -7,6 +7,10 @@ description: 将阈值、竞争门槛或标准变化制作成斩杀线标尺与�
 
 使用本技能中的 Canvas 引擎，将 JSON 配置渲染为离线 HTML 预览与无声 H.264 MP4。保留用户认可的表达：卡片落到阈值线时才碎裂；同一条线过渡为起跑线，新卡片先等待，再越线加速。
 
+**v3.0.0**　深色标尺使用渐变和亮边表现厚度，阈值线的两端带亮点。卡片触线碎裂后，同一条线转为起跑线。
+
+代表样片配置　[阈值转起跑线](assets/examples/combined.json)
+
 ## 工作流程
 
 1. 按使用场景复制 `assets/examples/` 中的配置到输出目录。`combined.json` 为完整 28 秒案例；`quality-threshold.json` 为独立 12 秒阈值案例；`race-only.json` 为独立 10 秒四卡片起跑案例；`pixel-race.json` 为暗夜三名像素角色、细节跑道的 11 秒案例。
@@ -50,3 +54,5 @@ python -B -X utf8 '<技能目录>\scripts\render_threshold.py' --config '<案例
 ## Portable runtime
 
 需要 Python 3.10+、Playwright、Pillow、Chrome/Chromium 与 FFmpeg/ffprobe。自动查找 PATH 和常见安装位置；也可传 `--chrome` / `--ffmpeg`，或设置 `CHROME_BIN` / `FFMPEG_BIN`。输出必须位于技能目录之外。
+
+默认样片在 Canvas 内绘制整幅背景。`--alpha` 可导出 VP9 WebM，实际透明范围见导出报告的 `alpha_min` 和 `alpha_max`。

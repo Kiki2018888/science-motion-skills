@@ -1,4 +1,6 @@
 """Normalize multiscale scene configuration; no browser or network required."""
+import sys as _sys
+_sys.dont_write_bytecode = True  # avoid __pycache__
 import copy
 import math
 
@@ -27,7 +29,11 @@ def normalize(raw):
     c['portrait'] = ratio < 1
     c['designWidth'], c['designHeight'] = (1080, 1920) if c['portrait'] else (1920, 1080)
     c['viewport'] = dict(x=64,y=280,w=952,h=1010) if c['portrait'] else dict(x=96,y=270,w=1376,h=688)
-    c['theme'] = {**dict(background='#f5f5ee', ink='#183e33', muted='#768b7b', rule='#d4ded1', accent='#327854', field='#e9eddf', panel='#fbfcf2', locator='#b88c35'), **c.get('theme', {})}
+    c.setdefault('appearance', 'default')
+    require(c['appearance'] in ['default', 'amber-night'], 'appearance must be default or amber-night')
+    _light = dict(background='#f5f5ee', ink='#183e33', muted='#768b7b', rule='#d4ded1', accent='#327854', field='#e9eddf', panel='#fbfcf2', locator='#b88c35')
+    _night = dict(background='#14120F', ink='#F5EFE6', muted='#9A9082', rule='#3B332B', accent='#E4893A', field='#1B1815', panel='#241F1A', locator='#F3BB66')
+    c['theme'] = {**( _night if c['appearance'] == 'amber-night' else _light), **c.get('theme', {})}
     c['text'] = {**dict(badge='多尺度连续缩放', kicker='', title='从整体，走进细节', subtitle='', note='结构示意', position='观察位置', viewWidth='当前视野宽度', relative='相对初始画面', locator='整体定位', moving='连续推进', holding='停留观察'), **c.get('text', {})}
     require(all(isinstance(v,str) for v in c['text'].values()), 'All text values must be strings')
     c['units'] = {**dict(name='μm',metresPerUnit=1e-6), **c.get('units', {})}

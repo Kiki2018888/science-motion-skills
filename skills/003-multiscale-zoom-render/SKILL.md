@@ -7,6 +7,10 @@ description: 将整体到细节的多个观察尺度制作成连续缩放视频�
 
 将各层素材放在同一个坐标系中，以连续相机推进串起“整体—局部—细节”。保留建立画面、推进、到达和停留的节奏。脚本输出可离线预览的 HTML 源文件、关键帧、检查报告及无声 H.264 MP4。
 
+**v3.0.0**　比例尺和定位图使用连续圆角面板。纵向轨道区分已经经过、正在观察和即将到达的尺度，支持纸面浅色和琥珀暗夜外观。
+
+代表样片配置　[琥珀暗夜横屏](assets/examples/showcase-amber.json) · [纸面浅色横屏](assets/examples/leaf.json) · [浅色竖屏](assets/examples/showcase-portrait.json)
+
 ## 选模式与准备配置
 
 - **换主题**：使用 `scene.type: images`，每层准备 PNG / JPEG / WebP / SVG。照片、显微图、3D 渲染静帧可以混用；当前模板不直接读取视频或 3D 模型。
@@ -50,3 +54,5 @@ python -B -X utf8 '<技能目录>\scripts\render_zoom.py' --config '<工作目�
 ## 局部预览与统一编码
 
 读 [共同渲染接口](references/rendering.md)。支持 `--frames START:END`、`--preview-frames` 和 `--profile bt709|legacy`；默认有限范围 BT.709，时间仍使用原场景时间轴。
+
+默认样片在 Canvas 内绘制整幅背景。`--alpha` 可导出 VP9 WebM，实际透明范围见导出报告的 `alpha_min` 和 `alpha_max`。

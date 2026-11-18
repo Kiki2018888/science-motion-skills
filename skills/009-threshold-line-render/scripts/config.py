@@ -1,4 +1,6 @@
 """Validate threshold contact, deterministic shards and independent race timing."""
+import sys as _sys
+_sys.dont_write_bytecode = True  # avoid __pycache__
 import copy, math, re
 def require(ok,msg):
     if not ok: raise ValueError(msg)

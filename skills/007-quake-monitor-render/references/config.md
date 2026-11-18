@@ -119,3 +119,10 @@ spine.drawEvent(ctx, originalSeconds, {x:88,y:218,w:1744,h:682});
 ```
 
 两个绘制接口可分开使用：不同镜头绘制自己的主体，共用同一事件表及原时间。输入使用config.py生成的monitor部分（包含lockAt/releaseAt），不是未校验的原始JSON。组件issues记录文字越界，调用方应检查；独立嵌入的任意尺寸仍需自行审图。页面 window.__monitor 暴露同一实例，报告记录 monitor_events_checked。
+
+## 材质与层级（3.0.0）
+
+- `panelCard(x,y,w,h,r,fill,strength)`：外投影（`blur 26×strength / offsetY 10×strength`）+ 顶亮 7% + 底暗 32% + 两层 1px 内描边。
+- 层级靠 `strength`：主面板 `1.15`、波形条 `0.85`；日历卡用独立的 30px 投影，不共用面板函数。
+- 波形发光 `C.wave.glow` 在绘制时乘 1.6，暗底上才看得出信号在跳。
+- 圆角统一 `squirclePath()`；`appearance` 只有 `default`（深色）和 `amber-night`（灰底琥珀），**不要给这个技能配浅色**——监测屏用纸面色不成立。

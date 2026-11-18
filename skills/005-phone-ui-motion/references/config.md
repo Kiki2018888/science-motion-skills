@@ -63,7 +63,7 @@ UTF-8 JSON（兼容 BOM）。文件路径以配置文件所在目录为基准；
 "chatBackground":{"type":"gradient","colors":["#faf8f2","#e9eee7"]}
 ```
 
-类型为 `solid` / `gradient` / `image`；渐变至少两个颜色；图片按 cover 显示，重要主体需视觉核对。全屏没有外围空白，因此画布 background 不可见；聊天背景与锁屏壁纸仍生效。图片不会自动去除原有文字或水印。当前版本输出不透明 MP4，不提供透明视频。
+类型为 `solid` / `gradient` / `image`；渐变至少两个颜色；图片按 cover 显示，重要主体需视觉核对。全屏没有外围空白，因此画布 background 不可见；聊天背景与锁屏壁纸仍生效。图片不会自动去除原有文字或水印。默认样片的背景铺满画布。MP4 用于整屏合成，使用 `--alpha` 导出 WebM 时可在 `report.json` 查看实际透明度。
 
 ## 状态栏、应用和文字
 
@@ -169,3 +169,9 @@ UTF-8 JSON（兼容 BOM）。文件路径以配置文件所在目录为基准；
 `style.appearance: amber-night` 提供深底、白字和琥珀强调色；若未显式设置画布背景，也切换为#323232。`style.palette` 可分别覆盖 `bg/ink/muted/accent/user/answer/input`，颜色用#RRGGBB，answer可为null。保留六种应用的界面结构，主题与硬件材质独立。
 
 参见 `assets/examples/half-phone.json`。默认配置未开启上述能力时，旧完整手机的布局与外观保持。
+
+## 机身与玻璃（3.0.0）
+
+- 机身斜向方向光：`frame()` 里在金属圈与黑边之上叠一层线性渐变（左上白 `.30` → 55% 透明 → 右下沉黑 `.20`），`frameClassic()` 同款（`.22` / `.18`）。
+- 屏幕柔光反射：`draw()` 在内容之后、刘海之前填一层 `rgba(255,255,255,.085)` 起手、50% 处归零的渐变，模拟玻璃。
+- **`style.appearance: amber-night` 已覆盖键盘**：文件顶部按 appearance 生成 `KB` 调色板（键盘底、键帽、键字、功能键、空格、型号胶囊），`keyboard()` 全部改读它。应用顶栏与锁屏壁纸仍按配置走，不受 appearance 影响。

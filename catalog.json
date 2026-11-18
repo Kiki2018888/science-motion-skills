@@ -23,43 +23,64 @@
       "number": "003",
       "name": "003-multiscale-zoom-render",
       "title": "多尺度连续缩放",
-      "path": "skills/003-multiscale-zoom-render"
+      "path": "skills/003-multiscale-zoom-render",
+      "version": "3.0.0",
+      "shared_renderer_version": "2.1.0",
+      "default_preview": "previews/003-multiscale-zoom-render-v03-amber.mp4"
     },
     {
       "number": "004",
       "name": "004-split-compare-render",
       "title": "对照实验双屏",
-      "path": "skills/004-split-compare-render"
+      "path": "skills/004-split-compare-render",
+      "version": "3.0.0",
+      "shared_renderer_version": "2.1.0",
+      "default_preview": "previews/004-split-compare-render-v03-amber.mp4"
     },
     {
       "number": "005",
       "name": "005-phone-ui-motion",
       "title": "手机聊天与锁屏通知",
-      "path": "skills/005-phone-ui-motion"
+      "path": "skills/005-phone-ui-motion",
+      "version": "3.0.0",
+      "shared_renderer_version": "2.1.0",
+      "default_preview": "previews/005-phone-ui-motion-v03-amber.mp4"
     },
     {
       "number": "006",
       "name": "006-layer-explode-render",
       "title": "分层剖面与拆解",
-      "path": "skills/006-layer-explode-render"
+      "path": "skills/006-layer-explode-render",
+      "version": "3.0.0",
+      "shared_renderer_version": "2.1.0",
+      "default_preview": "previews/006-layer-explode-render-v03-amber.mp4"
     },
     {
       "number": "007",
       "name": "007-quake-monitor-render",
       "title": "地震局监测屏",
-      "path": "skills/007-quake-monitor-render"
+      "path": "skills/007-quake-monitor-render",
+      "version": "3.0.0",
+      "shared_renderer_version": "2.1.0",
+      "default_preview": "previews/007-quake-monitor-render-v03.mp4"
     },
     {
       "number": "008",
       "name": "008-terminal-motion-render",
       "title": "终端 / 代码动效",
-      "path": "skills/008-terminal-motion-render"
+      "path": "skills/008-terminal-motion-render",
+      "version": "3.0.0",
+      "shared_renderer_version": "2.1.0",
+      "default_preview": "previews/008-terminal-motion-render-v03.mp4"
     },
     {
       "number": "009",
       "name": "009-threshold-line-render",
       "title": "斩杀线标尺",
-      "path": "skills/009-threshold-line-render"
+      "path": "skills/009-threshold-line-render",
+      "version": "3.0.0",
+      "shared_renderer_version": "2.1.0",
+      "default_preview": "previews/009-threshold-line-render-v03.mp4"
     },
     {
       "number": "011",
@@ -76,79 +97,12 @@
       "bytes": 604782
     },
     {
-      "skill": "003-multiscale-zoom-render",
-      "video": "previews/003-multiscale-zoom-render.mp4",
-      "bytes": 5324877
-    },
-    {
-      "skill": "004-split-compare-render",
-      "video": "previews/004-split-compare-render.mp4",
-      "bytes": 719754
-    },
-    {
-      "skill": "005-phone-ui-motion",
-      "video": "previews/005-phone-ui-motion.mp4",
-      "bytes": 354250
-    },
-    {
-      "skill": "006-layer-explode-render",
-      "video": "previews/006-layer-explode-render.mp4",
-      "bytes": 3476365
-    },
-    {
-      "skill": "007-quake-monitor-render",
-      "video": "previews/007-quake-monitor-render.mp4",
-      "bytes": 1498256
-    },
-    {
-      "skill": "008-terminal-motion-render",
-      "video": "previews/008-terminal-motion-render.mp4",
-      "bytes": 4551695
-    },
-    {
-      "skill": "009-threshold-line-render",
-      "video": "previews/009-threshold-line-render.mp4",
-      "bytes": 2037650
-    },
-    {
-      "skill": "005-phone-ui-motion",
-      "video": "previews/005-phone-ui-motion-v02.mp4",
-      "bytes": 144075,
-      "sha256": "7f8a7bdf344c55080f3f25ac93d12ca257d88fa4c0c59f100e64d05651a14cc2",
-      "revision": "v02",
-      "title": "半截手机与安全区"
-    },
-    {
       "skill": "002-flow-motion-render",
       "video": "previews/002-flow-motion-render-v02.mp4",
       "bytes": 338463,
       "sha256": "0a5504a7ad4a9f14ee1998a9b8e83ea6015c26740c0cb84807e1ef79668c1ace",
       "revision": "v02",
       "title": "连续虚线与分道回路"
-    },
-    {
-      "skill": "009-threshold-line-render",
-      "video": "previews/009-threshold-line-render-v02.mp4",
-      "bytes": 613953,
-      "sha256": "c037c79e3da0fb0c3d2e6c89cd2382f895d023558b4ea63f26d459229a60dcf2",
-      "revision": "v02",
-      "title": "像素角色与细节跑道"
-    },
-    {
-      "skill": "007-quake-monitor-render",
-      "video": "previews/007-quake-monitor-render-v02.mp4",
-      "bytes": 545891,
-      "sha256": "2486c96d1d677e6c376910131bb104b67fd609b8381d7c06f7d1d6984efc3c2f",
-      "revision": "v02",
-      "title": "固定监测带与事件定格"
-    },
-    {
-      "skill": "008-terminal-motion-render",
-      "video": "previews/008-terminal-motion-render-v02.mp4",
-      "bytes": 979495,
-      "sha256": "c871264780679b47f962dbc87b9a277a7b30cb5261b3a6f7eeef3df7fc9e2e41",
-      "revision": "v02",
-      "title": "长命令与日志可读排版"
     },
     {
       "skill": "011-ppt-card-motion-render",
@@ -196,9 +150,129 @@
       "title": "琥珀暗夜 · 竖屏",
       "duration_seconds": 11.5,
       "config": "skills/002-flow-motion-render/assets/examples/showcase-portrait.json"
+    },
+    {
+      "skill": "003-multiscale-zoom-render",
+      "video": "previews/003-multiscale-zoom-render-v03-amber.mp4",
+      "bytes": 4757044,
+      "sha256": "05416421af85a167ff15b5eee78e49a570db6bdebd2f445f84ec8cb0e10f77fb",
+      "revision": "v03",
+      "title": "琥珀暗夜横屏",
+      "duration_seconds": 24.0,
+      "config": "skills/003-multiscale-zoom-render/assets/examples/showcase-amber.json"
+    },
+    {
+      "skill": "003-multiscale-zoom-render",
+      "video": "previews/003-multiscale-zoom-render-v03-light.mp4",
+      "bytes": 4880841,
+      "sha256": "89fc54cd8cb2dee85fc335990d2d7eff750408ed8d7b47dbe8f94b53c3fc639a",
+      "revision": "v03",
+      "title": "纸面浅色横屏",
+      "duration_seconds": 24.0,
+      "config": "skills/003-multiscale-zoom-render/assets/examples/leaf.json"
+    },
+    {
+      "skill": "003-multiscale-zoom-render",
+      "video": "previews/003-multiscale-zoom-render-v03-portrait.mp4",
+      "bytes": 5841841,
+      "sha256": "59d66367a839ffabb11e70ad8fa5d493119e5f3d43cf4544ed2eb1d63bbb999a",
+      "revision": "v03",
+      "title": "浅色竖屏",
+      "duration_seconds": 24.0,
+      "config": "skills/003-multiscale-zoom-render/assets/examples/showcase-portrait.json"
+    },
+    {
+      "skill": "004-split-compare-render",
+      "video": "previews/004-split-compare-render-v03-amber.mp4",
+      "bytes": 887490,
+      "sha256": "a313d0d921b2686b8fdb8097d63229bb3c84b3d92f4c2167d0a4c9453cefab21",
+      "revision": "v03",
+      "title": "琥珀暗夜横屏",
+      "duration_seconds": 24.0,
+      "config": "skills/004-split-compare-render/assets/examples/showcase-amber.json"
+    },
+    {
+      "skill": "004-split-compare-render",
+      "video": "previews/004-split-compare-render-v03-light.mp4",
+      "bytes": 870382,
+      "sha256": "4b1e41b1c5c2cf50865eed682ef8e9db4c24a882b4964157b24031a91eca3bea",
+      "revision": "v03",
+      "title": "纸面浅色横屏",
+      "duration_seconds": 24.0,
+      "config": "skills/004-split-compare-render/assets/examples/fall.json"
+    },
+    {
+      "skill": "005-phone-ui-motion",
+      "video": "previews/005-phone-ui-motion-v03-amber.mp4",
+      "bytes": 689236,
+      "sha256": "52aff5737a32e7bb4fa22abf74751a69b279c001ac9550a8abde5e2c65da9b93",
+      "revision": "v03",
+      "title": "琥珀暗夜竖屏",
+      "duration_seconds": 24.0,
+      "config": "skills/005-phone-ui-motion/assets/examples/showcase-amber.json"
+    },
+    {
+      "skill": "005-phone-ui-motion",
+      "video": "previews/005-phone-ui-motion-v03-light.mp4",
+      "bytes": 874384,
+      "sha256": "94529a6b757de994c1e263b039c4f7db48fa72656f1881d7446516b5c2a329c3",
+      "revision": "v03",
+      "title": "浅色竖屏",
+      "duration_seconds": 24.0,
+      "config": "skills/005-phone-ui-motion/assets/examples/showcase-light.json"
+    },
+    {
+      "skill": "006-layer-explode-render",
+      "video": "previews/006-layer-explode-render-v03-amber.mp4",
+      "bytes": 3284537,
+      "sha256": "eae49a81a806d5d4302985cbc32f4cac910819330c7de80a9bd061a0224cd163",
+      "revision": "v03",
+      "title": "琥珀暗夜横屏",
+      "duration_seconds": 22.416667,
+      "config": "skills/006-layer-explode-render/assets/examples/showcase-amber.json"
+    },
+    {
+      "skill": "006-layer-explode-render",
+      "video": "previews/006-layer-explode-render-v03-light.mp4",
+      "bytes": 3129851,
+      "sha256": "ec86452ed41bd06e609993d96416fdb2c8495297413b67fc3773a0a942dae310",
+      "revision": "v03",
+      "title": "纸面浅色横屏",
+      "duration_seconds": 22.416667,
+      "config": "skills/006-layer-explode-render/assets/examples/filter.json"
+    },
+    {
+      "skill": "007-quake-monitor-render",
+      "video": "previews/007-quake-monitor-render-v03.mp4",
+      "bytes": 3435919,
+      "sha256": "dc02c625305dc6e1c5af55ab3baf992416834764f28325a3ec22cb8bac86ce73",
+      "revision": "v03",
+      "title": "夜间监测屏",
+      "duration_seconds": 28.0,
+      "config": "skills/007-quake-monitor-render/assets/examples/monitor.json"
+    },
+    {
+      "skill": "008-terminal-motion-render",
+      "video": "previews/008-terminal-motion-render-v03.mp4",
+      "bytes": 5189150,
+      "sha256": "1bdbcaaf18dc08b37650f66b464034c3179b0fba0bc2bc41324bff56df0d4e95",
+      "revision": "v03",
+      "title": "终端与日志",
+      "duration_seconds": 26.0,
+      "config": "skills/008-terminal-motion-render/assets/examples/terminal.json"
+    },
+    {
+      "skill": "009-threshold-line-render",
+      "video": "previews/009-threshold-line-render-v03.mp4",
+      "bytes": 1964066,
+      "sha256": "f78a6718c39439fee9612325f53c5d561933a4e3f8845bf13bf833a6bf7024e4",
+      "revision": "v03",
+      "title": "阈值转起跑线",
+      "duration_seconds": 28.0,
+      "config": "skills/009-threshold-line-render/assets/examples/combined.json"
     }
   ],
-  "version": "1.5.0",
+  "version": "1.6.0",
   "shared_renderer_version": "2.0.0",
   "retired_numbers": [
     "010"

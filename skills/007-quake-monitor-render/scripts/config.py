@@ -1,4 +1,6 @@
 """Validate configurable monitoring-screen modules and one global seconds timeline."""
+import sys as _sys
+_sys.dont_write_bytecode = True  # avoid __pycache__
 import copy
 import math
 

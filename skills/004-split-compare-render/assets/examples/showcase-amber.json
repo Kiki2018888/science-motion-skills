@@ -1,0 +1,110 @@
+{
+  "text": {
+    "title": "同样下落，为什么快慢不同？",
+    "subtitle": "保持一致：质量 1 kg / 下落距离 20 m / 初速度 0 / 重力加速度 9.8 m/s²",
+    "note": "理想模型演示 · 非实测数据",
+    "clock": "共同实验时钟",
+    "running": "¼ 速慢放",
+    "introTitle": "只改变空气阻力，其他条件相同",
+    "introSubtitle": "同样的小球 · 同样的高度 · 同样从静止开始",
+    "runTitle": "同步释放，观察差异逐渐出现",
+    "runSubtitle": "轨迹点按相同时间间隔记录；两边坐标尺度一致。",
+    "summaryTitle": "只改一个条件，结果就不同",
+    "summarySubtitle": "本模型中，有阻力的小球晚落地",
+    "footer": "平方阻力模型：F阻 = b v²；忽略浮力，参数仅用于演示。"
+  },
+  "timeline": {
+    "duration": 3.2,
+    "rate": 0.25,
+    "intro": 3.5,
+    "outro": 5.2,
+    "pauses": [
+      {
+        "at": 1.5,
+        "hold": 2.5,
+        "title": "同样经过 1.50 秒",
+        "subtitle": "暂停同一时刻，直接比较两边的位置。"
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "type": "bracket",
+      "when": {
+        "phase": "pause"
+      },
+      "left": "object",
+      "right": "object"
+    },
+    {
+      "type": "delta",
+      "when": {
+        "phase": "pause"
+      },
+      "leftMetric": "distance",
+      "rightMetric": "distance",
+      "text": "下落距离相差",
+      "unit": "m",
+      "operation": "absolute"
+    },
+    {
+      "type": "delta",
+      "when": {
+        "phase": "outro"
+      },
+      "leftMetric": "hit",
+      "rightMetric": "hit",
+      "text": "落地时间相差",
+      "unit": "s",
+      "operation": "right-left",
+      "prefix": "+"
+    }
+  ],
+  "left": {
+    "title": "无空气阻力",
+    "condition": "阻力参数 b = 0",
+    "footer": "相同质量 · 相同外形",
+    "media": {
+      "kind": "fall",
+      "drag": 0
+    },
+    "metrics": [
+      {
+        "id": "distance",
+        "label": "下落距离",
+        "unit": "m",
+        "source": "distance"
+      },
+      {
+        "id": "hit",
+        "label": "落地时间",
+        "unit": "s",
+        "source": "hit"
+      }
+    ]
+  },
+  "right": {
+    "title": "有空气阻力",
+    "condition": "阻力参数 b = 0.12 kg/m",
+    "footer": "相同质量 · 相同外形",
+    "media": {
+      "kind": "fall",
+      "drag": 0.12
+    },
+    "metrics": [
+      {
+        "id": "distance",
+        "label": "下落距离",
+        "unit": "m",
+        "source": "distance"
+      },
+      {
+        "id": "hit",
+        "label": "落地时间",
+        "unit": "s",
+        "source": "hit"
+      }
+    ]
+  },
+  "appearance": "amber-night"
+}

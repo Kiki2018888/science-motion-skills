@@ -11,6 +11,10 @@ description: 将事件与强度变化制作成地震局或数据监测屏动效�
 
 固定底部监测带和重复事件定格使用 `monitor-band.json`：`layout: monitor-band` 与统一的 `monitor.events`。可选 `appearance: amber-night`；旧仪表盘配色和布局保持默认。跨镜头嵌入可复用 `assets/template/monitor-band.js`，先读配置说明中的“固定监测带”。
 
+**v3.0.0**　深色仪表盘区分主面板与波形条的投影强度。信号线带辉光，月份翻页使用带厚度的日历卡片。
+
+代表样片配置　[夜间监测屏](assets/examples/monitor.json)
+
 ## 制作
 
 将示例 JSON 复制到 `output/007-quake-monitor-render/` 下的具体场景目录，按主题同时更新标题、事件、单位、年份、徽章、阶段文案和配色。所有时刻以视频起点的秒数计算；波形冻结不会推迟日历、事件或其他模块。无需改引擎。地图支持示意世界轮廓或本地 PNG/JPEG/WebP/SVG；本地图片与事件归一化坐标应对应，底图按面板尺寸铺满。图片路径相对输入 JSON，不要引用安装目录内的输出文件。
@@ -49,3 +53,5 @@ python -B -X utf8 '<技能目录>\scripts\render_monitor.py' --config '<工作�
 ## Portable runtime
 
 需要 Python 3.10+、Playwright、Pillow、Chrome/Chromium 与 FFmpeg/ffprobe。自动查找 PATH 和常见安装位置；也可传 `--chrome` / `--ffmpeg`，或设置 `CHROME_BIN` / `FFMPEG_BIN`。输出必须位于技能目录之外。
+
+默认样片在 Canvas 内绘制整幅背景。`--alpha` 可导出 VP9 WebM，实际透明范围见导出报告的 `alpha_min` 和 `alpha_max`。

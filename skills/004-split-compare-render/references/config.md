@@ -124,3 +124,10 @@ JSON 使用 UTF-8（兼容 BOM）。相对素材路径以配置文件所在目�
 ```
 
 `prefix` 是纯文本，不自动判断正负；只有保证非负时才设置 `+`。纯文字差异可直接用暂停标题/说明或 summaryTitle / summarySubtitle，无需编造数字。
+
+## 外观（3.0.0）
+
+- `appearance: "default" | "amber-night"`：整套换 background / ink / muted / rule / panel / left / right / banner / pause / summary；`theme` 单项覆盖仍优先。
+- 双屏卡片走 `panelCard()`：接触阴影 + 顶亮渐变 + 底暗渐变 + 颗粒；渐变按外观分档（浅色强顶亮、暗场弱顶亮强底暗）。
+- 圆角统一 `squirclePath()`（超椭圆 n=4.5，16 段/角），`box()` 内部已改用它。
+- 媒体视口用 `squirclePath` 裁剪，并补 1px 内描边：暗场里内描边用 `rgba(255,255,255,.07)`，否则视口与卡片同色会糊成一片。

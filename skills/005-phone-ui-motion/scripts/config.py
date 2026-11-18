@@ -1,4 +1,6 @@
 """Configuration and deterministic text timing for phone UI motion."""
+import sys as _sys
+_sys.dont_write_bytecode = True  # avoid __pycache__
 import copy
 import math
 import unicodedata
@@ -14,6 +16,7 @@ def number(v,name,low=0):
 
 def glyphs(s):
     """Keep common combining marks, emoji sequences and flag pairs together."""
+
     out=[]
     for ch in s:
         cp=ord(ch);mark=unicodedata.category(ch).startswith('M') or 0xFE00<=cp<=0xFE0F or 0x1F3FB<=cp<=0x1F3FF

@@ -1,4 +1,6 @@
 """Validate configuration and build one shared comparison clock."""
+import sys as _sys
+_sys.dont_write_bytecode = True  # avoid __pycache__
 import copy
 import math
 
@@ -26,7 +28,12 @@ def normalize(raw):
     for k in ['width','height']:require(isinstance(c[k],int) and c[k]>=320 and c[k]%2==0,k+' must be an even integer >= 320')
     require(abs(c['width']/c['height']-16/9)<.002,'This template uses a 16:9 side-by-side canvas')
     require(c['fps'] in [24,25,30,60],'fps must be 24,25,30,60')
-    c['theme']={**dict(background='#f5f4ed',ink='#1c354a',muted='#78858d',rule='#dce0dd',panel='#fdfdf8',left='#3c7e97',right='#c68b3c',banner='#e8edf0',pause='#f0e7d7',summary='#e6ece7'),**c.get('theme',{})}
+    c.setdefault('appearance', 'default')
+    require(c['appearance'] in ['default', 'amber-night'], 'appearance must be default or amber-night')
+    _light = dict(background='#f5f4ed',ink='#1c354a',muted='#78858d',rule='#dce0dd',panel='#fdfdf8',left='#3c7e97',right='#c68b3c',banner='#e8edf0',pause='#f0e7d7',summary='#e6ece7')
+    _night = dict(background='#14120F', ink='#F0E9DF', muted='#9A9082', rule='#3B332B', panel='#241F1A',
+                  left='#5FA8C4', right='#E4893A', banner='#2E2822', pause='#3A3025', summary='#3A2A18')
+    c['theme'] = {**(_night if c['appearance'] == 'amber-night' else _light), **c.get('theme', {})}
     c['text']={**dict(badge='对照实验双屏',kicker='',title='同一条件下，比较不同结果',subtitle='',note='示意演示',clock='共同时间轴',clockUnit='s',ready='准备',running='同步播放',paused='暂停对照',finished='播放结束',sync='两边使用同一时间轴',introTitle='先看共同起点',introSubtitle='',runTitle='同步观察两边的变化',runSubtitle='',summaryTitle='比较最终差异',summarySubtitle='',footer='',footerRight='同步开始 → 暂停对照 → 突出差异'),**c.get('text',{})}
     require(all(isinstance(v,str) for v in c['text'].values()),'text values must be strings')
     tl=c.setdefault('timeline',{});num(tl.get('duration'),'timeline.duration',.001)

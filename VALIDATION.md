@@ -1,5 +1,12 @@
 # Release validation
 
+## v1.6.0 — 2026-11-18
+
+- Installed the public packages into a fresh directory on Windows. The seven v3.0.0 skills rendered an eight-frame H.264 clip for each of the 12 showcase configurations. The other 25 bundled examples passed their browser and timeline checks, including the video comparison, half-phone, monitor band, wrapped terminal and pixel race.
+- All 12 full-length MP4 previews matched the local showcase files by SHA-256 and decoded through the last frame. Three original timeline frames per preview were compared against fresh renders. The largest mean absolute difference per RGB channel after 4× downsampling was 2.20 on a 0–255 scale.
+- Each renderer exported a four-frame VP9 WebM. All seven sample canvases filled the frame, with first-frame alpha values of 255 throughout. Each CLI rejected both mismatched file extensions before creating output.
+- The catalog, README and gallery point to the current previews. The package removes the 11 superseded videos for 003–009. All 20 shared source and documentation copies matched the renderer versions in the catalog.
+
 ## v1.5.0 — 2026-11-17
 
 - The portable 001 and 002 renderers completed six short exports on Windows using Chrome and FFmpeg. These covered a portrait X conversation, a transparent mixed-mode chat, all three v3 flow layouts and a transparent flow overlay. Frame counts, dimensions, timestamps, layout, seeking and full video decoding passed.

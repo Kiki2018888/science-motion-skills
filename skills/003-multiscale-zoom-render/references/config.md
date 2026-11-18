@@ -105,3 +105,10 @@ y 同理。先在大图选出下一层要进入的目标，将这点映射为下
 `scene: {"type":"leaf", "focus":[7000,6500]}`，固定为 μm 坐标，`units.metresPerUnit` 必须为 1e-6。支持 20–160000 μm 视野；原示例为 80000 → 3200 → 400 → 80。`focus` 改变程序细胞区域及目标气孔的位置，相应调整相机中心和标注点。极端位置可能超出叶缘，需视觉检查。
 
 内置叶片为原创程序结构示意，尺寸用于演示，非真实测量。层级关系参考 [OpenStax Biology 30.4 Leaves](https://openstax.org/books/biology/pages/30-4-leaves)，未复制图片。电路板示例同样是原创几何示意，不代表真实芯片结构。字体许可在模板 `OFL.txt`。
+
+## 外观（3.0.0）
+
+- `appearance: "default" | "amber-night"`。暗夜版把 background / ink / muted / rule / accent / field / panel / locator 整套换成深底米字琥珀强调；`theme` 里的单项覆盖仍然优先。
+- 面板（规模条、定位图）统一走 `panel()`：接触阴影 + 顶亮渐变 + 底暗渐变 + 颗粒，四层叠加；渐变按外观分档，浅色不做强顶亮。
+- 圆角统一走 `squirclePath()`（超椭圆 n=4.5，每角 16 段），不是 `ctx.roundRect`。
+- 颗粒用固定种子的 LCG 生成 160×160 噪声图，逐帧可复现；`window.__noGrain = true` 可临时关闭。

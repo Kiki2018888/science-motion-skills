@@ -1,0 +1,54 @@
+{
+  "duration": 24.0,
+  "messages": [
+    {
+      "role": "user",
+      "text": "帮我把这段科普讲得更清楚。",
+      "inputAt": 0.3,
+      "at": 2.0
+    },
+    {
+      "role": "assistant",
+      "text": "先给一个直观结论，再解释原因，最后用生活中的例子收尾。\n每次只讲一个重点，观众会更容易跟上。",
+      "thinkingAt": 2.6,
+      "at": 3.4,
+      "typeDuration": 3.6
+    },
+    {
+      "role": "user",
+      "text": "那这次的片子从哪里改起？",
+      "at": 9.4
+    },
+    {
+      "role": "assistant",
+      "text": "从开场三十秒改起：先把问题说清楚，再给数字，别一上来就讲方法。",
+      "thinkingAt": 10.0,
+      "at": 10.8,
+      "typeDuration": 2.8
+    }
+  ],
+  "lock": {
+    "at": 15.6,
+    "wakeAt": 16.3,
+    "date": "星期五，11月13日",
+    "time": "9:41"
+  },
+  "notifications": [
+    {
+      "at": 17.0,
+      "text": "改完的版本我放在共享文件夹里了。"
+    },
+    {
+      "at": 18.8,
+      "text": "第二段的例子也换成了更常见的那个。"
+    }
+  ],
+  "theme": "claude",
+  "display": {
+    "mode": "phone",
+    "caption": "CLAUDE / 手机界面动效"
+  },
+  "style": {
+    "appearance": "amber-night"
+  }
+}

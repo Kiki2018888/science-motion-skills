@@ -1,4 +1,6 @@
 """Normalize the layered illustration configuration and its deterministic timeline."""
+import sys as _sys
+_sys.dont_write_bytecode = True  # avoid __pycache__
 import copy
 import math
 
@@ -31,6 +33,12 @@ def normalize(raw):
     c['eyebrow'] = str(c.get('eyebrow', '结构观察 / 分层拆解'))
     c['subject'] = str(c.get('subject', '多层结构'))
     c['note'] = str(c.get('note', '结构示意'))
+    c.setdefault('appearance', 'default')
+    require(c['appearance'] in ['default', 'amber-night'], 'appearance must be default or amber-night')
+    if c['appearance'] == 'amber-night':
+        c['style'] = {**{'ink': '#F0E9DF', 'muted': '#9A9082', 'accent': '#E4893A', 'rule': '#3B332B'}, **c.get('style', {})}
+        if 'background' not in c:
+            c['background'] = {'type': 'gradient', 'colors': ['#1A1714', '#0E0C0A']}
     c['style'] = dict({'ink':'#203d36','muted':'#71837c','accent':'#258873','rule':'#cbd5ce',
                        'labelSize':30,'noteSize':21,'dimOthers':.36,'showPhase':True,'showProgress':True,
                        'phaseTitles':['完整装配','分层展开','逐层观察','按序复位','重新组装'],

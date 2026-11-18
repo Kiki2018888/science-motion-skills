@@ -122,3 +122,11 @@ emphasis精确匹配原文，默认取第0次出现；可用occurrence选取后�
 根readability:wrap还使阶段名、窗口标签和计数器标签在各自区域最多两行，至少22设计像素；计数器副标题保持一行，超限报错。大数字、标题与旧布局仍各按自己的容器检查，不表示任意文案都能放入模板。
 
 输出增加display-lines.json：每段、原始行号、原文、显示片段start/end及text。start含、end不含，单位Unicode码点，不是UTF-16索引；拼接全部text必须等于原文。report中的source_mapping_pass、wrapped_segments记录验收结果。浏览器window.__displayMap提供同样映射。
+
+## 材质与层级（3.0.0）
+
+- `panelCard(x,y,w,h,r,fill,strength,glow)`：外投影（`blur 26×strength / offsetY 10×strength`，传 `glow` 时改为彩色发光）+ 顶亮 7% + 底暗 32% + 1.2px 内描边。
+- 层级：终端窗口 `1.2`、首张统计卡 `0.95`、其余统计卡 `0.72`；关键行警示卡用 `glow=高亮色` 走发光分支。
+- 进度条（安装进度、统计卡小条）都带 `shadowBlur`，端点亮斑让"正在推进"看得见。
+- 阶段条是节点轨道：圆点 + 已过段描线 + 当前点发光 + 光环。
+- 圆角统一 `squirclePath()`；`appearance` 只有深色系，**不要给这个技能配浅色**。

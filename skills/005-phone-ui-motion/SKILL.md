@@ -7,6 +7,10 @@ description: 将对话与通知制作成手机界面动效视频，支持微信�
 
 使用随附的 Canvas 模板生成可离线预览 HTML 和静音 H.264 MP4。保留用户认可的手机外框、聊天→熄屏→锁屏→通知的结构，并支持聊天单独使用、锁屏单独使用及顶部通知。
 
+**v3.0.0**　手机金属边框增加斜向反光，玻璃屏幕增加柔光反射。琥珀暗夜配色覆盖对话、键盘和型号标签。
+
+代表样片配置　[琥珀暗夜竖屏](assets/examples/showcase-amber.json) · [浅色竖屏](assets/examples/showcase-light.json)
+
 ## 选模板与准备配置
 
 先读 [参数说明](references/config.md)。按用户指定主题选择 `assets/examples/` 中的 `wechat.json`、`chatgpt.json`、`gemini.json`、`deepseek.json`、`kimi.json` 或 `claude.json`；另有全屏、横屏嵌入和自定义背景示例。
@@ -50,3 +54,5 @@ python -B -X utf8 '<技能目录>\scripts\render_phone.py' --config '<工作目�
 ## Portable runtime
 
 需要 Python 3.10+、Playwright、Pillow、Chrome/Chromium 与 FFmpeg/ffprobe。自动查找 PATH 和常见安装位置；也可传 `--chrome` / `--ffmpeg`，或设置 `CHROME_BIN` / `FFMPEG_BIN`。输出必须位于技能目录之外。
+
+默认样片在 Canvas 内绘制整幅背景。`--alpha` 可导出 VP9 WebM，实际透明范围见导出报告的 `alpha_min` 和 `alpha_max`。

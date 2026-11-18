@@ -7,6 +7,10 @@ description: 将多层结构制作成立体分层拆解动效，配置层数、�
 
 使用随附 Canvas 模板，将 2–10 层矩形材料或部件绘制成带厚度的立体投影，导出离线 HTML 与静音 H.264 MP4。保留已认可样片的错峰展开、跟随标注、逐层强调和按序复位。
 
+**v3.0.0**　各层通过接触阴影和侧边明暗表现厚度。展开、观察和复位显示在底部阶段轨道上，支持纸面浅色和琥珀暗夜外观。
+
+代表样片配置　[琥珀暗夜横屏](assets/examples/showcase-amber.json) · [纸面浅色横屏](assets/examples/filter.json)
+
 ## 准备内容
 
 先读 [参数说明](references/config.md)。以 `assets/examples/filter.json` 为程序纹理示例，`image-right.json` 为图片替换与横向展开示例，`ten-layers.json` 为多层斜向展开且不复位的示例。
@@ -43,3 +47,5 @@ python -B -X utf8 '<技能目录>\scripts\render_layers.py' --config '<工作目
 ## 局部预览与统一编码
 
 读 [共同渲染接口](references/rendering.md)。支持 `--frames START:END`、`--preview-frames` 和 `--profile bt709|legacy`；默认有限范围 BT.709，时间仍使用原场景时间轴。
+
+默认样片在 Canvas 内绘制整幅背景。`--alpha` 可导出 VP9 WebM，实际透明范围见导出报告的 `alpha_min` 和 `alpha_max`。

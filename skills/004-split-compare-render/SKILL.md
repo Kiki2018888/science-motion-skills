@@ -7,6 +7,10 @@ description: 将左右图片、视频、图片序列或数据曲线制作成同�
 
 用同一时间轴驱动左右内容，支持同步开始、暂停同刻比较、继续播放、片尾突出差异。输出静音 H.264 MP4、可拖动的离线 HTML、关键帧和验收报告。横屏 16:9，默认 1920×1080；当前模板不提供竖屏重排。
 
+**v3.0.0**　左右对照窗口采用连续圆角裁切和内描边。纸面浅色和琥珀暗夜共用同一实验时钟、暂停点和差值标注。
+
+代表样片配置　[琥珀暗夜横屏](assets/examples/showcase-amber.json) · [纸面浅色横屏](assets/examples/fall.json)
+
 ## 选择素材和配置
 
 先读 [参数说明](references/config.md)，选最接近的示例复制到工作目录：
@@ -50,3 +54,5 @@ python -B -X utf8 '<技能目录>\scripts\render_compare.py' --config '<工作�
 ## 局部预览与统一编码
 
 读 [共同渲染接口](references/rendering.md)。支持 `--frames START:END`、`--preview-frames` 和 `--profile bt709|legacy`；默认有限范围 BT.709，时间仍使用原场景时间轴。
+
+默认样片在 Canvas 内绘制整幅背景。`--alpha` 可导出 VP9 WebM，实际透明范围见导出报告的 `alpha_min` 和 `alpha_max`。

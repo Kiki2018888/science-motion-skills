@@ -10,16 +10,20 @@
 | --- | --- | --- | --- |
 | 001 | 聊天动效 | [001-chat-motion-render](skills/001-chat-motion-render/SKILL.md) | [MP4 · 七套 UI](previews/001-chat-motion-render-v02.mp4) |
 | 002 | 流程与因果链 | [002-flow-motion-render](skills/002-flow-motion-render/SKILL.md) | [琥珀暗夜](previews/002-flow-motion-render-v03-amber.mp4) · [浅色](previews/002-flow-motion-render-v03-light.mp4) · [竖屏](previews/002-flow-motion-render-v03-portrait.mp4) |
-| 003 | 多尺度连续缩放 | [003-multiscale-zoom-render](skills/003-multiscale-zoom-render/SKILL.md) | [MP4](previews/003-multiscale-zoom-render.mp4) |
-| 004 | 对照实验双屏 | [004-split-compare-render](skills/004-split-compare-render/SKILL.md) | [MP4](previews/004-split-compare-render.mp4) |
-| 005 | 手机聊天与锁屏通知 | [005-phone-ui-motion](skills/005-phone-ui-motion/SKILL.md) | [MP4](previews/005-phone-ui-motion.mp4) |
-| 006 | 分层剖面与拆解 | [006-layer-explode-render](skills/006-layer-explode-render/SKILL.md) | [MP4](previews/006-layer-explode-render.mp4) |
-| 007 | 地震局监测屏 | [007-quake-monitor-render](skills/007-quake-monitor-render/SKILL.md) | [MP4](previews/007-quake-monitor-render.mp4) |
-| 008 | 终端 / 代码动效 | [008-terminal-motion-render](skills/008-terminal-motion-render/SKILL.md) | [MP4](previews/008-terminal-motion-render.mp4) |
-| 009 | 斩杀线标尺 | [009-threshold-line-render](skills/009-threshold-line-render/SKILL.md) | [MP4](previews/009-threshold-line-render.mp4) |
+| 003 | 多尺度连续缩放 | [003-multiscale-zoom-render](skills/003-multiscale-zoom-render/SKILL.md) | [琥珀暗夜横屏](previews/003-multiscale-zoom-render-v03-amber.mp4) · [纸面浅色横屏](previews/003-multiscale-zoom-render-v03-light.mp4) · [浅色竖屏](previews/003-multiscale-zoom-render-v03-portrait.mp4) |
+| 004 | 对照实验双屏 | [004-split-compare-render](skills/004-split-compare-render/SKILL.md) | [琥珀暗夜横屏](previews/004-split-compare-render-v03-amber.mp4) · [纸面浅色横屏](previews/004-split-compare-render-v03-light.mp4) |
+| 005 | 手机聊天与锁屏通知 | [005-phone-ui-motion](skills/005-phone-ui-motion/SKILL.md) | [琥珀暗夜竖屏](previews/005-phone-ui-motion-v03-amber.mp4) · [浅色竖屏](previews/005-phone-ui-motion-v03-light.mp4) |
+| 006 | 分层剖面与拆解 | [006-layer-explode-render](skills/006-layer-explode-render/SKILL.md) | [琥珀暗夜横屏](previews/006-layer-explode-render-v03-amber.mp4) · [纸面浅色横屏](previews/006-layer-explode-render-v03-light.mp4) |
+| 007 | 地震局监测屏 | [007-quake-monitor-render](skills/007-quake-monitor-render/SKILL.md) | [夜间监测屏](previews/007-quake-monitor-render-v03.mp4) |
+| 008 | 终端 / 代码动效 | [008-terminal-motion-render](skills/008-terminal-motion-render/SKILL.md) | [终端与日志](previews/008-terminal-motion-render-v03.mp4) |
+| 009 | 斩杀线标尺 | [009-threshold-line-render](skills/009-threshold-line-render/SKILL.md) | [阈值转起跑线](previews/009-threshold-line-render-v03.mp4) |
 | 011 | 自由卡片动效 | [011-ppt-card-motion-render](skills/011-ppt-card-motion-render/SKILL.md) | [MP4](previews/011-ppt-card-motion-render-v02.mp4) |
 
 在本地浏览器打开 [gallery.html](gallery.html) 可观看十套技能的样片。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
+
+## v1.6.0 · 2026-11-18
+
+003–009 七套技能均升级到 **v3.0.0**。003–006 提供浅色和琥珀暗夜样片，003 另附叶片缩放竖屏版。007 的监测屏、008 的终端和 009 的标尺各有一条深色样片。画廊中的 12 条新版视频均附有可直接渲染的 JSON 配置。
 
 ## v1.5.0 · 2026-11-17
 
@@ -34,7 +38,7 @@ python skills/001-chat-motion-render/scripts/render_chat.py --config skills/001-
 python skills/002-flow-motion-render/scripts/render_flow.py --config skills/002-flow-motion-render/assets/examples/showcase-amber.json --output output/flow-amber.mp4
 ```
 
-维护时运行 `python tools/sync_runtime.py` 核对各技能的渲染器。`catalog.json` 在 001 和 002 上指定 2.1.0，共享源码位于 `shared/2.1.0/`。其余技能沿用仓库默认的 2.0.0。
+维护时运行 `python tools/sync_runtime.py` 核对各技能的渲染器。001–009 使用 `shared/2.1.0/` 中的渲染器。011 的版本由 `catalog.json` 的默认值 2.0.0 指定。
 
 ## 安装环境
 
@@ -97,13 +101,13 @@ Ten configurable motion-rendering skills for science communication: chat, flow a
 
 ## v1.1.0 · 2026-11-14
 
-所有九套技能加入共同渲染 2.0：按原时间轴导出帧段、关键帧 PNG、有限范围 BT.709、编码后 PTS 与完整解码检查。005 新增半截手机、硬件细节与消息安全区；002 新增连续虚线、分道回程和路径诊断；009 新增像素角色、细节跑道与实际轮廓越线。上述三项新样片位于 gallery 的 v02 区域，原样片保留。
+所有九套技能加入共同渲染 2.0：按原时间轴导出帧段、关键帧 PNG、有限范围 BT.709、编码后 PTS 与完整解码检查。005 新增半截手机、硬件细节与消息安全区；002 新增连续虚线、分道回程和路径诊断；009 新增像素角色、细节跑道与实际轮廓越线。当期发布了三条 v02 样片。
 
 新选项均为可选配置；旧配置保留原布局。`shared/` 保存共同渲染源码，`python tools/sync_runtime.py` 检查九份副本，`--apply` 同步副本。007 / 008 在本次公开版本中只更新共同渲染层。
 
 ## v1.2.0 · 2026-11-14
 
-007 新增固定监测带：统一事件配置驱动波峰、月份、数值定格与盖章，可跨镜头复用。008 新增长命令与日志折行、原始行到显示行的映射、长标签和字段强调，以及完整原始行放大。两套模板均可选暗夜配色，默认保留旧布局。配置分别见 `monitor-band.json` 和 `readable-terminal.json`。两条 v02 样片已加入 gallery，原有样片保留。
+007 新增固定监测带：统一事件配置驱动波峰、月份、数值定格与盖章，可跨镜头复用。008 新增长命令与日志折行、原始行到显示行的映射、长标签和字段强调，以及完整原始行放大。两套模板均可选暗夜配色，默认保留旧布局。配置分别见 `monitor-band.json` 和 `readable-terminal.json`。该版同时发布了两条 v02 样片。
 
 
 ## v1.3.0 · 2026-11-15

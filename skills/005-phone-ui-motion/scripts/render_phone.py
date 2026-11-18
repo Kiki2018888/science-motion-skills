@@ -6,12 +6,13 @@ import json
 import math
 import os
 from pathlib import Path
+import sys
+
+sys.dont_write_bytecode = True
 from runtime import default_chrome, default_ffmpeg
 from motion_render import add_arguments, RenderPlan
 import shutil
 import subprocess
-import sys
-sys.dont_write_bytecode = True
 from config import normalize, require
 
 
@@ -24,7 +25,8 @@ def main():
     ap.add_argument('--ffmpeg',type=Path,default=default_ffmpeg())
     add_arguments(ap);args=ap.parse_args();raw=json.loads(args.config.read_text(encoding='utf-8-sig'));c=normalize(raw)
     skill=Path(__file__).resolve().parents[1];dest=args.output.resolve();source=dest.parent/(dest.stem+'_source')
-    require(dest.suffix.lower()=='.mp4','Output must be .mp4')
+    required_suffix = '.webm' if args.alpha else '.mp4'
+    require(dest.suffix.lower() == required_suffix, f'Output must end in {required_suffix} for the selected encoding')
     require(not dest.is_relative_to(skill) and not source.is_relative_to(skill),'Outputs must be outside skill directory')
     require(args.overwrite or not (dest.exists() or source.exists()),'Output/source exists; choose a new name or pass --overwrite')
     require(args.chrome.is_file(),'Chrome missing; pass --chrome')

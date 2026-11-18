@@ -1,4 +1,6 @@
 """Normalize a content-clock timeline; focus pauses add wall time automatically."""
+import sys as _sys
+_sys.dont_write_bytecode = True  # avoid __pycache__
 import copy, math
 
 def require(ok,message):

@@ -9,7 +9,11 @@ description: 将命令、代码和日志制作成终端动效视频，支持逐�
 
 先读 [参数说明](references/config.md)，再从 `assets/examples/terminal.json` 复制业务配置。`training.json` 演示换配色、多命令、Python 代码、三个强调时刻、百分比和下降计数；`logs-only.json` 演示无计数器的宽屏中文日志。
 
-长命令、代码或日志参考 `readable-terminal.json`，使用 `readability: wrap`。字号保持可读，按容器软折行，可指定原文断点与字段强调；长标签最多两行。默认 legacy 保留旧配置的画面。暗夜配色通过 `appearance: amber-night` 单独选择。
+长命令、代码或日志参考 `readable-terminal.json`，使用 `readability: wrap`。字号保持可读，按容器软折行，可指定原文断点与字段强调；长标签最多两行。默认 `legacy` 使用单行排版。暗夜配色通过 `appearance: amber-night` 单独选择。
+
+**v3.0.0**　深色终端按窗口和统计卡区分层次。进度条增加亮点，定格行使用发光边框，底部节点标示当前阶段。
+
+代表样片配置　[终端与日志](assets/examples/terminal.json)
 
 ## 编排
 
@@ -49,3 +53,5 @@ python -B -X utf8 '<技能目录>\scripts\render_terminal.py' --config '<工作�
 ## Portable runtime
 
 需要 Python 3.10+、Playwright、Pillow、Chrome/Chromium 与 FFmpeg/ffprobe。自动查找 PATH 和常见安装位置；也可传 `--chrome` / `--ffmpeg`，或设置 `CHROME_BIN` / `FFMPEG_BIN`。输出必须位于技能目录之外。
+
+默认样片在 Canvas 内绘制整幅背景。`--alpha` 可导出 VP9 WebM，实际透明范围见导出报告的 `alpha_min` 和 `alpha_max`。
