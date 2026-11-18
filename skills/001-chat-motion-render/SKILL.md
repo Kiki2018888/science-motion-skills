@@ -1,11 +1,13 @@
 ---
 name: 001-chat-motion-render
-description: 将对话制作成聊天动效视频。支持 Messages、微信、WhatsApp、Claude、ChatGPT、X 公开回复串、Google Gemini 七套 UI、浅深色、横竖屏、无光标逐字输入与整条弹出，可逐条混用和长对话滚动。只渲染视频，不向真实软件发送消息。
+description: 将对话制作成聊天动效视频。支持 Messages、微信、WhatsApp、Claude、ChatGPT、X 公开回复串、Google Gemini 七套 UI、浅深色、横竖屏、无光标逐字输入与整条弹出。可导出无声 MP4 或透明 WebM，支持逐条混用和长对话滚动。
 ---
 
 # 聊天动效视频
 
 使用随包 HTML/CSS/JS 与 Python 渲染器生成无声 H.264 MP4 和离线预览。七套 UI 沿用已认可的界面；逐字输入不显示光标，保留标点停顿，整条弹出保留 0.48 秒轻微回弹。X 使用公开帖子与回复结构，帖子正文不做气泡变形。
+
+v2.2.0 支持把聊天界面叠到已有画面上。需要透出底图时，用 `--alpha` 导出透明 VP9 WebM。
 
 ## 配置
 
@@ -26,6 +28,12 @@ description: 将对话制作成聊天动效视频。支持 Messages、微信、W
 
 ```bash
 python "<skill>/scripts/render_chat.py" --config "<case>/dialogue.json" --output "<case>/chat-v02.mp4"
+```
+
+从仓库根目录可直接运行混合两种出现方式的透明示例。
+
+```bash
+python skills/001-chat-motion-render/scripts/render_chat.py --config skills/001-chat-motion-render/assets/examples/basic.json --output output/chat-overlay.webm --alpha
 ```
 
 需要 Python 3.10+、Playwright、Pillow、Chrome/Chromium、FFmpeg 与 ffprobe。浏览器按 `CHROME_BIN`、PATH、系统常见位置、Playwright Chromium 发现；FFmpeg 按 `FFMPEG_BIN` 或 PATH 发现，也可显式传 `--chrome`、`--ffmpeg`。输出与配置放在技能目录外；模板不写入具体任务文案。

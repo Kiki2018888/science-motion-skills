@@ -1,0 +1,65 @@
+{
+  "title": "一次误报，经过五个环节",
+  "subtitle": "2026 · AI 事件复盘",
+  "appearance": "amber-night",
+  "nodes": [
+    {
+      "id": "ask",
+      "title": "提问",
+      "icon": "question",
+      "description": "用户越界发问",
+      "column": 0,
+      "row": 0
+    },
+    {
+      "id": "find",
+      "title": "检索",
+      "icon": "analysis",
+      "description": "找到过期材料",
+      "column": 1,
+      "row": 0
+    },
+    {
+      "id": "gen",
+      "title": "生成",
+      "icon": "check",
+      "description": "给出确定结论",
+      "column": 2,
+      "row": 0
+    },
+    {
+      "id": "out",
+      "title": "越界",
+      "icon": "warning",
+      "description": "超出可靠边界",
+      "column": 3,
+      "row": 0
+    },
+    {
+      "id": "spread",
+      "title": "扩散",
+      "icon": "experiment",
+      "description": "截图开始流传",
+      "column": 4,
+      "row": 0
+    }
+  ],
+  "edges": [
+    {
+      "from": "ask",
+      "to": "find"
+    },
+    {
+      "from": "find",
+      "to": "gen"
+    },
+    {
+      "from": "gen",
+      "to": "out"
+    },
+    {
+      "from": "out",
+      "to": "spread"
+    }
+  ]
+}

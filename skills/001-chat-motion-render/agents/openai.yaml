@@ -1,6 +1,6 @@
 interface:
   display_name: "001 · 聊天动效视频"
-  short_description: "七套聊天 UI 与浅深色，支持横竖屏、无光标逐字输入和整条弹出"
+  short_description: "七套聊天 UI，支持横竖屏、无光标逐字输入、整条弹出和透明视频叠加"
   default_prompt: "使用 $001-chat-motion-render，把下面的对话按我指定的横竖屏、界面样式和出现方式生成视频。"
 policy:
   allow_implicit_invocation: true

@@ -1,4 +1,4 @@
-"""Create a local configurable SVG flow animation and verified H.264 MP4."""
+"""Render an SVG flow animation as H.264 MP4 or transparent VP9 WebM."""
 import argparse
 import io
 import json
@@ -27,7 +27,8 @@ def main():
     if a.cursor:raw['cursor']={**raw.get('cursor',{}),'shape':a.cursor}
     if a.fps:raw['fps']=a.fps
     c=normalize(raw);skill=Path(__file__).resolve().parents[1];dest=a.output.resolve();source=dest.parent/(dest.stem+'_source')
-    require(dest.suffix.lower()=='.mp4','Output must end in .mp4')
+    required_suffix = '.webm' if a.alpha else '.mp4'
+    require(dest.suffix.lower() == required_suffix, f'Output must end in {required_suffix} for the selected encoding')
     require(not dest.is_relative_to(skill) and not source.is_relative_to(skill),'Keep generated outputs outside the skill directory')
     require(a.overwrite or not (dest.exists() or source.exists()),'Output/source exists; select another filename or explicitly pass --overwrite')
     require(a.chrome.is_file(),'Chrome missing; pass --chrome')

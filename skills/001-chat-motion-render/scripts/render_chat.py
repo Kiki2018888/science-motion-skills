@@ -43,7 +43,10 @@ def prepare_source(skill,source,cfg):
 
 def main():
  parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--config',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--fps',type=int,choices=[24,30],default=24);parser.add_argument('--check-only',action='store_true');parser.add_argument('--overwrite',action='store_true');parser.add_argument('--chrome',type=Path);parser.add_argument('--ffmpeg',type=Path);add_arguments(parser);args=parser.parse_args()
- cfg=normalize(json.loads(args.config.read_text(encoding='utf-8-sig')));dest=args.output.resolve();require(dest.suffix.lower()=='.mp4','Output must end in .mp4');source=dest.parent/(dest.stem+'_source');skill=Path(__file__).resolve().parents[1];template=skill/'assets/template'
+ cfg=normalize(json.loads(args.config.read_text(encoding='utf-8-sig')));dest=args.output.resolve()
+ required_suffix = '.webm' if args.alpha else '.mp4'
+ require(dest.suffix.lower() == required_suffix, f'Output must end in {required_suffix} for the selected encoding')
+ source=dest.parent/(dest.stem+'_source');skill=Path(__file__).resolve().parents[1];template=skill/'assets/template'
  require(args.overwrite or not(dest.exists() or source.exists()),'Output or source directory exists; use a new version name or --overwrite')
  require(not dest.is_relative_to(skill) and not source.is_relative_to(skill),'Do not write output into the installed skill')
  chrome=args.chrome or default_chrome()

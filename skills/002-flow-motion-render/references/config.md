@@ -45,7 +45,7 @@ theme 的字段及默认值：
  "accent":"#1d2f55","warning":"#a46b1a","highlight":"#ffe066","card":"#ffffff"}
 ```
 
-这些颜色初始化卡片、连线与状态。精细设置用 nodeDefaults、states、edgeDefaults 或单项覆盖。当前导出为不透明 H.264，不提供透明 MOV。
+这些颜色初始化卡片、连线与状态。精细设置用 nodeDefaults、states、edgeDefaults 或单项覆盖。默认导出 H.264 MP4。需要透出宿主背景时，用 `--alpha` 导出 VP9 WebM。详见[共同渲染接口](rendering.md)。
 
 ## 布局 layout
 
@@ -70,16 +70,16 @@ nodeDefaults 为全局默认，节点 style 逐字段覆盖。
 | 字段 | 默认 / 含义 |
 |---|---|
 | shape | rounded；rect / rounded / pill / circle / diamond |
-| width、height | 300、180；圆形须相等 |
-| radius | 20，用于 rounded；rect 为 0，pill 自动计算 |
-| padding | 24，矩形内部留白 |
-| titleSize、descriptionSize | 36、24；自动换行但不自动缩小字号 |
-| iconSize | 40 |
+| width、height | 300、190；竖屏 520、200；圆形须相等 |
+| radius | 28（暗场 26），用于 rounded；连续圆角按超椭圆计算，rect 为 0，pill 自动计算 |
+| padding | 横屏 28，竖屏 32，矩形内部留白 |
+| titleSize、descriptionSize | 40、22（竖屏 46、26）；自动换行但不自动缩小字号 |
+| iconSize | 横屏 46，竖屏 52 |
 | showIcon、showNumber、showState | 均 true，可独立关闭 |
 | fill、border | 填充、边框，默认 theme.card / theme.line |
 | text、descriptionColor | 标题、说明色，默认 theme.fg / theme.muted |
-| accent、highlight | 图标/状态标签色、标题强调底色 |
-| strokeWidth、shadow | 2、true |
+| accent、highlight | 图标和状态标签色、暗场标题辉光色 |
+| strokeWidth、shadow | 浅色 2，暗场 1.5。默认启用阴影 |
 
 圆形、菱形、胶囊的文字空间和编号位置按形状计算。超出时报错，增加尺寸或调整内容。图标：question / evidence / analysis / conclusion / experiment / check / warning / none；iconText 可放简短文字或符号，showIcon=false 会隐藏两种图标来源。
 
@@ -136,7 +136,7 @@ nodeDefaults 为全局默认，节点 style 逐字段覆盖。
 - enter：底线淡入开始，默认首段 travel 的 start。
 - style：覆盖 edgeDefaults；cursor：覆盖全局 cursor。
 
-edgeDefaults / edge.style 字段：color（主线）、baseColor（底线）、width（4）、baseWidth（3）、opacity（0.72）、bend（100，曲线手柄长度，相向端口小间距自动限幅）、cornerRadius（24，via 圆角）、labelSize（25）、labelColor。
+edgeDefaults / edge.style 控制主线颜色 color、底线颜色 baseColor、主线宽 width（5）、底线宽 baseWidth（4）、opacity（0.8）、bend（100，相向端口小间距自动限幅）、cornerRadius（24，via 圆角）、labelSize（25）和 labelColor。
 
 边的 label 示例：
 
@@ -193,7 +193,7 @@ shape 支持 circle / triangle。size 是圆半径，三角形按相近视觉面
 
 ## 连续虚线与分道回路（v02）
 
-`appearance: "amber-night"` 启用 #323232 底色、琥珀色线条、白字和无阴影卡片；theme 与单个节点覆盖仍有效。省略时保持原默认外观。
+`appearance: "amber-night"` 启用 #323232 底色、琥珀色线条、白字、琥珀辉光阴影与 1.5px 细边；theme 与单个节点覆盖仍有效。省略时保持浅色默认外观（含极淡底部厚度，不做顶亮）。
 
 连续虚线示例：
 
@@ -211,3 +211,19 @@ shape 支持 circle / triangle。size 是圆半径，三角形按相近视觉面
 - validation 的 paths/labels/crossings 分别设为 off/warn/error，默认 warn 兼容旧配置。paths 检查自折返、路径重合和越界，labels 检查标签压节点、标签互压及连线穿字，crossings 检查线间及自交。新布局建议全部设为 error；有意交叉可单独降为 warn 并人工检查。
 - 几何检测约每 10 像素采样一次；接近共同端点的相交会忽略。它是排版诊断，不是精确碰撞仿真。长标签、动态入场和多个分支仍需检查关键帧。
 - report.json 增加 layout_warnings / path_diagnostics；页面 window.__inspect() 的虚线状态包含 dashOffset、period、pathLength 和 visible。
+
+## 视觉层（3.0.0）
+
+默认圆角卡片的材质参数集中在 `engine.js`。
+
+| 层 | 实现 | 说明 |
+| --- | --- | --- |
+| 形状 | `squircle(w,h,r,n=4.5,steps=18)` | 四角用超椭圆采样，角间以直边相连 |
+| 顶亮 | `matTopDark` 渐变 | 白 .13 → .05 → 0；仅暗场 |
+| 底暗 | `matBottomDark` / `matBottomLight` | 暗场黑 0 → .08 → .22；浅色藏青 0 → .06 |
+| 接触阴影 | 形状副本下移 4px + `feGaussianBlur 3.5` | 黑 .55，画在卡片之前 |
+| 颗粒 | `feTurbulence` → 去饱和 → 提 alpha → `feComposite in2=SourceAlpha` | 只落在卡片不透明区域 |
+| 边缘 | `n.edge`(状态色) + `edgeHi`(白 .30→0) + `edgeLo`(黑 0→.22) | 三层同宽，左上来光 |
+| 选中高亮 | 标题文字 `drop-shadow` | 暗场暖色外发光，浅色深色投影；`n.mark` 保留但永久透明 |
+
+改这些参数时先跑 `--frames 0:24` 出一小段看单帧，不要整片重渲。

@@ -1,5 +1,13 @@
 # Release validation
 
+## v1.5.0 — 2026-11-17
+
+- The portable 001 and 002 renderers completed six short exports on Windows using Chrome and FFmpeg. These covered a portrait X conversation, a transparent mixed-mode chat, all three v3 flow layouts and a transparent flow overlay. Frame counts, dimensions, timestamps, layout, seeking and full video decoding passed.
+- Both VP9 WebM files contained the alpha-mode flag. The decoded first alpha plane spanned 0–255 in each clip. The requested PNGs also contained transparent and opaque pixels. Both CLIs rejected mismatched output extensions before writing output.
+- All four previous 002 example configurations passed layout, cursor and timeline checks with the v3 renderer. The three new 11.5-second preview videos matched their source files by SHA-256. Each decoded as 276 frames at 24 fps. Frame 204 of each preview was also compared with output from its published JSON configuration.
+- The 94.5-second seven-UI 001 preview matched the original by SHA-256 and decoded in full. The Codex installer was exercised in a fresh destination, and both skills passed metadata validation. All 20 renderer and documentation copies matched the version selected by the catalog.
+- Full video rendering was tested on Windows. macOS and Linux remain unverified for this release.
+
 ## v1.4.1 — 2026-11-17
 
 - Removed the retired 001 four-layout templates, minimal example and original preview from the current package and gallery. The current package supports only the seven approved UI themes; removed UI options fail validation instead of silently selecting another design.

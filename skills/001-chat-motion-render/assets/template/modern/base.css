@@ -1,6 +1,6 @@
 /* Apple HIG-informed video UI. CSS approximation; no Apple UI assets embedded. */
-@font-face{font-family:ChatUI;src:local('MiSans Regular'),local('MiSans'),url('body.otf');font-weight:400}
-@font-face{font-family:ChatUI;src:local('MiSans Semibold'),local('MiSans SemiBold'),url('body.otf');font-weight:600}
+@font-face{font-family:ChatUI;src:local('MiSans Regular'),local('MiSans'),url('./body.otf');font-weight:400}
+@font-face{font-family:ChatUI;src:local('MiSans Semibold'),local('MiSans SemiBold'),url('./body.otf');font-weight:600}
 *{box-sizing:border-box;overflow-anchor:none}
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','PingFang SC',ChatUI,'Microsoft YaHei',sans-serif;color:#1d1d1f;background:#e9ebee}
 body{margin:0}button,select{font:inherit;border:1px solid #d8dbe1;border-radius:12px;background:white;padding:9px 14px;color:#323438;cursor:pointer}

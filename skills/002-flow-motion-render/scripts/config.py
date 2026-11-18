@@ -99,11 +99,12 @@ def normalize(raw):
     show = dict(header=True, subtitle=True, caption=True, progress=True)
     obj(c.get('show', {}), show, 'show'); show.update(c.get('show', {}))
     require(all(type(v) is bool for v in show.values()), 'show values must be booleans'); c['show'] = show
-    base = dict(shape='rounded', width=300, height=180, radius=20, padding=24, titleSize=36,
-                descriptionSize=24, iconSize=40, showIcon=True, showNumber=True, showState=True,
+    base = dict(shape='rounded', width=300, height=190, radius=28, padding=28, titleSize=40,
+                descriptionSize=22, iconSize=46, showIcon=True, showNumber=True, showState=True,
                 fill=theme['card'], border=theme['line'], text=theme['fg'], descriptionColor=theme['muted'],
                 accent=theme['accent'], highlight=theme['highlight'], strokeWidth=2, shadow=True)
-    if c['appearance']=='amber-night':base.update(radius=8,shadow=False)
+    if c['appearance']=='amber-night':base.update(radius=26,shadow=True,strokeWidth=1.5)
+    if portrait:base.update(width=520,height=200,titleSize=46,descriptionSize=26,iconSize=52,padding=32)
     base = merge_style(base, c.get('nodeDefaults', {}), 'nodeDefaults'); c['nodeDefaults'] = base
     # Sparse state styles preserve node-specific base colors unless explicitly overridden.
     state_base = dict(fill=base['fill'], border=base['border'], text=base['text'], descriptionColor=base['descriptionColor'],
@@ -120,7 +121,7 @@ def normalize(raw):
             if k in patch: number(patch[k], f'states.{name}.{k}', 0, 1)
     c['states'] = states
     c['cursor'] = cursor(dict(shape='circle', size=6, color=None, haloOpacity=.12, haloScale=2.1), c.get('cursor', {}), 'cursor')
-    edge_base = dict(color=theme['accent'], baseColor=theme['line'], width=4, baseWidth=3, opacity=.72,
+    edge_base = dict(color=theme['accent'], baseColor=theme['line'], width=5, baseWidth=4, opacity=.8,
                      bend=100, labelSize=25, labelColor=theme['fg'], cornerRadius=24)
     c['edgeDefaults'] = merge_style(edge_base, c.get('edgeDefaults', {}), 'edgeDefaults')
     require(isinstance(c.get('nodes'), list) and c['nodes'], 'nodes must be a nonempty array')

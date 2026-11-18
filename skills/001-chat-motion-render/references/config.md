@@ -47,11 +47,11 @@
 逐字输入不显示光标。消息内容、时间轴与界面风格可独立配置。
 
 导出参数：
-- `--config` 输入 JSON，`--output` 输出 MP4，输出必须在技能目录外。
+- `--config` 指定输入 JSON，`--output` 指定技能目录外的文件。默认输出 `.mp4`，启用 `--alpha` 时输出 `.webm`。
 - `--fps 24` 或 `--fps 30`。
 - `--check-only` 只生成源文件、关键帧和检查报告。
 - `--overwrite` 覆盖明确指定的输出及对应生成源文件；不递归删除其他内容。
 - `--chrome`、`--ffmpeg` 显式指定本机程序，ffprobe 应位于 ffmpeg 同目录。
-- `--frames`、`--preview-frames`、`--profile` 见 rendering.md。
+- 局部导出、关键帧 PNG、透明度检查和 `--alpha-clear` 的用法见[共同渲染接口](rendering.md)。
 
-输出旁 `_source/` 包含 HTML/CSS/JS、输入配置、字体、OFL.txt、contact.jpg 与 report.json，可离线预览。永久改动应编辑 JSON 并重新渲染。视频为无声音轨的 H.264 MP4，默认有限范围 BT.709；没有音效参数。
+输出旁 `_source/` 包含 HTML/CSS/JS、输入配置、字体、OFL.txt、contact.jpg 与 report.json，可离线预览。永久改动应编辑 JSON 并重新渲染。两种格式均为无声视频。MP4 默认使用有限范围 BT.709，透明 WebM 使用 VP9。

@@ -9,7 +9,7 @@
 | 编号 | 动效 | 技能与参数入口 | 样片 |
 | --- | --- | --- | --- |
 | 001 | 聊天动效 | [001-chat-motion-render](skills/001-chat-motion-render/SKILL.md) | [MP4 · 七套 UI](previews/001-chat-motion-render-v02.mp4) |
-| 002 | 流程与因果链 | [002-flow-motion-render](skills/002-flow-motion-render/SKILL.md) | [MP4](previews/002-flow-motion-render.mp4) |
+| 002 | 流程与因果链 | [002-flow-motion-render](skills/002-flow-motion-render/SKILL.md) | [琥珀暗夜](previews/002-flow-motion-render-v03-amber.mp4) · [浅色](previews/002-flow-motion-render-v03-light.mp4) · [竖屏](previews/002-flow-motion-render-v03-portrait.mp4) |
 | 003 | 多尺度连续缩放 | [003-multiscale-zoom-render](skills/003-multiscale-zoom-render/SKILL.md) | [MP4](previews/003-multiscale-zoom-render.mp4) |
 | 004 | 对照实验双屏 | [004-split-compare-render](skills/004-split-compare-render/SKILL.md) | [MP4](previews/004-split-compare-render.mp4) |
 | 005 | 手机聊天与锁屏通知 | [005-phone-ui-motion](skills/005-phone-ui-motion/SKILL.md) | [MP4](previews/005-phone-ui-motion.mp4) |
@@ -20,6 +20,21 @@
 | 011 | 自由卡片动效 | [011-ppt-card-motion-render](skills/011-ppt-card-motion-render/SKILL.md) | [MP4](previews/011-ppt-card-motion-render-v02.mp4) |
 
 在本地浏览器打开 [gallery.html](gallery.html) 可观看十套技能的样片。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
+
+## v1.5.0 · 2026-11-17
+
+**002 流程与因果链 v3.0.0** 把同一条五节点流程排成三版。琥珀暗夜横屏用连续圆角、细边缘光和暖色辉光突出当前节点。浅色横屏用底部阴影和文字投影。竖屏把五卡改为纵列，放大标题与图标。三版均为 11.5 秒，各自附可重渲的配置。[琥珀暗夜配置](skills/002-flow-motion-render/assets/examples/showcase-amber.json) · [浅色配置](skills/002-flow-motion-render/assets/examples/showcase-light.json) · [竖屏配置](skills/002-flow-motion-render/assets/examples/showcase-portrait.json)
+
+![同一流程在琥珀暗夜横屏、浅色横屏和竖屏中的版式](previews/002-flow-motion-render-v03-comparison.png)
+
+**001 聊天动效 v2.2.0** 的七套聊天界面支持透明叠加。001 和 002 都可用 `--alpha` 导出带透明通道的 VP9 WebM，用于把聊天界面或流程卡片放到已有视频上。常规导出为无声 H.264 MP4。下例从仓库根目录运行，需要 FFmpeg 带 `libvpx-vp9` 编解码器。
+
+```bash
+python skills/001-chat-motion-render/scripts/render_chat.py --config skills/001-chat-motion-render/assets/examples/basic.json --output output/chat-overlay.webm --alpha
+python skills/002-flow-motion-render/scripts/render_flow.py --config skills/002-flow-motion-render/assets/examples/showcase-amber.json --output output/flow-amber.mp4
+```
+
+维护时运行 `python tools/sync_runtime.py` 核对各技能的渲染器。`catalog.json` 在 001 和 002 上指定 2.1.0，共享源码位于 `shared/2.1.0/`。其余技能沿用仓库默认的 2.0.0。
 
 ## 安装环境
 

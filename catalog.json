@@ -6,14 +6,18 @@
       "name": "001-chat-motion-render",
       "title": "聊天动效",
       "path": "skills/001-chat-motion-render",
-      "version": "2.1.0",
-      "default_preview": "previews/001-chat-motion-render-v02.mp4"
+      "version": "2.2.0",
+      "default_preview": "previews/001-chat-motion-render-v02.mp4",
+      "shared_renderer_version": "2.1.0"
     },
     {
       "number": "002",
       "name": "002-flow-motion-render",
       "title": "流程与因果链",
-      "path": "skills/002-flow-motion-render"
+      "path": "skills/002-flow-motion-render",
+      "version": "3.0.0",
+      "shared_renderer_version": "2.1.0",
+      "default_preview": "previews/002-flow-motion-render-v03-amber.mp4"
     },
     {
       "number": "003",
@@ -162,9 +166,39 @@
       "revision": "v02",
       "title": "七套 UI · 无光标逐字输入与整条弹出",
       "duration_seconds": 94.5
+    },
+    {
+      "skill": "002-flow-motion-render",
+      "video": "previews/002-flow-motion-render-v03-amber.mp4",
+      "bytes": 332166,
+      "sha256": "4ec2a1176751df86860f0a57dfb98f475ec5966a1f99bbe5b10f8ba9929d60ae",
+      "revision": "v03",
+      "title": "琥珀暗夜 · 横屏",
+      "duration_seconds": 11.5,
+      "config": "skills/002-flow-motion-render/assets/examples/showcase-amber.json"
+    },
+    {
+      "skill": "002-flow-motion-render",
+      "video": "previews/002-flow-motion-render-v03-light.mp4",
+      "bytes": 355220,
+      "sha256": "4279aebe8713847c64a5b289162a443987c3545207bc4ddbafe7d58ba4720658",
+      "revision": "v03",
+      "title": "浅色 · 横屏",
+      "duration_seconds": 11.5,
+      "config": "skills/002-flow-motion-render/assets/examples/showcase-light.json"
+    },
+    {
+      "skill": "002-flow-motion-render",
+      "video": "previews/002-flow-motion-render-v03-portrait.mp4",
+      "bytes": 487028,
+      "sha256": "3de59d814900ffec7a6ecdfbbb4acc2c1d6b0a1ba8e5185740e13af07d96c2df",
+      "revision": "v03",
+      "title": "琥珀暗夜 · 竖屏",
+      "duration_seconds": 11.5,
+      "config": "skills/002-flow-motion-render/assets/examples/showcase-portrait.json"
     }
   ],
-  "version": "1.4.1",
+  "version": "1.5.0",
   "shared_renderer_version": "2.0.0",
   "retired_numbers": [
     "010"
