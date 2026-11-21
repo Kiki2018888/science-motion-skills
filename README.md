@@ -1,6 +1,6 @@
 # Science Motion Skills · 科普动效技能库
 
-十套可配置、可复现的科普视频动效。提供独立 Python 渲染脚本、HTML/Canvas/SVG 源码、JSON 配置示例、中文字体和代表样片，可作为 Codex 技能使用，也可以直接从命令行导出视频。
+十一套可配置、可复现的科普视频动效。提供独立 Python 渲染脚本、HTML/Canvas/SVG 源码、JSON 配置示例、中文字体和代表样片，可作为 Codex 技能使用，也可以直接从命令行导出视频。
 
 **代码与原创示例采用 MIT 开源许可证，可修改、分发和商用。字体保留 SIL OFL 1.1。**
 
@@ -18,8 +18,13 @@
 | 008 | 终端 / 代码动效 | [008-terminal-motion-render](skills/008-terminal-motion-render/SKILL.md) | [终端与日志](previews/008-terminal-motion-render-v03.mp4) |
 | 009 | 斩杀线标尺 | [009-threshold-line-render](skills/009-threshold-line-render/SKILL.md) | [阈值转起跑线](previews/009-threshold-line-render-v03.mp4) |
 | 011 | 自由卡片动效 | [011-ppt-card-motion-render](skills/011-ppt-card-motion-render/SKILL.md) | [MP4](previews/011-ppt-card-motion-render-v02.mp4) |
+| 018 | 剪纸像素定格卡通 | [018-paper-cut-cartoon](skills/018-paper-cut-cartoon/SKILL.md) | [磁铁与回形针](previews/018-paper-cut-cartoon-magnet.mp4) · [纸手换签](previews/018-paper-cut-cartoon-sticker.mp4) |
 
-在本地浏览器打开 [gallery.html](gallery.html) 可观看十套技能的样片。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
+在本地浏览器打开 [gallery.html](gallery.html) 可观看十一套技能的样片。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
+
+## v1.7.0 · 2026-11-21
+
+新增 018 剪纸像素定格卡通。用 JSON 编排铆钉纸偶、自绘道具、手部挂点和撕贴纸签，可以重排竖屏构图。技能导出无声 MP4 与内嵌字体的离线 HTML。
 
 ## v1.6.0 · 2026-11-18
 
@@ -97,7 +102,7 @@ See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Fon
 
 ## English overview
 
-Ten configurable motion-rendering skills for science communication: chat, flow and causality, multiscale zoom, split comparison, phone conversation/notifications, exploded layers, event monitoring, terminal/code, threshold/start-line animation, and freeform card motion. Run the Python renderers directly or install the folders as Codex skills. JSON examples and editable browser-based engines are included. Original code and examples are MIT licensed; bundled fonts retain SIL OFL licensing. Windows is verified; other platforms have portable tool discovery but have not received full rendering validation.
+Eleven configurable motion-rendering skills for science communication: chat, flow and causality, multiscale zoom, split comparison, phone conversation/notifications, exploded layers, event monitoring, terminal/code, threshold/start-line animation, freeform card motion, and paper-cut puppet animation. Run the Python renderers directly or install the folders as Codex skills. JSON examples and editable browser-based engines are included. Original code and examples are MIT licensed; bundled fonts retain SIL OFL licensing. Windows is verified; other platforms have portable tool discovery but have not received full rendering validation.
 
 ## v1.1.0 · 2026-11-14
 

@@ -1,5 +1,10 @@
 # Release validation
 
+## v1.7.0 — 2026-11-21
+
+- Skill 018 rendered the magnet scene in landscape and portrait (228 frames each) and the sticker scene in landscape (102 frames). The two public previews use the landscape configurations. The renderer checked frame count, timestamps, BT.709 metadata and full decoding at 30 fps.
+- An independent use of the packaged renderer created a portrait pinwheel scene with new vector artwork, a hand attachment and captions. All 96 frames decoded. The offline player loaded locally and reproduced the same pixels when seeking back to a frame.
+
 ## v1.6.0 — 2026-11-18
 
 - Installed the public packages into a fresh directory on Windows. The seven v3.0.0 skills rendered an eight-frame H.264 clip for each of the 12 showcase configurations. The other 25 bundled examples passed their browser and timeline checks, including the video comparison, half-phone, monitor band, wrapped terminal and pixel race.

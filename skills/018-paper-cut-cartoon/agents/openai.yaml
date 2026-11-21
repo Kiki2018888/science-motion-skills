@@ -1,0 +1,4 @@
+interface:
+  display_name: "018 · 剪纸像素定格卡通"
+  short_description: "用铆钉纸偶、可更换的道具与字幕制作横竖屏剪纸定格叙事动画"
+  default_prompt: "使用 $018-paper-cut-cartoon 把这段内容做成剪纸卡通，按角色动作和道具接触点安排节拍，输出可预览的镜头。"

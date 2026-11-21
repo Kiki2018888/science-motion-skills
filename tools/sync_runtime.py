@@ -18,7 +18,10 @@ def main():
         shared = root / 'shared'
         if version != default_version:
             shared = shared / version
-        for relative in (Path('scripts/motion_render.py'), Path('references/rendering.md')):
+        files = [Path('scripts/motion_render.py')]
+        if skill.get('shared_rendering_reference', True):
+            files.append(Path('references/rendering.md'))
+        for relative in files:
             source = shared / relative.name
             target = root / skill['path'] / relative
             if not target.is_file() or target.read_bytes() != source.read_bytes():

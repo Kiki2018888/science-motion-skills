@@ -1,0 +1,63 @@
+{
+  "format": "landscape",
+  "background": "#201d25",
+  "props": {
+    "magnet": [
+      {"d":"M-89 71 L-89 -16 C-89 -117 89 -117 89 -16 L89 71 L46 71 L46 -16 C46 -66 -46 -66 -46 -16 L-46 71 Z","fill":"#c54c42","edge":"#f1d3bd","outline":3.4,"shadow":7},
+      {"d":"M-78 5 L-78 -18 C-78 -61 -46 -86 -12 -88","stroke":"#eb8c72","weight":4},
+      {"d":"M47 18 L89 18 L89 70 L46 70 Z","fill":"#b6cdca","outline":2,"shadow":1},
+      {"d":"M-89 18 L-46 18 L-46 70 L-89 70 Z","fill":"#d1dcd2","outline":2,"shadow":1},
+      {"d":"M-85 59 L-50 59 M52 59 L84 59 M-85 54 L-66 54 M66 54 L84 54","stroke":"#6c8584","weight":1.7},
+      {"d":"M11 -61 L24 -73 L22 -62 L33 -63 L15 -46 L17 -58 Z","fill":"#f2c94c","outline":1,"shadow":1}
+    ],
+    "clip": [
+      {"d":"M-33 1 L29 1 Q40 1 40 -8 Q40 -17 28 -17 L-34 -17 Q-52 -17 -52 1 Q-52 22 -31 22 L38 22 Q59 22 59 1 Q59 -16 44 -21","stroke":"#292631","weight":11},
+      {"d":"M-33 -2 L29 -2 Q40 -2 40 -11 Q40 -20 28 -20 L-34 -20 Q-52 -20 -52 -2 Q-52 19 -31 19 L38 19 Q59 19 59 -2 Q59 -19 44 -24","stroke":"#d5dfd3","weight":8},
+      {"d":"M-34 -22 L26 -22 M-25 17 L28 17 M-37 -3 L25 -3","stroke":"#7f989b","weight":2.4}
+    ],
+    "tray": [
+      {"d":"M-226 -8 L143 -25 L226 -6 L193 22 L-173 34 L-226 12 Z","fill":"#906651","edge":"#cda88a","outline":2.3,"shadow":6},
+      {"d":"M-226 -8 L-186 -23 L152 -37 L226 -6 L193 6 L-173 19 Z","fill":"#d0ae85","edge":"#e9d2ab","outline":2.2,"shadow":0},
+      {"d":"M-199 -6 L-174 -14 L148 -27 L197 -7 L170 0 L-159 12 Z","fill":"#a98d74","edge":"#90715d","outline":2,"shadow":0},
+      {"d":"M-170 26 L159 13 M-129 28 L-79 26 M89 -28 L137 -30","stroke":"#cdad89","weight":2}
+    ],
+    "contact": [
+      {"d":"M-5 -5 L-18 -20 M8 -12 L7 -28 M18 -5 L30 -18","stroke":"#f2c94c","weight":5}
+    ]
+  },
+  "scenes": [
+    {
+      "duration": 3.2,
+      "captions": [[0,"不用手碰，怎么捡起回形针？"]],
+      "layers": [
+        {"type":"prop","prop":"tray","at":[0.60,0.743],"scale":1.45,"portrait":{"at":[0.57,0.725],"scale":1.06}},
+        {"type":"prop","prop":"clip","at":[0.655,0.730],"scale":0.75,"angle":-12,"portrait":{"at":[0.647,0.717],"scale":0.68}},
+        {"type":"prop","prop":"clip","at":[0.542,0.737],"scale":0.95,"angle":7,"portrait":{"at":[0.548,0.724],"scale":0.90}},
+        {"type":"robot","id":"guide","at":[0.331,0.735],"scale":1.42,"hand":[103,-142],
+          "keys":[{"t":0.55,"handX":103,"handY":-142},{"t":0.80,"handX":81,"handY":-137},{"t":1.40,"handX":190,"handY":-215},{"t":1.65,"handX":180,"handY":-203},{"t":2.70,"handX":187,"handY":-190}],
+          "portrait":{"at":[0.285,0.67],"scale":1.62}},
+        {"type":"prop","prop":"magnet","attach":{"to":"guide","point":"hand","offset":[24,64]},"scale":1.02,"angle":-13,
+          "keys":[{"t":0.80,"angle":-21},{"t":1.45,"angle":9},{"t":1.75,"angle":-3}],"portrait":{"scale":1.15}},
+        {"type":"label","text":"钢回形针","at":[0.701,0.615],"fontSize":36,"scale":1.0,"angle":-4,
+          "portrait":{"at":[0.735,0.665],"fontSize":33}}
+      ]
+    },
+    {
+      "duration": 4.4,
+      "transition": "peel",
+      "captions": [[0,"让磁铁靠近……"],[1.50,"钢回形针被吸起来了。"]],
+      "layers": [
+        {"type":"prop","prop":"tray","at":[0.55,0.745],"scale":2.12,"portrait":{"at":[0.54,0.725],"scale":1.52}},
+        {"type":"prop","prop":"clip","at":[0.414,0.734],"scale":0.89,"angle":-9,"portrait":{"at":[0.365,0.721],"scale":0.79}},
+        {"type":"prop","prop":"magnet","at":[0.48,0.347],"scale":2.45,"angle":-7,
+          "keys":[{"t":0.50,"y":0.347,"angle":-7},{"t":1.27,"y":0.448,"angle":0},{"t":2.13,"y":0.448},{"t":2.91,"y":0.327,"angle":0},{"t":3.14,"y":0.333}],
+          "portrait":{"at":[0.456,0.447],"scale":2.00,"keys":[{"t":0.50,"y":0.447,"angle":-7},{"t":1.27,"y":0.600,"angle":0},{"t":2.13,"y":0.600},{"t":2.91,"y":0.464,"angle":0},{"t":3.14,"y":0.470}]}},
+        {"type":"prop","prop":"clip","at":[0.566,0.730],"scale":1.17,"angle":-8,
+          "keys":[{"t":1.10,"x":0.566,"y":0.730,"angle":-8},{"t":1.27,"x":0.562,"y":0.702,"angle":39},{"t":1.45,"x":0.569,"y":0.664,"angle":81},{"t":1.68,"angle":75},{"t":2.13,"y":0.664},{"t":2.91,"y":0.543,"angle":78},{"t":3.14,"y":0.549,"angle":75}],
+          "portrait":{"at":[0.588,0.721],"scale":1.02,"keys":[{"t":1.10,"x":0.588,"y":0.721,"angle":-8},{"t":1.27,"x":0.58,"y":0.716,"angle":48},{"t":1.45,"x":0.580,"y":0.699,"angle":81},{"t":1.68,"angle":75},{"t":2.13,"y":0.699},{"t":2.91,"y":0.563,"angle":78},{"t":3.14,"y":0.569,"angle":75}]}},
+        {"type":"prop","prop":"contact","at":[0.592,0.607],"start":1.44,"end":1.78,"angle":30,"portrait":{"at":[0.625,0.668]}},
+        {"type":"label","text":"磁铁","at":[0.293,0.345],"fontSize":42,"angle":-4,"portrait":{"at":[0.192,0.394],"fontSize":34}}
+      ]
+    }
+  ]
+}

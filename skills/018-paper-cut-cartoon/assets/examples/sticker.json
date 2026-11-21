@@ -1,0 +1,14 @@
+{
+  "format": "landscape",
+  "scenes": [{
+    "duration": 3.4,
+    "captions": [[0,"检查完，就换张签。"]],
+    "layers": [
+      {"type":"robot","at":[0.34,0.76],"color":"#6b5b8e","scale":1.39,
+       "hand":[115,-158],"keys":[{"t":2.15,"angle":0},{"t":2.40,"angle":5},{"t":2.80,"angle":2}],
+       "portrait":{"at":[0.35,0.65],"scale":1.48}},
+      {"type":"swap","at":[0.64,0.48],"before":"待检查","after":"已核对",
+       "impact":1.65,"fontSize":66,"scale":1.25,"portrait":{"at":[0.63,0.60],"scale":0.88}}
+    ]
+  }]
+}
