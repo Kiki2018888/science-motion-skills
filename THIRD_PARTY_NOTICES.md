@@ -1,5 +1,13 @@
 # Third-party notices
 
+## 019 · Pelican Test
+
+The 20-era sequence and selected procedural material routines and two-bone solver in the badminton showcase are adapted from **Elbert’s Pelican Test**, Copyright (c) 2026 Elbert, under the MIT License. The original film features a pelican riding a bicycle. Science Motion Skills created the robot drawings, badminton choreography, shuttle path, hit sounds and single-file viewer for this adaptation. [Original repository](https://github.com/orbitoo/pelican-test) · [Pinned source](https://github.com/orbitoo/pelican-test/tree/59c8ca2657ce5b2cf067969b5bda19d6609af8ac) · [Original MIT license](skills/019-pelican-era-film/references/upstream/LICENSE) · [Upstream third-party notices](skills/019-pelican-era-film/references/upstream/THIRD_PARTY_NOTICES.md)
+
+The standalone HTML embeds the applicable notices and uses the native Canvas and Web Audio APIs with system fonts.
+
+## Other skills
+
 - `skills/*/assets/template/body.otf` is an unmodified Adobe Source font. Copyright 2014–2025 Adobe. Each copy is accompanied by its original SIL Open Font License 1.1 in `OFL.txt`. The font retains OFL licensing; the repository MIT license does not replace it.
 - Python, Playwright, Pillow, Chromium/Chrome, FFmpeg and ffprobe are external runtime dependencies. Their executable distributions are not included here and retain their own licenses.
 - Consolas and Courier New are optional system font fallbacks referenced by the terminal renderer; no copies of these fonts are distributed.

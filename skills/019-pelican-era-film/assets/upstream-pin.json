@@ -1,0 +1,16 @@
+{
+  "name": "pelican-test",
+  "url": "https://github.com/orbitoo/pelican-test.git",
+  "web": "https://github.com/orbitoo/pelican-test",
+  "commit": "59c8ca2657ce5b2cf067969b5bda19d6609af8ac",
+  "commit_date": "2026-11-11T13:36:53Z",
+  "default_branch_observed": "main",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 Elbert",
+  "duration_seconds": 137,
+  "resolution": "1920x1080",
+  "fps": 60,
+  "bpm": 120,
+  "scene_count": 20,
+  "notes": "fetch-upstream.sh checks out this commit only. It does not follow later commits on main, and it does not run upstream install or render scripts."
+}

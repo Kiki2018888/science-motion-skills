@@ -1,5 +1,13 @@
 # Release validation
 
+## v1.8.0 — 2026-11-22
+
+- Installed the numbered 019 package in an empty directory and validated its manifest, required files, upstream pin and JavaScript syntax.
+- Opened the single-file showcase offline in Chrome. At five rally times in each of the twenty scenes, all 100 full-resolution RGBA frames matched their individual source scenes. The viewer made no HTTP requests.
+- Exercised same-frame style changes, scrubbing, audio, sequential playback, single-scene looping, fullscreen, credits and all twenty touch selectors. Desktop and mobile layouts were tested at 1440 × 900 and 390 × 844.
+- Verified that all four edges of the original woodblock frame remain visible in five viewport sizes, including phone landscape and portrait.
+- Started the packaged preview server on loopback and used the packaged capture command to produce two identical stills and a six-frame, 1920 × 1080 H.264 clip. The published skill includes the upstream license, original notices and links to the pinned source.
+
 ## v1.7.0 — 2026-11-21
 
 - Skill 018 rendered the magnet scene in landscape and portrait (228 frames each) and the sticker scene in landscape (102 frames). The two public previews use the landscape configurations. The renderer checked frame count, timestamps, BT.709 metadata and full decoding at 30 fps.

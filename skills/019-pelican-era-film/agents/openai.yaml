@@ -1,0 +1,6 @@
+interface:
+  display_name: "019 · 鹈鹕时代短片"
+  short_description: "按 20 种时代材质选风格、预览并导出短片段"
+  default_prompt: "用鹈鹕时代短片技能看我的简述：先判断是原片复现、材质级改动，还是需要重写，再选场景并预览。"
+policy:
+  allow_implicit_invocation: true

@@ -9,8 +9,13 @@ def main():
     for item in catalog['skills']:
         skill=root/item['path'];text=(skill/'SKILL.md').read_text(encoding='utf-8')
         assert re.search(r'^name: '+re.escape(item['name'])+r'$',text,re.M),item['name']
-        assert (skill/'assets/template/OFL.txt').is_file()
-        assert (skill/'assets/template/body.otf').is_file()
+        font_mode=item.get('font_mode','bundled')
+        assert font_mode in ('bundled','system'),item['name']
+        if font_mode=='bundled':
+            assert (skill/'assets/template/OFL.txt').is_file()
+            assert (skill/'assets/template/body.otf').is_file()
+        if 'default_preview' in item:
+            assert (root/item['default_preview']).is_file(),item['default_preview']
         assert (skill/'agents/openai.yaml').is_file()
     assert catalog['next_number']==max(int(x['number']) for x in catalog['skills'])+1
     for p in root.rglob('*.py'):

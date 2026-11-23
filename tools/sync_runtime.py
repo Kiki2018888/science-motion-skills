@@ -15,6 +15,8 @@ def main():
     copies = 0
     for skill in catalog['skills']:
         version = skill.get('shared_renderer_version', default_version)
+        if version is None:
+            continue
         shared = root / 'shared'
         if version != default_version:
             shared = shared / version
