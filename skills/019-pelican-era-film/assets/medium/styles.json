@@ -1,0 +1,625 @@
+[
+  {
+    "number": 1,
+    "id": "s01_sahara",
+    "name": "撒哈拉岩画",
+    "aliases": [
+      "岩画",
+      "撒哈拉",
+      "砂岩",
+      "岩壁彩绘",
+      "撒哈拉岩壁彩绘",
+      "史前岩画"
+    ],
+    "source": "src/scenes/s01_sahara.js",
+    "operators": [
+      "worleyRock"
+    ],
+    "palette": {
+      "ground": "#d3a274",
+      "ink": "#432b24",
+      "body": "#9b4031",
+      "secondary": "#644936",
+      "accent": "#d79342",
+      "light": "#e6bc91",
+      "muted": "#b98a62"
+    },
+    "form": "把动作拆成侧向剪影和能读清夹角的肢段，小物提取一个特征。",
+    "mark": "让岩面砂眼吃掉颜料边缘，赭红与木炭褐分层。",
+    "space": "沿岩面排布远近，省去透视投影。",
+    "motion": "迎风、伸手等姿态靠负形读出。",
+    "check": "看轮廓内外是否露出同一块岩面。"
+  },
+  {
+    "number": 2,
+    "id": "s02_egypt",
+    "name": "埃及壁画",
+    "aliases": [
+      "埃及",
+      "墓室壁画",
+      "埃及墓室彩绘",
+      "古埃及壁画",
+      "古埃及墓室壁画"
+    ],
+    "source": "src/scenes/s02_egypt.js",
+    "operators": [
+      "rushStroke"
+    ],
+    "palette": {
+      "ground": "#ead8ab",
+      "ink": "#342a26",
+      "body": "#af5136",
+      "secondary": "#407b79",
+      "accent": "#d69f43",
+      "light": "#f7ebc9",
+      "muted": "#bba877"
+    },
+    "form": "有脸的主体取侧面，肩胸可展开；器物保留正侧面最易识别的一面。",
+    "mark": "芦苇笔围边，矿物颜料平涂，允许小幅套色偏移。",
+    "space": "同一动作的要件落在同一条层带中，前后关系靠遮挡。",
+    "motion": "固定脚底承重点，动肢与躯干留空。",
+    "check": "检查手与道具接触处没有被双轮廓吞掉。"
+  },
+  {
+    "number": 3,
+    "id": "s03_han",
+    "name": "汉画像石拓片",
+    "aliases": [
+      "汉拓",
+      "拓片",
+      "汉画像石",
+      "汉代石刻",
+      "汉画像石拓印",
+      "汉代拓片"
+    ],
+    "source": "src/scenes/s03_han.js",
+    "operators": [
+      "chiselVGroove"
+    ],
+    "palette": {
+      "ground": "#282824",
+      "ink": "#20221d",
+      "body": "#d6c8a8",
+      "secondary": "#a49c86",
+      "accent": "#edddb6",
+      "light": "#ece4ce",
+      "muted": "#55554b"
+    },
+    "form": "把物体看作石上保留的凸面，把关节和负空间刻进去。",
+    "mark": "暖白拓印留斑，转折以楔形阴刻线切入。",
+    "space": "近景白面最大，背景压回墨地。",
+    "motion": "分开运动构件的外轮廓，遮挡处留一道墨缝。",
+    "check": "缩小看应仍能分出实体、阴刻和石地。"
+  },
+  {
+    "number": 4,
+    "id": "s04_tang",
+    "name": "唐代白描",
+    "aliases": [
+      "唐代",
+      "白描",
+      "兰叶描",
+      "铁线描",
+      "唐代线描",
+      "唐代绢本白描",
+      "唐代兰叶描"
+    ],
+    "source": "src/scenes/s04_tang.js",
+    "operators": [
+      "drawLanyeStroke",
+      "drawTiexianStroke"
+    ],
+    "palette": {
+      "ground": "#f2e7cf",
+      "ink": "#352e29",
+      "body": "#e1ccb0",
+      "secondary": "#e7dac7",
+      "accent": "#b98667",
+      "light": "#f8efdf",
+      "muted": "#ccc0a7"
+    },
+    "form": "用长线交代主轴与受力，硬边留给器件、骨架和折角。",
+    "mark": "主轮廓用由细到粗再收锋的兰叶描，硬边用等宽铁线；绢上只留淡色。",
+    "space": "按主体与道具间的空隙组织构图，保留素绢。",
+    "motion": "把发力、回弹画成连续线势，接触线两侧能分辨。",
+    "check": "停在动作转折，同时看到笔腹、收锋与干净的留白。"
+  },
+  {
+    "number": 5,
+    "id": "s05_song",
+    "name": "宋代山水",
+    "aliases": [
+      "北宋山水",
+      "山水",
+      "雨点皴",
+      "宋代",
+      "北宋雨点皴山水",
+      "北宋水墨山水"
+    ],
+    "source": "src/scenes/s05_song.js",
+    "operators": [
+      "drawRaindropCunDab"
+    ],
+    "palette": {
+      "ground": "#e2ddc5",
+      "ink": "#393f36",
+      "body": "#68715b",
+      "secondary": "#97a28d",
+      "accent": "#8e7050",
+      "light": "#eeecd9",
+      "muted": "#b7bea9"
+    },
+    "form": "环境先分近中远，主体保留可读轮廓；小道具与接触点在近层给足面积。",
+    "mark": "在有体积的面上顺势叠雨点皴，向远景减淡，以纸白作雾。",
+    "space": "用前景遮挡与层层退墨表达纵深。",
+    "motion": "用岸线、坡线或物体边缘作为位移参照。",
+    "check": "缩图检查远层仍浅，关键动作仍可读。"
+  },
+  {
+    "number": 6,
+    "id": "s06_qingming",
+    "name": "清明上河图",
+    "aliases": [
+      "清明上河图界画",
+      "界画",
+      "宋代界画",
+      "界画长卷",
+      "宋代界画长卷",
+      "清明上河图长卷"
+    ],
+    "source": "src/scenes/s06_qingming.js",
+    "operators": [
+      "jiehuaStroke"
+    ],
+    "palette": {
+      "ground": "#e5d4ae",
+      "ink": "#4a4032",
+      "body": "#907757",
+      "secondary": "#758575",
+      "accent": "#b16e44",
+      "light": "#f0e3c7",
+      "muted": "#c1b08b"
+    },
+    "form": "拆出承重构件、铰点和顺着结构走的平行线。",
+    "mark": "界尺淡墨勾硬边，活动部件保留手描曲线，绢底薄设色。",
+    "space": "用斜向平行线组织空间，相邻物体共用底面。",
+    "motion": "同一固定点贯穿运动，平移通过参照构件读出。",
+    "check": "检查直边平行，动作处没有多余结构线。"
+  },
+  {
+    "number": 7,
+    "id": "s07_maya",
+    "name": "玛雅抄本",
+    "aliases": [
+      "玛雅",
+      "树皮纸抄本",
+      "玛雅折页",
+      "玛雅折页抄本"
+    ],
+    "source": "src/scenes/s07_maya.js",
+    "operators": [
+      "drawQuillRibbon"
+    ],
+    "palette": {
+      "ground": "#e7d1a4",
+      "ink": "#322923",
+      "body": "#b25037",
+      "secondary": "#54877a",
+      "accent": "#d39e44",
+      "light": "#f3e4bc",
+      "muted": "#b3a587"
+    },
+    "form": "把动作轮廓压成大色区，关节用弯折的钩形线表达。",
+    "mark": "羽管笔画宽窄有别的边，转角积墨，内填朱红、青绿。",
+    "space": "树皮折页留纵折线，构图让主动作跨得过折线。",
+    "motion": "动作循环可借重复的方向纹，事件仍由脚本计时。",
+    "check": "折痕不可盖过主角，细节不能像现代文字标签。"
+  },
+  {
+    "number": 8,
+    "id": "s08_mughal",
+    "name": "莫卧儿细密画",
+    "aliases": [
+      "细密画",
+      "莫卧儿",
+      "宫廷细密画",
+      "莫卧儿宫廷细密画"
+    ],
+    "source": "src/scenes/s08_mughal.js",
+    "operators": [
+      "drawQalamStroke",
+      "paintPardazStipple"
+    ],
+    "palette": {
+      "ground": "#e6d6b1",
+      "ink": "#48351f",
+      "body": "#85744b",
+      "secondary": "#527876",
+      "accent": "#b25843",
+      "light": "#f3e7c8",
+      "muted": "#c0ae85"
+    },
+    "form": "先定准确的外形，再在衣料、叶片、器皿上分出细小的装饰面。",
+    "mark": "用细尖卡拉姆笔围边，在表面叠帕尔达兹点描，金色只点边缘。",
+    "space": "留册页边距，层次靠物体的前后覆盖。",
+    "motion": "细笔纹样跟着局部坐标运动。",
+    "check": "放大看点描随物体走，缩小看动作连贯。"
+  },
+  {
+    "number": 9,
+    "id": "s09_bada",
+    "name": "八大山人",
+    "aliases": [
+      "八大",
+      "写意水墨",
+      "水墨写意",
+      "大写意",
+      "八大山人写意水墨",
+      "八大山人水墨"
+    ],
+    "source": "src/scenes/s09_bada.js",
+    "operators": [
+      "drawSealBrushStroke"
+    ],
+    "palette": {
+      "ground": "#eee9d7",
+      "ink": "#262924",
+      "body": "#485044",
+      "secondary": "#839183",
+      "accent": "#9e4a38",
+      "light": "#f5f0e3",
+      "muted": "#c4c5b1"
+    },
+    "form": "找出最能说明动作的几块墨形，关键肢体用一两笔连起来。",
+    "mark": "湿墨积成块，长线用篆籀笔的飞白和枯锋，虚处留纸。",
+    "space": "把视觉重量压向一侧，为动作前方留白。",
+    "motion": "笔触附着于形体，停顿时保持飞白位置。",
+    "check": "黑块、淡墨、纸白三层与关键接触同时可见。"
+  },
+  {
+    "number": 10,
+    "id": "s10_wayang",
+    "name": "爪哇皮影",
+    "aliases": [
+      "皮影",
+      "爪哇",
+      "Wayang",
+      "瓦扬",
+      "爪哇皮影戏"
+    ],
+    "source": "src/scenes/s10_wayang.js",
+    "operators": [
+      "punchHoleRow"
+    ],
+    "palette": {
+      "ground": "#e3af63",
+      "ink": "#33221c",
+      "body": "#65402b",
+      "secondary": "#8e5134",
+      "accent": "#ba7136",
+      "light": "#fae4a2",
+      "muted": "#ba834b"
+    },
+    "form": "把刚体、关节和可旋转的附肢拆片，孔饰只放在较宽皮片。",
+    "mark": "描暗色皮革边，沿内部穿出成排亮孔；薄片叠加留轮廓。",
+    "space": "用灯幕从后方照亮轮廓，边缘渐暗。",
+    "motion": "按实际铰点转动，操杆仅在故事需要时出现。",
+    "check": "检查活动关节没有画成脱开的零件，透光位置随皮片动。"
+  },
+  {
+    "number": 11,
+    "id": "s11_ukiyoe",
+    "name": "浮世绘",
+    "aliases": [
+      "木版画",
+      "日式木刻",
+      "锦绘",
+      "ukiyo-e",
+      "浮世绘木版",
+      "浮世绘木版画"
+    ],
+    "source": "src/scenes/s11_ukiyoe.js",
+    "operators": [
+      "drawCarvedKeyblockCurve",
+      "withColorPlate"
+    ],
+    "palette": {
+      "ground": "#ead9b4",
+      "ink": "#2e3738",
+      "body": "#567c81",
+      "secondary": "#949963",
+      "accent": "#b65640",
+      "light": "#f3e8cf",
+      "muted": "#bfb28b"
+    },
+    "form": "把主体分成可分别刻版的形体，动作依靠清楚的剪影。",
+    "mark": "墨线作主版，色版轻微错位，大色面用渐层晕染。",
+    "space": "以前中后景遮挡和留出的纸色区压出空间。",
+    "motion": "色版和主版一起运动；错版量不能变成接触误差。",
+    "check": "近看墨线和色版有细小偏移，远看仍是同一物体。"
+  },
+  {
+    "number": 12,
+    "id": "s12_starry",
+    "name": "星月夜",
+    "aliases": [
+      "梵高",
+      "梵高厚涂",
+      "后印象派",
+      "厚涂油画",
+      "梵高星月夜",
+      "星月夜厚涂"
+    ],
+    "source": "src/scenes/s12_starry.js",
+    "operators": [
+      "getImpastoAtlas",
+      "createDabPainter"
+    ],
+    "palette": {
+      "ground": "#233860",
+      "ink": "#101b35",
+      "body": "#467e9e",
+      "secondary": "#698d76",
+      "accent": "#edbd48",
+      "light": "#d4dfbf",
+      "muted": "#344d70"
+    },
+    "form": "先确定物体的大明暗，再沿表面与运动方向组织成束笔触。",
+    "mark": "厚涂短笔带高光和沟纹，深蓝与铬黄邻接。",
+    "space": "天空或空处可有弯曲笔流，物体边界改变笔流方向。",
+    "motion": "物体笔触随形，环境笔流可以独立缓动。",
+    "check": "能分辨笔脊的朝向，主要关节不埋进笔流。"
+  },
+  {
+    "number": 13,
+    "id": "s13_scream",
+    "name": "呐喊",
+    "aliases": [
+      "蒙克",
+      "表现主义",
+      "干粉彩",
+      "表现主义粉彩",
+      "蒙克呐喊",
+      "呐喊粉彩"
+    ],
+    "source": "src/scenes/s13_scream.js",
+    "operators": [
+      "drawDryPastelRibbon"
+    ],
+    "palette": {
+      "ground": "#c7875f",
+      "ink": "#3d3437",
+      "body": "#b85a42",
+      "secondary": "#557777",
+      "accent": "#e9a450",
+      "light": "#e6c8a0",
+      "muted": "#927365"
+    },
+    "form": "把主体的受力方向拉成线束，保持接触点和身份轮廓。",
+    "mark": "干粉彩多股色带绕过轮廓，露出硬纸板齿纹。",
+    "space": "把背景色带排成波，支撑物保留方向鲜明的硬线。",
+    "motion": "情绪张力由环境的波形呈现，事件时刻由动作决定。",
+    "check": "背景在流动时，手和道具仍然分得开。"
+  },
+  {
+    "number": 14,
+    "id": "s14_nosferatu",
+    "name": "诺斯费拉图",
+    "aliases": [
+      "德国表现主义",
+      "默片",
+      "表现主义默片",
+      "吸血鬼默片",
+      "德国表现主义默片",
+      "诺斯费拉图默片"
+    ],
+    "source": "src/scenes/s14_nosferatu.js",
+    "operators": [
+      "orthochromaticSplitToneRGB"
+    ],
+    "palette": {
+      "ground": "#aa9d83",
+      "ink": "#232123",
+      "body": "#514b49",
+      "secondary": "#716657",
+      "accent": "#98907f",
+      "light": "#d5c5a6",
+      "muted": "#817868"
+    },
+    "form": "用黑白剪影和投影演动作，把关键动作边缘对着亮面。",
+    "mark": "正色胶片分调，把中间灰压实，保留固定颗粒。",
+    "space": "斜向投影拉长空间，受光面留给事件发生处。",
+    "motion": "影子由当前几何投出，与本体同时起落。",
+    "check": "停帧时投影与实际接触的因果关系清楚。"
+  },
+  {
+    "number": 15,
+    "id": "s15_oscilloscope",
+    "name": "示波器",
+    "aliases": [
+      "CRT示波器",
+      "矢量示波器",
+      "磷光",
+      "oscilloscope",
+      "CRT矢量示波器",
+      "模拟示波器"
+    ],
+    "source": "src/scenes/s15_oscilloscope.js",
+    "operators": [
+      "analogNoise"
+    ],
+    "palette": {
+      "ground": "#091c17",
+      "ink": "#9dffc7",
+      "body": "#47d98f",
+      "secondary": "#2e986a",
+      "accent": "#c1ff9e",
+      "light": "#e1ffe2",
+      "muted": "#204b3b"
+    },
+    "form": "把物体提成闭合矢量轨迹，保留主轴与关键交点。",
+    "mark": "先画宽暗磷光晕，再描亮细芯；绘制强弱按主次。",
+    "space": "刻度网格充当位置参照；前层需遮住后层的线。",
+    "motion": "运动靠光迹位置变化，微小电噪由时间决定。",
+    "check": "网格上能读到真实轨迹，亮线芯没有糊成光团。"
+  },
+  {
+    "number": 16,
+    "id": "s16_8bit",
+    "name": "8-bit",
+    "aliases": [
+      "8bit",
+      "8位",
+      "8位像素",
+      "像素",
+      "红白机",
+      "像素游戏",
+      "8bit街机",
+      "8-bit街机",
+      "像素街机"
+    ],
+    "source": "src/scenes/s16_8bit.js",
+    "operators": [
+      "pline",
+      "tileHash"
+    ],
+    "palette": {
+      "ground": "#24263d",
+      "ink": "#191c32",
+      "body": "#bf6148",
+      "secondary": "#588c87",
+      "accent": "#f5bb54",
+      "light": "#e7dcac",
+      "muted": "#515571"
+    },
+    "form": "把对象当作精灵，低分辨率下以最少像素保留特征。",
+    "mark": "有限色阶，整数栅格描边；大片面以少量棋盘色过渡。",
+    "space": "固定像素间距，景物用成组色块。",
+    "motion": "台阶运动只作用于显示，事件和接触仍用原时间。",
+    "check": "斜线能数出像素台阶，道具轮廓没有消失。"
+  },
+  {
+    "number": 17,
+    "id": "s17_chat",
+    "name": "千禧聊天窗",
+    "aliases": [
+      "千禧",
+      "Windows 2000",
+      "聊天窗",
+      "复古桌面",
+      "MSN",
+      "千禧聊天窗口",
+      "千禧聊天界面"
+    ],
+    "source": "src/scenes/s17_chat.js",
+    "operators": [
+      "snapWebSafe",
+      "drawBevelBox"
+    ],
+    "palette": {
+      "ground": "#bcc7bf",
+      "ink": "#323c4e",
+      "body": "#638899",
+      "secondary": "#748c74",
+      "accent": "#bc7569",
+      "light": "#f2f0da",
+      "muted": "#97a4a2"
+    },
+    "form": "将场景作为旧桌面窗口的内容区，真实角色与道具保有自己的形状。",
+    "mark": "系统色阶抖动，嵌入边和凸起高光成对。",
+    "space": "标题栏与窗口边在内容安全边缘；需要文字时用脚本原文。",
+    "motion": "物体可连续运动，窗口部件贴在视口。",
+    "check": "看得到窗口层次与有序抖动，主体没被界面挡住。"
+  },
+  {
+    "number": 18,
+    "id": "s18_vaporwave",
+    "name": "蒸汽波",
+    "aliases": [
+      "vaporwave",
+      "合成器浪潮",
+      "镀铬",
+      "蒸汽波镀铬",
+      "蒸汽波VHS"
+    ],
+    "source": "src/scenes/s18_vaporwave.js",
+    "operators": [
+      "sampleSkyEarthChromeEnv"
+    ],
+    "palette": {
+      "ground": "#342958",
+      "ink": "#201c41",
+      "body": "#6e8ec0",
+      "secondary": "#c27eb0",
+      "accent": "#f3b363",
+      "light": "#9bf3ea",
+      "muted": "#66518c"
+    },
+    "form": "用大平面和弧面组织反光，保留主体的局部结构。",
+    "mark": "用天空地面反射带表现镀铬，局部点洋红青色分色。",
+    "space": "地平线与透视栅格给运动方向，亮部节制。",
+    "motion": "高光随表面移动，网格固定为参照。",
+    "check": "在灰度下仍能从轮廓和反射转折看清主体。"
+  },
+  {
+    "number": 19,
+    "id": "s19_shortvideo",
+    "name": "竖屏短视频",
+    "aliases": [
+      "短视频",
+      "手机镜头",
+      "手机短视频",
+      "运动相机",
+      "竖屏短视频界面"
+    ],
+    "source": "src/scenes/s19_shortvideo.js",
+    "operators": [
+      "evalHermiteSegment"
+    ],
+    "palette": {
+      "ground": "#d1d8cf",
+      "ink": "#253337",
+      "body": "#e0794d",
+      "secondary": "#468b94",
+      "accent": "#e6b95e",
+      "light": "#f3f0dc",
+      "muted": "#93a69c"
+    },
+    "form": "按景别突出当前动作的焦点，道具、接触双方都在安全区内。",
+    "mark": "主体清晰，取景边缘可有轻微色散；构图预留手机控件。",
+    "space": "可竖拍，也可在指定横幅中使用取景线；焦点跟随脚本声明的位置。",
+    "motion": "用平滑的镜头响应提示焦点，绝不挪动实际接触位置。",
+    "check": "检查镜头切换、对焦与安全区，保留用户指定画幅。"
+  },
+  {
+    "number": 20,
+    "id": "s20_code",
+    "name": "代码美学",
+    "aliases": [
+      "代码",
+      "傅里叶",
+      "矢量工作台",
+      "贝塞尔",
+      "代码绘图",
+      "代码美学工作台"
+    ],
+    "source": "src/scenes/s20_code.js",
+    "operators": [
+      "getPelicanFourierData"
+    ],
+    "palette": {
+      "ground": "#172433",
+      "ink": "#65d5df",
+      "body": "#538ca5",
+      "secondary": "#6b9791",
+      "accent": "#efae68",
+      "light": "#caeee2",
+      "muted": "#304559"
+    },
+    "form": "从当前主体轮廓等弧长采样，选主谐波重建形状。",
+    "mark": "主轮廓配矢量节点与细线，重点对象可叠加傅里叶重建线。",
+    "space": "暗色网格作工作面，控制点避开关键交点。",
+    "motion": "随当前轮廓重算构造线，刚体局部形状可缓存。",
+    "check": "确认重建线跟随新主体而且仍能看到真实轮廓。"
+  }
+]

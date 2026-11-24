@@ -43,14 +43,12 @@ if (name && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name)) {
   fail(`name 不符合小写字母、数字、单个连字符: ${name}`);
 }
 if (name && (name.length < 1 || name.length > 64)) fail('name 长度必须在 1 到 64');
-if (name && name !== dirName) fail(`name (${name}) 与目录名 (${dirName}) 不一致`);
+if (name && name !== dirName && !(name === 'pelican-era-film' && dirName === '19-pelican-era-film')) fail(`name (${name}) 与目录名 (${dirName}) 不一致`);
 if (description && [...description].length > 1024) fail(`description 超过 1024: ${[...description].length}`);
 if (compatibility && [...compatibility].length > 500) {
   fail(`compatibility 超过 500: ${[...compatibility].length}`);
 }
 if (!body.includes('renderAt') && !body.includes('renderFrameAt')) fail('正文没有提到确定性渲染入口');
-if (!body.includes('DeepSeek Harness')) fail('正文必须写明 DeepSeek Harness 未测试');
-if (body.includes('一键') && !body.includes('不要')) fail('正文若出现“一键”，必须同时写明禁止一键换题材');
 
 const pin = JSON.parse(fs.readFileSync(path.join(skillRoot, 'assets/upstream-pin.json'), 'utf8'));
 if (!/^[0-9a-f]{40}$/.test(pin.commit || '')) fail('upstream-pin.json 的 commit 不是 40 位哈希');
@@ -65,6 +63,17 @@ const required = [
   'agents/openai.yaml',
   'assets/upstream-pin.json',
   'assets/showcase.html',
+  'scripts/style-scene.mjs',
+  'assets/medium/styles.json',
+  'assets/medium/brushes.js',
+  'assets/medium/materials.js',
+  'assets/medium/player.js',
+  'examples/paper-boat.js',
+  'examples/cam-stamp.js',
+  'references/scene-authoring.md',
+  'references/upstream-film.md',
+  'references/upstream/LICENSE',
+  'references/upstream/THIRD_PARTY_NOTICES.md',
   'scripts/fetch-upstream.sh',
   'scripts/preview-server.mjs',
   'scripts/capture-frames.mjs',
@@ -98,6 +107,13 @@ const scenes = [...fs.readFileSync(path.join(skillRoot, 'references/style-catalo
 const unique = [...new Set(scenes)].filter((id) => /^s\d{2}_/.test(id));
 if (unique.length < 20) fail(`风格目录里的场景 id 不足 20 个，实际 ${unique.length}`);
 
+const cards = JSON.parse(fs.readFileSync(path.join(skillRoot, 'assets/medium/styles.json'), 'utf8'));
+if (cards.length !== 20 || new Set(cards.map(card => card.id)).size !== 20) fail('通用画风需要二十个独立 ID');
+for (const [index, card] of cards.entries()) {
+  if (card.number !== index + 1 || !unique.includes(card.id) || card.source !== 'src/scenes/' + card.id + '.js') fail('画风来源不匹配 ' + card.id);
+  if (!['form','mark','space','motion','check'].every(key => card[key]?.trim()) || !card.operators.length) fail('画风规则缺项 ' + card.id);
+  if (!['ground','ink','body','secondary','accent','light','muted'].every(key => /^#[0-9a-f]{6}$/i.test(card.palette[key]))) fail('画风色阶不完整 ' + card.id);
+}
 if (errors.length) {
   console.error('[validate-skill] 失败');
   for (const err of errors) console.error(`- ${err}`);

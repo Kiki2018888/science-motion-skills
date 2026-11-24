@@ -102,9 +102,9 @@
     {
       "number": "019",
       "name": "019-pelican-era-film",
-      "title": "鹈鹕时代短片 · 机器人羽毛球",
+      "title": "动作脚本 × 20 种时代画风",
       "path": "skills/019-pelican-era-film",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "default_preview": "skills/019-pelican-era-film/assets/showcase.html",
       "showcase": "https://kiki2018888.github.io/science-motion-skills/",
       "upstream": "https://github.com/orbitoo/pelican-test",
@@ -315,7 +315,7 @@
       "config": "skills/018-paper-cut-cartoon/assets/examples/sticker.json"
     }
   ],
-  "version": "1.8.0",
+  "version": "1.9.0",
   "shared_renderer_version": "2.0.0",
   "retired_numbers": [
     "010"

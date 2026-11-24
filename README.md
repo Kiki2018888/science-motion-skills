@@ -19,9 +19,13 @@
 | 009 | 斩杀线标尺 | [009-threshold-line-render](skills/009-threshold-line-render/SKILL.md) | [阈值转起跑线](previews/009-threshold-line-render-v03.mp4) |
 | 011 | 自由卡片动效 | [011-ppt-card-motion-render](skills/011-ppt-card-motion-render/SKILL.md) | [MP4](previews/011-ppt-card-motion-render-v02.mp4) |
 | 018 | 剪纸像素定格卡通 | [018-paper-cut-cartoon](skills/018-paper-cut-cartoon/SKILL.md) | [磁铁与回形针](previews/018-paper-cut-cartoon-magnet.mp4) · [纸手换签](previews/018-paper-cut-cartoon-sticker.mp4) |
-| 019 | 鹈鹕时代短片 · 机器人羽毛球 | [019-pelican-era-film](skills/019-pelican-era-film/SKILL.md) | [在线全屏展示](https://kiki2018888.github.io/science-motion-skills/) · [单文件 HTML](skills/019-pelican-era-film/assets/showcase.html) |
+| 019 | 动作脚本 × 20 种时代画风 | [019-pelican-era-film](skills/019-pelican-era-film/SKILL.md) | [在线全屏展示](https://kiki2018888.github.io/science-motion-skills/) · [单文件 HTML](skills/019-pelican-era-film/assets/showcase.html) |
 
 在本地浏览器打开 [gallery.html](gallery.html) 可查看十二套技能的样片和交互展示。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
+
+## v1.9.0 · 2026-11-24
+
+019 v2.0.0 接收自然语言动作和指定画风。Agent 编写新角色、道具与时间轴，通用画材按新轮廓绘制。可在一页内暂停换画风，离线播放与导出。仓库包含横屏纸船松绳过桥、竖屏偏心轮顶印两份可修改的场景。[制作说明](skills/019-pelican-era-film/references/scene-authoring.md) · [20 套画风规则及源码出处](skills/019-pelican-era-film/assets/medium/styles.json) · [Elbert 的原作](https://github.com/orbitoo/pelican-test)
 
 ## v1.8.0 · 2026-11-22
 

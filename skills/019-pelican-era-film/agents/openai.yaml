@@ -1,6 +1,6 @@
 interface:
-  display_name: "019 · 鹈鹕时代短片"
-  short_description: "按 20 种时代材质选风格、预览并导出短片段"
-  default_prompt: "用鹈鹕时代短片技能看我的简述：先判断是原片复现、材质级改动，还是需要重写，再选场景并预览。"
+  display_name: "动作脚本 × 20 种时代画风"
+  short_description: "把新的动作脚本按指定时代画法绘制成动画，支持同帧换画风与离线导出"
+  default_prompt: "用 $019-pelican-era-film 按我指定的画风绘制这段动作，生成可播放的动画。"
 policy:
   allow_implicit_invocation: true

@@ -5,7 +5,7 @@ import { spawn, execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { startPreviewServer } from './preview-server.mjs';
 
 const skillRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -23,6 +23,7 @@ function hasFlag(name) {
 
 function usage() {
   console.error(`用法:
+  node scripts/capture-frames.mjs --html <离线场景.html> --clip-start 0 --clip-seconds 9 --fps 30 --out <输出目录>
   node scripts/capture-frames.mjs --project <影片目录> --times 8,74 --out <输出目录>
       [--chrome <chrome 可执行文件>] [--clip-start 73 --clip-seconds 4 --fps 8]
       [--sheet contact.png] [--allow-diverged]
@@ -37,6 +38,9 @@ function findChrome(explicit) {
   const candidates = [
     explicit,
     process.env.CHROME_BIN,
+    ...[process.env.PROGRAMFILES, process.env['PROGRAMFILES(X86)'], process.env.LOCALAPPDATA]
+      .filter(Boolean).map(base => path.join(base, 'Google', 'Chrome', 'Application', 'chrome.exe')),
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     'google-chrome',
     'google-chrome-stable',
     'chromium',
@@ -144,7 +148,7 @@ async function launchChrome(chromeBin) {
   const stderrChunks = [];
   const child = spawn(chromeBin, [
     '--headless=new',
-    '--no-sandbox',
+    ...(process.getuid?.() === 0 ? ['--no-sandbox'] : []),
     '--disable-dev-shm-usage',
     '--disable-gpu',
     '--use-angle=swiftshader',
@@ -210,59 +214,62 @@ async function captureOne(page, seconds) {
 }
 
 function runFfmpeg(args) {
-  execFileSync('ffmpeg', ['-y', ...args], { stdio: 'inherit' });
+  execFileSync(process.env.FFMPEG_BIN || 'ffmpeg', ['-y', ...args], { stdio: 'inherit' });
 }
 
 const project = arg('--project');
+const html = arg('--html');
 const outDir = arg('--out');
 const timesArg = arg('--times', '');
-if (!project || !outDir || hasFlag('-h') || hasFlag('--help')) {
-  usage();
-  process.exit(project && outDir ? 0 : 2);
-}
+if (hasFlag('-h') || hasFlag('--help')) { usage(); process.exit(0); }
+if ((!project && !html) || (project && html) || !outDir) { usage(); process.exit(2); }
 
-const projectAbs = path.resolve(project);
+const projectAbs = project && path.resolve(project);
 const outAbs = path.resolve(outDir);
-const head = git(projectAbs, ['rev-parse', 'HEAD']);
-const dirty = git(projectAbs, ['status', '--porcelain']) || '';
-if (!head) {
-  console.error('目标目录不是 git 检出，无法核对固定提交。');
-  process.exit(2);
+if (html && !fs.statSync(path.resolve(html)).isFile()) throw new Error('--html 须为场景 HTML 文件。');
+if (project) {
+  const head = git(projectAbs, ['rev-parse', 'HEAD']);
+  const dirty = git(projectAbs, ['status', '--porcelain']) || '';
+  if (!head) {
+    console.error('目标目录不是 git 检出，无法核对固定提交。');
+    process.exit(2);
+  }
+  if (head !== pin.commit && !hasFlag('--allow-diverged')) {
+    console.error(`HEAD ${head} 不是技能 pin ${pin.commit}。`);
+    console.error('这不是固定版本。若确实要截修改过提交的树，加上 --allow-diverged。');
+    process.exit(2);
+  }
+  if (dirty) {
+    console.log(`[capture] 工作区有未提交修改（${dirty.split('\n').filter(Boolean).length} 条）。截帧反映的是磁盘上的文件。`);
+  } else {
+    console.log('[capture] 工作区干净。');
+  }
+  console.log(`[capture] HEAD ${head}`);
 }
-if (head !== pin.commit && !hasFlag('--allow-diverged')) {
-  console.error(`HEAD ${head} 不是技能 pin ${pin.commit}。`);
-  console.error('这不是固定版本。若确实要截修改过提交的树，加上 --allow-diverged。');
-  process.exit(2);
-}
-if (dirty) {
-  console.log(`[capture] 工作区有未提交修改（${dirty.split('\n').filter(Boolean).length} 条）。截帧反映的是磁盘上的文件。`);
-} else {
-  console.log('[capture] 工作区干净。');
-}
-console.log(`[capture] HEAD ${head}`);
 
-const times = timesArg.split(',').map((item) => Number(item.trim())).filter((item) => Number.isFinite(item));
+const times = timesArg.trim() ? timesArg.split(',').map(item => item.trim() ? Number(item) : NaN) : [];
+if (times.some(t => !Number.isFinite(t))) throw new Error('--times 包含无效秒数。');
 const clipStart = arg('--clip-start');
 const clipSeconds = Number(arg('--clip-seconds', '0'));
 const fps = Number(arg('--fps', '8'));
 if (clipStart != null) {
-  if (!Number.isFinite(clipSeconds) || clipSeconds <= 0 || clipSeconds > 8) {
-    console.error('--clip-seconds 需要大于 0 且不超过 8。全片导出不在这个脚本里。');
+  if (!Number.isFinite(clipSeconds) || clipSeconds <= 0 || (project && clipSeconds > 8) || !Number.isFinite(Number(clipStart)) || Number(clipStart) < 0) {
+    console.error('请给出有效的片段起点与正时长；原片模式单段最长 8 秒。');
     process.exit(2);
   }
   if (!Number.isFinite(fps) || fps < 1 || fps > 30) {
     console.error('--fps 需要在 1 到 30。');
     process.exit(2);
   }
-  const count = Math.round(clipSeconds * fps);
+  const count = Math.max(1, Math.round(clipSeconds * fps));
   for (let index = 0; index < count; index += 1) times.push(Number(clipStart) + index / fps);
 }
 if (times.length === 0) {
   console.error('至少给出 --times 或 --clip-start。');
   process.exit(2);
 }
-if (times.some((time) => time < 0 || time > 137)) {
-  console.error('时间必须在 0 到 137 秒。');
+if (times.some((time) => time < 0 || (project && time > 137))) {
+  console.error('时间超出许可范围。');
   process.exit(2);
 }
 
@@ -273,18 +280,19 @@ if (!chromeBin) {
 }
 
 fs.mkdirSync(outAbs, { recursive: true });
-const preview = await startPreviewServer(projectAbs, '127.0.0.1', 0);
+const preview = project ? await startPreviewServer(projectAbs, '127.0.0.1', 0) : null;
+const url = html ? pathToFileURL(path.resolve(html)).href + '?capture=1' : preview.baseUrl + '/render.html';
 let chrome;
 const stillPaths = [];
 try {
   console.log(`[capture] chrome ${chromeBin}`);
-  console.log(`[capture] preview ${preview.baseUrl}/render.html`);
+  console.log(`[capture] preview ${url}`);
   chrome = await launchChrome(chromeBin);
   const version = await getJson(chrome.port, '/json/version');
   const browserWs = await openSocket(version.webSocketDebuggerUrl);
   const browser = new Cdp(browserWs);
   const created = await browser.send('Target.createTarget', {
-    url: `${preview.baseUrl}/render.html`,
+    url,
   });
   const targets = await getJson(chrome.port, '/json/list');
   const pageInfo = targets.find((item) => item.id === created.targetId);
@@ -317,10 +325,19 @@ try {
     throw new Error(`渲染宿主未就绪。页面错误: ${page.errors.join(' | ') || '无'}`);
   }
 
+  if (html) {
+    const result = await page.send('Runtime.evaluate', { expression: 'window.__dur', returnByValue: true });
+    const duration = result.result?.value;
+    if (!Number.isFinite(duration) || times.some(time => time > duration) ||
+        (clipStart != null && Number(clipStart) + clipSeconds > duration + 1e-8)) {
+      throw new Error(`取帧范围超出场景的 ${duration} 秒。`);
+    }
+  }
+
   let clipIndex = 0;
   const clipDir = path.join(outAbs, 'clip-frames');
   if (clipStart != null) fs.mkdirSync(clipDir, { recursive: true });
-  const clipCount = clipStart != null ? Math.round(clipSeconds * fps) : 0;
+  const clipCount = clipStart != null ? Math.max(1, Math.round(clipSeconds * fps)) : 0;
   const stillCount = times.length - clipCount;
 
   for (let index = 0; index < times.length; index += 1) {
@@ -366,6 +383,8 @@ try {
     runFfmpeg([
       '-framerate', String(fps),
       '-i', path.join(clipDir, 'frame_%03d.png'),
+      '-frames:v', String(clipCount),
+      '-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2',
       '-c:v', 'libx264',
       '-pix_fmt', 'yuv420p',
       '-crf', '18',
@@ -377,7 +396,7 @@ try {
   }
 } finally {
   if (chrome) chrome.kill();
-  await preview.close();
+  if (preview) await preview.close();
 }
 
 if (process.exitCode) {

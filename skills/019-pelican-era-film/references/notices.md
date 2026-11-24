@@ -1,5 +1,7 @@
 # 许可与第三方声明
 
+通用版在 `assets/medium/brushes.js` 提取、适配固定提交的二十场画材函数。`styles.json` 逐场标记来源。独立新增的部分包括主体无关的画风规则、绘制与播放接口、场景构建器，以及纸船与偏心轮动作。生成的离线 HTML 附有双方的 MIT 许可和上游第三方声明。[上游许可](upstream/LICENSE) · [上游第三方声明](upstream/THIRD_PARTY_NOTICES.md)
+
 本技能包包含工作流脚本及 [机器人羽毛球展示页](../assets/showcase.html)。页面内嵌了固定提交中改编的材质绘制函数与双骨骼求解器，附有 Elbert 的 MIT 全文、上游第三方声明和技能包的 MIT 全文。其余双人球局绘制、比赛动作、击球声及交互播放器由 Science Motion Skills 为本次改编制作，采用 MIT 许可。展示页用浏览器原生 Canvas、Web Audio 与系统字体。
 
 用户用 `scripts/fetch-upstream.sh` 取得的原影片工程，须连同其 `LICENSE`、`THIRD_PARTY_NOTICES.md` 及随所分发字体或库要求提供的许可证一起保留。[上游源头](https://github.com/orbitoo/pelican-test) · [固定版本](https://github.com/orbitoo/pelican-test/tree/59c8ca2657ce5b2cf067969b5bda19d6609af8ac)
