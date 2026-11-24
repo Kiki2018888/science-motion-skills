@@ -7,6 +7,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { startPreviewServer } from './preview-server.mjs';
+import { chooseStyle } from './style-catalog.mjs';
 
 const skillRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pin = JSON.parse(fs.readFileSync(path.join(skillRoot, 'assets/upstream-pin.json'), 'utf8'));
@@ -23,7 +24,7 @@ function hasFlag(name) {
 
 function usage() {
   console.error(`用法:
-  node scripts/capture-frames.mjs --html <离线场景.html> --clip-start 0 --clip-seconds 9 --fps 30 --out <输出目录>
+  node scripts/capture-frames.mjs --html <离线场景.html> [--style 画风名或编号] --clip-start 0 --clip-seconds 9 --fps 30 --out <输出目录>
   node scripts/capture-frames.mjs --project <影片目录> --times 8,74 --out <输出目录>
       [--chrome <chrome 可执行文件>] [--clip-start 73 --clip-seconds 4 --fps 8]
       [--sheet contact.png] [--allow-diverged]
@@ -224,6 +225,8 @@ const timesArg = arg('--times', '');
 if (hasFlag('-h') || hasFlag('--help')) { usage(); process.exit(0); }
 if ((!project && !html) || (project && html) || !outDir) { usage(); process.exit(2); }
 
+if (hasFlag('--style') && !html) throw new Error('--style 适用于 --html 新场景。');
+const chosenStyle = hasFlag('--style') ? chooseStyle(arg('--style')) : null;
 const projectAbs = project && path.resolve(project);
 const outAbs = path.resolve(outDir);
 if (html && !fs.statSync(path.resolve(html)).isFile()) throw new Error('--html 须为场景 HTML 文件。');
@@ -325,6 +328,16 @@ try {
     throw new Error(`渲染宿主未就绪。页面错误: ${page.errors.join(' | ') || '无'}`);
   }
 
+  if (chosenStyle) {
+    const selection = await page.send('Runtime.evaluate', {
+      expression: `window.setSceneStyle(${JSON.stringify(chosenStyle.id)})`,
+      returnByValue: true,
+    });
+    if (selection.exceptionDetails) {
+      const failure = selection.exceptionDetails;
+      throw new Error(`切换到「${chosenStyle.name}」失败。 ${failure.exception?.description || failure.text}`);
+    }
+  }
   if (html) {
     const result = await page.send('Runtime.evaluate', { expression: 'window.__dur', returnByValue: true });
     const duration = result.result?.value;

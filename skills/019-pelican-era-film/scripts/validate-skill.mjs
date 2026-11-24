@@ -64,6 +64,7 @@ const required = [
   'assets/upstream-pin.json',
   'assets/showcase.html',
   'scripts/style-scene.mjs',
+  'scripts/style-catalog.mjs',
   'assets/medium/styles.json',
   'assets/medium/brushes.js',
   'assets/medium/materials.js',

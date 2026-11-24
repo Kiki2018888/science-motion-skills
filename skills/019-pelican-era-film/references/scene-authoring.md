@@ -55,7 +55,7 @@ node scripts/capture-frames.mjs --html boat.html --times 1.65,4.7,9 --out stills
 node scripts/capture-frames.mjs --html boat.html --clip-start 0 --clip-seconds 9 --fps 30 --out movie
 ```
 
-HTML 默认用第一种画风；暂停后切换下拉菜单会保留时间。单个画风单独导出，可在构建时只传这一种。浏览器控制 `__seek(t)` 可暂停定位；`setSceneStyle('s11_ukiyoe')` 可在已打包的画风间切换；`captureFrameAt(t)` 返回画布 PNG 的 Base64；`__dur` 是秒数。后缀 `?capture=1` 打开后停在首帧。`?style=s11_ukiyoe` 可指定首选画风。
+HTML 默认用第一种画风；暂停后切换下拉菜单会保留时间。可直接从这张 HTML 中导出任一种已打包的画风，例如 `node scripts/capture-frames.mjs --html boat.html --style 唐代白描 --times 1.65 --out tang`。省略 `--style` 时导出第一种。浏览器控制 `__seek(t)` 可暂停定位；`setSceneStyle('s11_ukiyoe')` 可在已打包的画风间切换；`captureFrameAt(t)` 返回画布 PNG 的 Base64；`__dur` 是秒数。后缀 `?capture=1` 打开后停在首帧。`?style=s11_ukiyoe` 可指定首选画风。
 
 导出 PNG 需要 Node.js 22+ 与本机 Chrome/Chromium；MP4 另需 FFmpeg。Chrome 可用 `--chrome` 或 `CHROME_BIN` 指定，FFmpeg 可用 `FFMPEG_BIN` 指定。MP4 与帧序列在指定输出目录内，文件名为 `clip.mp4`、`clip-frames/`。输出画幅跟随场景。渲染默认为无声。
 

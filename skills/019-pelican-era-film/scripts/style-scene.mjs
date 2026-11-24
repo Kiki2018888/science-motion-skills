@@ -3,27 +3,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Script } from 'node:vm';
+import { cards, chooseStyle } from './style-catalog.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
-const cards = JSON.parse(read('assets/medium/styles.json'));
 const args = process.argv.slice(2),
   command = args.shift();
-const normalize = (s) =>
-  String(s)
-    .trim()
-    .toLowerCase()
-    .replace(/[\s_·-]/g, '');
-function choose(name) {
-  const key = normalize(name).replace(/(?:的)?(?:画风|风格|风)$/, '');
-  const card = cards.find((c) =>
-    [c.id, c.number, String(c.number).padStart(2, '0'), c.name, ...c.aliases].some(
-      (v) => normalize(v) === key,
-    ),
-  );
-  if (!card) throw new Error('找不到画风「' + name + '」。用 list 查看名称或编号。');
-  return card;
-}
 const help = `用法
   node scripts/style-scene.mjs list
   node scripts/style-scene.mjs rules 唐代白描
@@ -40,7 +25,7 @@ function build() {
     if (!value || value.startsWith('--')) throw new Error('缺少 ' + flag + ' 的值');
     if (flag === '--scene') input = value;
     else if (flag === '--out') output = value;
-    else if (flag === '--style') chosen.push(...(value === 'all' ? cards : [choose(value)]));
+    else if (flag === '--style') chosen.push(...(value === 'all' ? cards : [chooseStyle(value)]));
     else throw new Error('未知参数 ' + flag);
   }
   if (!input || !output || !chosen.length) throw new Error(help);
@@ -80,7 +65,7 @@ try {
       console.log(String(c.number).padStart(2, '0') + '  ' + c.name + '  ' + c.id),
     );
   else if (command === 'rules') {
-    const c = choose(args.join(' '));
+    const c = chooseStyle(args.join(' '));
     console.log(
       [
         c.name + ' · ' + c.id,

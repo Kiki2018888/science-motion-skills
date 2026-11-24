@@ -4,6 +4,7 @@
 
 - Built two independent inputs, a 960×540 paper boat and a 480×640 cam follower, as local HTML files, each with all 20 styles. Offline Chromium made no network requests. Every style drew distinct frames and repeated seeks reproduced identical PNGs.
 - Verified the boat's bow and line-end at release, and the cam, follower and stamp contacts. Canvas coordinates matched across all styles at the four sampled times per input.
+- An independent agent authored another action from text: a snail extended a feeler, touched a drop of dew, and withdrew. The woodblock and oscilloscope views retained nine anchors at twelve sampled times. Named CLI frame export matched the manually selected oscilloscope frame pixel-for-pixel in the same Chrome rendering configuration.
 - Exported the entire nine-second boat animation using the authored-HTML entry point. FFprobe reported H.264, yuv420p, 960×540, 30 fps, 270 frames and 9.000 seconds.
 
 ## v1.8.0 — 2026-11-22
