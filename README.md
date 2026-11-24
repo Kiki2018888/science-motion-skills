@@ -24,7 +24,7 @@
 
 ## v1.10.0 · 019 独立发布
 
-019「动作脚本 × 20 种时代画风」已迁移到独立项目，可从新仓库安装或在线查看羽毛球演示。本合集从此版起收录十一套技能。[019 独立仓库](https://github.com/Kiki2018888/019-pelican-era-film) · [在线展示](https://kiki2018888.github.io/019-pelican-era-film/)
+019「动作脚本 × 20 种时代画风」已迁移到独立项目，可从新仓库安装或在线查看羽毛球演示。本合集从此版起收录十一套技能。[019 独立仓库](https://github.com/Kiki2018888/pelican-era-skills) · [在线展示](https://kiki2018888.github.io/pelican-era-skills/)
 
 ## v1.7.0 · 2026-11-21
 
