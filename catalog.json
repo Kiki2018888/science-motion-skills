@@ -98,19 +98,6 @@
       "default_preview": "previews/018-paper-cut-cartoon-magnet.mp4",
       "shared_renderer_version": "2.0.0",
       "shared_rendering_reference": false
-    },
-    {
-      "number": "019",
-      "name": "019-pelican-era-film",
-      "title": "动作脚本 × 20 种时代画风",
-      "path": "skills/019-pelican-era-film",
-      "version": "2.0.0",
-      "default_preview": "skills/019-pelican-era-film/assets/showcase.html",
-      "showcase": "https://kiki2018888.github.io/science-motion-skills/",
-      "upstream": "https://github.com/orbitoo/pelican-test",
-      "upstream_commit": "59c8ca2657ce5b2cf067969b5bda19d6609af8ac",
-      "font_mode": "system",
-      "shared_renderer_version": null
     }
   ],
   "previews": [
@@ -315,9 +302,15 @@
       "config": "skills/018-paper-cut-cartoon/assets/examples/sticker.json"
     }
   ],
-  "version": "1.9.0",
+  "version": "1.10.0",
   "shared_renderer_version": "2.0.0",
   "retired_numbers": [
     "010"
+  ],
+  "moved_skills": [
+    {
+      "number": "019",
+      "repository": "https://github.com/Kiki2018888/019-pelican-era-film"
+    }
   ]
 }

@@ -1,5 +1,11 @@
 # Release validation
 
+## v1.10.0 — standalone publication of 019
+
+- A clean installation of the collection produced the eleven directories in the catalog. All 26 removed package files belonged to 019. The other skill directories matched the preceding main revision.
+- The standalone repository preserved the three earlier skill commits. An anonymous clone passed the skill validator, listed twenty styles, built an offline two-style scene, and exported a selected 960×540 frame in Chrome.
+- The standalone Pages branch contains one HTML file. Its published bytes matched the packaged badminton showcase, and a browser rendered the 1920×1080 canvas and switched styles.
+
 ## v1.9.0 — 2026-11-24
 
 - Built two independent inputs, a 960×540 paper boat and a 480×640 cam follower, as local HTML files, each with all 20 styles. Offline Chromium made no network requests. Every style drew distinct frames and repeated seeks reproduced identical PNGs.

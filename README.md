@@ -1,6 +1,6 @@
 # Science Motion Skills · 科普动效技能库
 
-十二套可配置、可复现的科普视频动效。提供独立 Python 渲染脚本、HTML/Canvas/SVG 源码、JSON 配置示例、中文字体和代表样片，可作为 Codex 技能使用，也可以直接从命令行导出视频。
+十一套可配置、可复现的科普视频动效。提供独立 Python 渲染脚本、HTML/Canvas/SVG 源码、JSON 配置示例、中文字体和代表样片，可作为 Codex 技能使用，也可以直接从命令行导出视频。
 
 **代码与原创示例采用 MIT 开源许可证，可修改、分发和商用。字体保留 SIL OFL 1.1。**
 
@@ -19,19 +19,12 @@
 | 009 | 斩杀线标尺 | [009-threshold-line-render](skills/009-threshold-line-render/SKILL.md) | [阈值转起跑线](previews/009-threshold-line-render-v03.mp4) |
 | 011 | 自由卡片动效 | [011-ppt-card-motion-render](skills/011-ppt-card-motion-render/SKILL.md) | [MP4](previews/011-ppt-card-motion-render-v02.mp4) |
 | 018 | 剪纸像素定格卡通 | [018-paper-cut-cartoon](skills/018-paper-cut-cartoon/SKILL.md) | [磁铁与回形针](previews/018-paper-cut-cartoon-magnet.mp4) · [纸手换签](previews/018-paper-cut-cartoon-sticker.mp4) |
-| 019 | 动作脚本 × 20 种时代画风 | [019-pelican-era-film](skills/019-pelican-era-film/SKILL.md) | [在线全屏展示](https://kiki2018888.github.io/science-motion-skills/) · [单文件 HTML](skills/019-pelican-era-film/assets/showcase.html) |
 
-在本地浏览器打开 [gallery.html](gallery.html) 可查看十二套技能的样片和交互展示。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
+在本地浏览器打开 [gallery.html](gallery.html) 可查看十一套技能的样片和交互展示。GitHub 源码页面不能执行 HTML；请下载仓库后打开。视频为已渲染的代表案例，配置可按新主题修改。
 
-## v1.9.0 · 2026-11-24
+## v1.10.0 · 019 独立发布
 
-019 v2.0.0 接收自然语言动作和指定画风。Agent 编写新角色、道具与时间轴，通用画材按新轮廓绘制。可在一页内暂停换画风，离线播放与导出。仓库包含横屏纸船松绳过桥、竖屏偏心轮顶印两份可修改的场景。[制作说明](skills/019-pelican-era-film/references/scene-authoring.md) · [20 套画风规则及源码出处](skills/019-pelican-era-film/assets/medium/styles.json) · [Elbert 的原作](https://github.com/orbitoo/pelican-test)
-
-## v1.8.0 · 2026-11-22
-
-019 提供一张可离线打开的 HTML，两台机器人在 20 种画风中完成同一个六秒羽毛球回合。每种画风都占据整幅画面，可连播、全屏、逐帧定位，也可停在同一拍切换画风。[打开在线展示](https://kiki2018888.github.io/science-motion-skills/) · [下载单文件 HTML](https://raw.githubusercontent.com/Kiki2018888/science-motion-skills/main/skills/019-pelican-era-film/assets/showcase.html)
-
-画风顺序、部分画材代码和双骨骼求解器来自 Elbert 的《鹈鹕测试》Pelican Test（MIT）。本例为机器人重画了二十场比赛，共用同一套步法、挥拍和球路，并配有击球声。[上游仓库](https://github.com/orbitoo/pelican-test) · [固定版本](https://github.com/orbitoo/pelican-test/tree/59c8ca2657ce5b2cf067969b5bda19d6609af8ac) · [第三方声明](skills/019-pelican-era-film/references/notices.md)
+019「动作脚本 × 20 种时代画风」已迁移到独立项目，可从新仓库安装或在线查看羽毛球演示。本合集从此版起收录十一套技能。[019 独立仓库](https://github.com/Kiki2018888/019-pelican-era-film) · [在线展示](https://kiki2018888.github.io/019-pelican-era-film/)
 
 ## v1.7.0 · 2026-11-21
 
@@ -58,7 +51,7 @@ python skills/002-flow-motion-render/scripts/render_flow.py --config skills/002-
 
 ## 安装环境
 
-直接打开 019 展示页只需现代浏览器。019 的上游检出和截帧使用 Git、Node.js、Chrome/Chromium 与 FFmpeg。其余 Python 渲染技能需要 Python 3.10+、Chrome/Chromium、FFmpeg 与 ffprobe。
+本合集的 Python 渲染技能需要 Python 3.10+、Chrome/Chromium、FFmpeg 与 ffprobe。
 
 ```bash
 python -m venv .venv
@@ -96,13 +89,13 @@ python skills/009-threshold-line-render/scripts/render_threshold.py --config ski
 python tools/install_skills.py
 ```
 
-默认安装到 `~/.codex/skills`（设置 CODEX_HOME 时使用该目录下的 skills），也可传 `--destination <路径>`。安装器遇到任何同名技能会停止，不覆盖本机已有版本；先使用 `--dry-run` 查看将安装的目录。每套技能随附所需源码。019 展示页使用系统字体，安装后可直接打开。
+默认安装到 `~/.codex/skills`（设置 CODEX_HOME 时使用该目录下的 skills），也可传 `--destination <路径>`。安装器遇到任何同名技能会停止，不覆盖本机已有版本；先使用 `--dry-run` 查看将安装的目录。每套技能随附所需源码。
 
 例如：`使用 $009-threshold-line-render，做一个质量门槛动画，只使用前半段。`
 
 ## 编号与贡献
 
-- `catalog.json` 是编号索引；已公开 001–009、011、018、019。010 已停用，下一个自建编号为 020。
+- `catalog.json` 是编号索引；本合集收录 001–009、011、018。010 已停用，019 已独立发布，下一个自建编号为 020。
 - 新技能采用 `NNN-kebab-case`，目录、SKILL name 与显示名编号一致；已有技能增加主题沿用原编号。
 - 修改应保留确定性的时间定位、可替换配置、字体许可和必要验证。不要提交密钥、个人路径、运行环境、临时帧或私人业务脚本。
 - 运行 `python tools/check_release.py` 检查包结构、配置文件、许可证和 Python 语法。动态检查需依赖环境与浏览器，按各技能运行 `--check-only`，正式视频还需检查解码和画面。
@@ -113,7 +106,7 @@ See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Fon
 
 ## English overview
 
-Twelve configurable motion-rendering skills for science communication: chat, flow and causality, multiscale zoom, split comparison, phone conversation/notifications, exploded layers, event monitoring, terminal/code, threshold/start-line animation, freeform card motion, paper-cut puppet animation, and a twenty-style robot badminton showcase. Run the Python renderers directly or install the folders as Codex skills. JSON examples and editable browser-based engines are included. Original code and examples are MIT licensed; bundled fonts retain SIL OFL licensing. Windows is verified; other platforms have portable tool discovery but have not received full rendering validation.
+Eleven configurable motion-rendering skills for science communication: chat, flow and causality, multiscale zoom, split comparison, phone conversation/notifications, exploded layers, event monitoring, terminal/code, threshold/start-line animation, freeform card motion, and paper-cut puppet animation. Run the Python renderers directly or install the folders as Codex skills. JSON examples and editable browser-based engines are included. Original code and examples are MIT licensed; bundled fonts retain SIL OFL licensing. Windows is verified; other platforms have portable tool discovery but have not received full rendering validation.
 
 ## v1.1.0 · 2026-11-14
 

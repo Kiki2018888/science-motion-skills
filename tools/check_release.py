@@ -17,7 +17,14 @@ def main():
         if 'default_preview' in item:
             assert (root/item['default_preview']).is_file(),item['default_preview']
         assert (skill/'agents/openai.yaml').is_file()
-    assert catalog['next_number']==max(int(x['number']) for x in catalog['skills'])+1
+    packaged = {item['path'] for item in catalog['skills']}
+    on_disk = {skill.relative_to(root).as_posix() for skill in (root/'skills').iterdir() if skill.is_dir()}
+    assert on_disk == packaged, 'Catalog and installable skill directories disagree'
+    numbers = [item['number'] for item in catalog['skills']]
+    numbers.extend(catalog.get('retired_numbers', []))
+    numbers.extend(item['number'] for item in catalog.get('moved_skills', []))
+    assert len(numbers) == len(set(numbers)), 'A skill number was assigned twice'
+    assert catalog['next_number'] == max(map(int, numbers)) + 1
     for p in root.rglob('*.py'):
         if '.venv' not in p.parts:ast.parse(p.read_text(encoding='utf-8-sig'),filename=str(p))
     for p in (root/'skills').rglob('*.json'):json.loads(p.read_text(encoding='utf-8-sig'))
