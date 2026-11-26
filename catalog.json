@@ -309,7 +309,8 @@
   ],
   "moved_skills": [
     {
-      "number": "019",
+      "name": "pelican-era-film",
+      "title": "鹈鹕时代技能",
       "repository": "https://github.com/Kiki2018888/pelican-era-skills"
     }
   ]

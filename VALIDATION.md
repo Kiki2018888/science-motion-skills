@@ -1,8 +1,8 @@
 # Release validation
 
-## v1.10.0 — standalone publication of 019
+## v1.10.0 — standalone publication of 鹈鹕时代技能
 
-- A clean installation of the collection produced the eleven directories in the catalog. All 26 removed package files belonged to 019. The other skill directories matched the preceding main revision.
+- A clean installation of the collection produced the eleven directories in the catalog. All 26 removed package files belonged to 鹈鹕时代技能. The other skill directories matched the preceding main revision.
 - The standalone repository preserved the three earlier skill commits. An anonymous clone passed the skill validator, listed twenty styles, built an offline two-style scene, and exported a selected 960×540 frame in Chrome.
 - The standalone Pages branch contains one HTML file. Its published bytes matched the packaged badminton showcase, and a browser rendered the 1920×1080 canvas and switched styles.
 
@@ -15,7 +15,7 @@
 
 ## v1.8.0 — 2026-11-22
 
-- Installed the numbered 019 package in an empty directory and validated its manifest, required files, upstream pin and JavaScript syntax.
+- Installed the 鹈鹕时代技能 package in an empty directory and validated its manifest, required files, upstream pin and JavaScript syntax.
 - Opened the single-file showcase offline in Chrome. At five rally times in each of the twenty scenes, all 100 full-resolution RGBA frames matched their individual source scenes. The viewer made no HTTP requests.
 - Exercised same-frame style changes, scrubbing, audio, sequential playback, single-scene looping, fullscreen, credits and all twenty touch selectors. Desktop and mobile layouts were tested at 1440 × 900 and 390 × 844.
 - Verified that all four edges of the original woodblock frame remain visible in five viewport sizes, including phone landscape and portrait.

@@ -22,9 +22,13 @@ def main():
     assert on_disk == packaged, 'Catalog and installable skill directories disagree'
     numbers = [item['number'] for item in catalog['skills']]
     numbers.extend(catalog.get('retired_numbers', []))
-    numbers.extend(item['number'] for item in catalog.get('moved_skills', []))
+    moved = catalog.get('moved_skills', [])
+    numbers.extend(item['number'] for item in moved if 'number' in item)
     assert len(numbers) == len(set(numbers)), 'A skill number was assigned twice'
-    assert catalog['next_number'] == max(map(int, numbers)) + 1
+    # A separately published skill can leave an unnamed gap above the last packaged number.
+    first_free = max(map(int, numbers)) + 1
+    unnamed_moves = sum('number' not in item for item in moved)
+    assert first_free <= catalog['next_number'] <= first_free + unnamed_moves
     for p in root.rglob('*.py'):
         if '.venv' not in p.parts:ast.parse(p.read_text(encoding='utf-8-sig'),filename=str(p))
     for p in (root/'skills').rglob('*.json'):json.loads(p.read_text(encoding='utf-8-sig'))
